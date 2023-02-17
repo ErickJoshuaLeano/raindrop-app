@@ -25,10 +25,10 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    name: Joi.string().required(),
-    email: Joi.string().required(),
-    username: Joi.string().required(),
-    password: Joi.string().required(),
+    name: Joi.string().max(50).required(),
+    email: Joi.email().required(),
+    username: Joi.string().min(5).max(15).required(),
+    password: Joi.string().lowercase().uppercase().alphanum().required(),
   });
 
   const handleSubmit = async (event) => {
