@@ -36,18 +36,18 @@ function App() {
   return (
     <>
       <CssBaseline />
-      {/* <NavBar onLogout={handleLogout} /> */}
+      <NavBar onLogout={handleLogout} />
       <Container sx={{ marginTop: 3 }}>
         <Routes>
-          {/* <Route
+          <Route
             path="/home"
             element={accessToken ? <HomePages /> : <Navigate to="/login" />}
-          /> */}
+          />
           <Route
             path="/register"
             element={accessToken ? <Navigate to="/" /> : <RegisterPage />}
           />
-          {/* <Route
+          <Route
             path="/login"
             element={
               accessToken ? (
@@ -58,7 +58,7 @@ function App() {
             }
           />
           <Route path="/not-found" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/not-found" />} /> */}
+          <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
       </Container>
     </>
