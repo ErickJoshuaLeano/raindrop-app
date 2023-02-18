@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route
             path="/home"
-            element={accessToken ? <HomePages /> : <Navigate to="/login" />}
+            element={accessToken ? <HomePages /> : <Navigate to="/register" />}
           />
           <Route
             path="/register"
