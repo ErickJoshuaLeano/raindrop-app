@@ -115,7 +115,7 @@ const RegisterPage = () => {
       justifyContent="flex-end"
       onSubmit={handleSubmit}
     >
-      <Grid item xs={4}>
+      <Grid item xs={5}>
         <Card>
           <CardContent>
             <Grid container spacing={2}>
@@ -194,18 +194,17 @@ const RegisterPage = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
             >
               Sign up
             </Button>
-          </CardActions>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link to="/login" variant="body2">
-                Already have an account? Sign in
-              </Link>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="/login" variant="body2">
+                  Already have an account?
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
+          </CardActions>
         </Card>
       </Grid>
     </Grid>

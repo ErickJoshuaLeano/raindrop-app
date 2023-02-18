@@ -11,7 +11,7 @@ const HomePages = () => {
     authService.logout();
     setAccessToken(null);
     window.location.reload(false);
-    navigate("/home");
+    navigate("/login");
   };
 
   return (
