@@ -26,7 +26,7 @@ const RegisterPage = () => {
 
   const schema = Joi.object({
     name: Joi.string().max(50).required(),
-    email: Joi.email().required(),
+    email: Joi.string().required(),
     username: Joi.string().min(5).max(15).required(),
     password: Joi.string().lowercase().uppercase().alphanum().required(),
   });
