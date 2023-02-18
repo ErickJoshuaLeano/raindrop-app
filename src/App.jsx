@@ -36,7 +36,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      {/* <NavBar onLogout={handleLogout} /> */}
+      <NavBar onLogout={handleLogout} />
       <Container sx={{ marginTop: 3 }}>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
