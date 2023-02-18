@@ -57,7 +57,7 @@ const RegisterPage = () => {
         "string.empty": `Password cannot be empty`,
         "any.required": `Password is required`,
       }),
-
+    confirmPassword: Joi.string().required(),
     // repeatPassword: Joi.valid(userData.password).messages({
     //   "any.only": "The two passwords do not match",
     //   "any.required": "Please re-enter the password",

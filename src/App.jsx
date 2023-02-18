@@ -4,6 +4,7 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import HomePages from "./pages/HomePages";
 import * as authService from "./services/auth";
 // import NavBar from "./components/NavBar";
 import { useState } from "react";
@@ -16,7 +17,7 @@ function App() {
   const handleLogin = async (username, password) => {
     try {
       const response = await authService.login(username, password);
-      console.log(response.data.accessToken);
+      // console.log(response.data.accessToken);
       localStorage.setItem("accessToken", response.data.accessToken);
       setAccessToken(response.data.accessToken);
       navigate("/");
@@ -38,6 +39,11 @@ function App() {
       {/* <NavBar onLogout={handleLogout} /> */}
       <Container sx={{ marginTop: 3 }}>
         <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route
+            path="/home"
+            element={accessToken ? <HomePages /> : <Navigate to="/login" />}
+          />
           <Route
             path="/register"
             element={accessToken ? <Navigate to="/" /> : <RegisterPage />}
