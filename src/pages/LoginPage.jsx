@@ -9,7 +9,8 @@ import {
 } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { createTheme } from "@mui/material/styles";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = useState({
@@ -55,6 +56,23 @@ const LoginPage = ({ onLogin }) => {
     return !!result.error;
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#52bbc7",
+        main: "#27ABB9",
+        dark: "#1b7781",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#8fe5ee",
+        main: "#74DFEA",
+        dark: "#519ca3",
+        contrastText: "#000",
+      },
+    },
+  });
+
   return (
     <Grid
       container
@@ -95,9 +113,22 @@ const LoginPage = ({ onLogin }) => {
             </Grid>
           </CardContent>
           <CardActions>
-            <Button disabled={isFormInvalid()} type="submit" fullWidth>
-              Sign In
+            <Button
+              disabled={isFormInvalid()}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Sign In <Link to="/home"></Link>
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link to="/register" variant="body2">
+                  Create an account?
+                </Link>
+              </Grid>
+            </Grid>
           </CardActions>
         </Card>
       </Grid>

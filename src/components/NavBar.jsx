@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import * as authService from "../services/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 
 const NavBar = ({ onLogout }) => {
   const currentUser = authService.getCurrentUser();
+
   const navigate = useNavigate();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -38,12 +40,7 @@ const NavBar = ({ onLogout }) => {
               </>
             ) : (
               <>
-                <Button LinkComponent={Link} to="/register" color="inherit">
-                  Register
-                </Button>
-                <Button LinkComponent={Link} to="/login" color="inherit">
-                  Login
-                </Button>
+                <Typography>Logging out...</Typography>
               </>
             )}
           </div>
