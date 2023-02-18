@@ -3,14 +3,32 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   Grid,
+  Typography,
   TextField,
 } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import * as authService from "../services/auth";
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Raindrop
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -18,6 +36,7 @@ const RegisterPage = () => {
     email: "",
     username: "",
     password: "",
+    confirmPassword: "",
   });
 
   const navigate = useNavigate();
@@ -30,7 +49,19 @@ const RegisterPage = () => {
       .required()
       .email({ tlds: { allow: false } }),
     username: Joi.string().min(5).max(15).required(),
-    password: Joi.string().lowercase().uppercase().alphanum().required(),
+    password: Joi.string()
+      .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
+      .required()
+      .messages({
+        "string.pattern.base": `Password should be between 8 to 20 characters and contain letters, numbers and special character`,
+        "string.empty": `Password cannot be empty`,
+        "any.required": `Password is required`,
+      }),
+
+    // repeatPassword: Joi.valid(userData.password).messages({
+    //   "any.only": "The two passwords do not match",
+    //   "any.required": "Please re-enter the password",
+    // }),
   });
 
   const handleSubmit = async (event) => {
@@ -40,7 +71,8 @@ const RegisterPage = () => {
         form.name,
         form.email,
         form.username,
-        form.password
+        form.password,
+        form.confirmPassword
       );
       alert("Registration successful");
       navigate("/login");
@@ -80,17 +112,17 @@ const RegisterPage = () => {
     <Grid
       container
       component="form"
-      justifyContent="center"
+      justifyContent="flex-end"
       onSubmit={handleSubmit}
     >
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <Card>
-          <CardHeader title="Register" />
           <CardContent>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   name="name"
+                  required
                   error={!!errors.name}
                   helperText={errors.name}
                   onChange={handleChange}
@@ -103,6 +135,7 @@ const RegisterPage = () => {
               <Grid item xs={12}>
                 <TextField
                   name="email"
+                  required
                   error={!!errors.email}
                   helperText={errors.email}
                   onChange={handleChange}
@@ -115,6 +148,7 @@ const RegisterPage = () => {
               <Grid item xs={12}>
                 <TextField
                   name="username"
+                  required
                   error={!!errors.username}
                   helperText={errors.username}
                   onChange={handleChange}
@@ -127,6 +161,7 @@ const RegisterPage = () => {
               <Grid item xs={12}>
                 <TextField
                   name="password"
+                  required
                   error={!!errors.password}
                   helperText={errors.password}
                   onChange={handleChange}
@@ -137,17 +172,44 @@ const RegisterPage = () => {
                   fullWidth
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="confirmPassword"
+                  required
+                  error={!!errors.confirmPassword}
+                  helperText={errors.confirmPassword}
+                  onChange={handleChange}
+                  value={form.confirmPassword}
+                  label="Confirm Password"
+                  variant="standard"
+                  type="password"
+                  fullWidth
+                />
+              </Grid>
             </Grid>
           </CardContent>
           <CardActions>
-            <Button disabled={isFormInvalid()} type="submit" fullWidth>
+            <Button
+              disabled={isFormInvalid()}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Sign up
             </Button>
-            <Button>Need Help?</Button>
           </CardActions>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link to="/login" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
         </Card>
       </Grid>
     </Grid>
+    // <Copyright sx={{ mt: 5 }} />
   );
 };
 

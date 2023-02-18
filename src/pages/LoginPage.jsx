@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = useState({
@@ -96,7 +96,7 @@ const LoginPage = ({ onLogin }) => {
           </CardContent>
           <CardActions>
             <Button disabled={isFormInvalid()} type="submit" fullWidth>
-              Sign In
+              Sign In <Link to="/home"></Link>
             </Button>
           </CardActions>
         </Card>

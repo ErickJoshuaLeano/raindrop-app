@@ -4,9 +4,8 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import HomePages from "./pages/HomePages";
 import * as authService from "./services/auth";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import { useState } from "react";
 
 function App() {
@@ -36,13 +35,9 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <NavBar onLogout={handleLogout} />
+      {/* <NavBar onLogout={handleLogout} /> */}
       <Container sx={{ marginTop: 3 }}>
         <Routes>
-          <Route
-            path="/home"
-            element={accessToken ? <HomePages /> : <Navigate to="/login" />}
-          />
           <Route
             path="/register"
             element={accessToken ? <Navigate to="/" /> : <RegisterPage />}

@@ -1,7 +1,19 @@
 import React from "react";
+import NavBar from "../components/NavBar";
+import * as authService from "./services/auth";
 
 const HomePages = () => {
-  return <div>HomePages</div>;
+  const handleLogout = () => {
+    authService.logout();
+    setAccessToken(null);
+    navigate("/login");
+  };
+
+  return (
+    <>
+      <NavBar onLogout={handleLogout} />
+    </>
+  );
 };
 
 export default HomePages;
