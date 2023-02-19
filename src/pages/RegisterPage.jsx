@@ -5,6 +5,8 @@ import {
   CardContent,
   Grid,
   TextField,
+  Typography,
+  Box,
 } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
@@ -89,107 +91,127 @@ const RegisterPage = () => {
   };
 
   return (
-    <Grid
-      container
-      component="form"
-      justifyContent="flex-end"
-      onSubmit={handleSubmit}
-    >
-      <Grid justifyContent="flex-end"></Grid>
-      <Grid item xs={5} mt={10}>
-        <Card>
-          <CardContent>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  name="name"
-                  required
-                  error={!!errors.name}
-                  helperText={errors.name}
-                  onChange={handleChange}
-                  value={form.name}
-                  label="Name"
-                  variant="standard"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="email"
-                  required
-                  error={!!errors.email}
-                  helperText={errors.email}
-                  onChange={handleChange}
-                  value={form.email}
-                  label="Email"
-                  variant="standard"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="username"
-                  required
-                  error={!!errors.username}
-                  helperText={errors.username}
-                  onChange={handleChange}
-                  value={form.username}
-                  label="Username"
-                  variant="standard"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="password"
-                  required
-                  error={!!errors.password}
-                  helperText={errors.password}
-                  onChange={handleChange}
-                  value={form.password}
-                  label="Password"
-                  variant="standard"
-                  type="password"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="confirmPassword"
-                  required
-                  error={!!errors.confirmPassword}
-                  helperText={errors.confirmPassword}
-                  onChange={handleChange}
-                  value={form.confirmPassword}
-                  label="Confirm Password"
-                  variant="standard"
-                  type="password"
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-          </CardContent>
-          <CardActions>
-            <Button
-              className="btnSignUp"
-              disabled={isFormInvalid()}
-              type="submit"
-              fullWidth
-              variant="contained"
-            >
-              Sign up
-            </Button>
-          </CardActions>
-          <Grid container justifyContent="center" ml={1} mt={1}>
-            <Grid item>
-              <Link to="/login" variant="body2" underline="none">
-                Already have an account?
-              </Link>
-            </Grid>
+    <>
+      <Grid xs={12}>
+        <Grid item xs={4}>
+          <Typography variant="h4" components="h2">
+            RAINDROP
+          </Typography>
+          <Typography variant="h6" components="h2" ml={11.5}>
+            SIGN UP
+          </Typography>
+        </Grid>
+        <Grid item xs={12} container component="form" onSubmit={handleSubmit}>
+          <Grid xs={7}>
+            <Box
+              component="img"
+              sx={{
+                height: 400,
+                width: 500,
+              }}
+              alt="Globe"
+              src="images\globe.png"
+              mt={5}
+            />
           </Grid>
-        </Card>
+
+          <Grid item xs={5}>
+            <Card>
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="name"
+                      required
+                      error={!!errors.name}
+                      helperText={errors.name}
+                      onChange={handleChange}
+                      value={form.name}
+                      label="Name"
+                      variant="standard"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="email"
+                      required
+                      error={!!errors.email}
+                      helperText={errors.email}
+                      onChange={handleChange}
+                      value={form.email}
+                      label="Email"
+                      variant="standard"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="username"
+                      required
+                      error={!!errors.username}
+                      helperText={errors.username}
+                      onChange={handleChange}
+                      value={form.username}
+                      label="Username"
+                      variant="standard"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="password"
+                      required
+                      error={!!errors.password}
+                      helperText={errors.password}
+                      onChange={handleChange}
+                      value={form.password}
+                      label="Password"
+                      variant="standard"
+                      type="password"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="confirmPassword"
+                      required
+                      error={!!errors.confirmPassword}
+                      helperText={errors.confirmPassword}
+                      onChange={handleChange}
+                      value={form.confirmPassword}
+                      label="Confirm Password"
+                      variant="standard"
+                      type="password"
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+              </CardContent>
+              <CardActions>
+                <Button
+                  className="btnSignUp"
+                  disabled={isFormInvalid()}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                >
+                  Sign up
+                </Button>
+              </CardActions>
+              <Grid container justifyContent="center" ml={1} mt={1}>
+                <Grid item>
+                  <Link to="/login" variant="body2" underline="none">
+                    Already have an account?
+                  </Link>
+                </Grid>
+              </Grid>
+            </Card>
+          </Grid>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
+
     // <Copyright sx={{ mt: 5 }} />
   );
 };
