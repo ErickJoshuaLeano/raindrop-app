@@ -1,6 +1,5 @@
 import {
   Button,
-  Card,
   CardActions,
   CardContent,
   Grid,
@@ -92,17 +91,17 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Grid xs={12}>
-        <Grid item xs={4}>
+      <Grid className="whole-grid">
+        <Grid item xs={4} ml={10}>
           <Typography variant="h4" components="h2">
-            RAINDROP
+            R A I N D R O P
           </Typography>
-          <Typography variant="h6" components="h2" ml={11.5}>
-            SIGN UP
+          <Typography variant="h6" components="h2" ml={16.5}>
+            S I G N U P
           </Typography>
         </Grid>
-        <Grid item xs={12} container component="form" onSubmit={handleSubmit}>
-          <Grid xs={7}>
+        <Grid container component="form" onSubmit={handleSubmit}>
+          <Grid item xs={7}>
             <Box
               component="img"
               sx={{
@@ -116,103 +115,114 @@ const RegisterPage = () => {
           </Grid>
 
           <Grid item xs={5}>
-            <Card>
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="name"
-                      required
-                      error={!!errors.name}
-                      helperText={errors.name}
-                      onChange={handleChange}
-                      value={form.name}
-                      label="Name"
-                      variant="standard"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="email"
-                      required
-                      error={!!errors.email}
-                      helperText={errors.email}
-                      onChange={handleChange}
-                      value={form.email}
-                      label="Email"
-                      variant="standard"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="username"
-                      required
-                      error={!!errors.username}
-                      helperText={errors.username}
-                      onChange={handleChange}
-                      value={form.username}
-                      label="Username"
-                      variant="standard"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="password"
-                      required
-                      error={!!errors.password}
-                      helperText={errors.password}
-                      onChange={handleChange}
-                      value={form.password}
-                      label="Password"
-                      variant="standard"
-                      type="password"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="confirmPassword"
-                      required
-                      error={!!errors.confirmPassword}
-                      helperText={errors.confirmPassword}
-                      onChange={handleChange}
-                      value={form.confirmPassword}
-                      label="Confirm Password"
-                      variant="standard"
-                      type="password"
-                      fullWidth
-                    />
-                  </Grid>
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="name"
+                    required
+                    error={!!errors.name}
+                    helperText={errors.name}
+                    onChange={handleChange}
+                    value={form.name}
+                    label="Name"
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                  />
                 </Grid>
-              </CardContent>
-              <CardActions>
-                <Button
-                  className="btnSignUp"
-                  disabled={isFormInvalid()}
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                >
-                  Sign up
-                </Button>
-              </CardActions>
-              <Grid container justifyContent="center" ml={1} mt={1}>
-                <Grid item>
-                  <Link to="/login" variant="body2" underline="none">
-                    Already have an account?
-                  </Link>
+                <Grid item xs={12}>
+                  <TextField
+                    name="email"
+                    required
+                    error={!!errors.email}
+                    helperText={errors.email}
+                    onChange={handleChange}
+                    value={form.email}
+                    label="Email"
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="username"
+                    required
+                    error={!!errors.username}
+                    helperText={errors.username}
+                    onChange={handleChange}
+                    value={form.username}
+                    label="Username"
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="password"
+                    required
+                    error={!!errors.password}
+                    helperText={errors.password}
+                    onChange={handleChange}
+                    value={form.password}
+                    label="Password"
+                    type="password"
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="confirmPassword"
+                    required
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword}
+                    onChange={handleChange}
+                    value={form.confirmPassword}
+                    label="Confirm Password"
+                    type="password"
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                  />
                 </Grid>
               </Grid>
-            </Card>
+            </CardContent>
+            <CardActions>
+              <Button
+                className="btnSignUp"
+                disabled={isFormInvalid()}
+                type="submit"
+                fullWidth
+                variant="contained"
+              >
+                Sign up
+              </Button>
+            </CardActions>
+            <Grid container justifyContent="center" ml={1} mt={1}>
+              <Grid item>
+                <Link to="/login" variant="body2" underline="none">
+                  Already have an account?
+                </Link>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
     </>
-
-    // <Copyright sx={{ mt: 5 }} />
   );
 };
 

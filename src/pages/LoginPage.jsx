@@ -10,7 +10,6 @@ import {
 import Joi from "joi";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { createTheme } from "@mui/material/styles";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = useState({
@@ -54,23 +53,6 @@ const LoginPage = ({ onLogin }) => {
 
     return !!result.error;
   };
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        light: "#52bbc7",
-        main: "#27ABB9",
-        dark: "#1b7781",
-        contrastText: "#fff",
-      },
-      secondary: {
-        light: "#8fe5ee",
-        main: "#74DFEA",
-        dark: "#519ca3",
-        contrastText: "#000",
-      },
-    },
-  });
 
   return (
     <Grid
