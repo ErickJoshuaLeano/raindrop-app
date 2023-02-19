@@ -1,6 +1,5 @@
 import { Container, CssBaseline } from "@mui/material";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
@@ -28,11 +27,6 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
-    authService.logout();
-    setAccessToken(null);
-    navigate("/login");
-  };
   return (
     <>
       <CssBaseline />
