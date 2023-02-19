@@ -4,31 +4,12 @@ import {
   CardActions,
   CardContent,
   Grid,
-  Typography,
   TextField,
 } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import * as authService from "../services/auth";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Raindrop
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
