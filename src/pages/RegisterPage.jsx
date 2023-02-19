@@ -38,11 +38,10 @@ const RegisterPage = () => {
         "string.empty": `Password cannot be empty`,
         "any.required": `Password is required`,
       }),
-    confirmPassword: Joi.string().required(),
-    // repeatPassword: Joi.valid(userData.password).messages({
-    //   "any.only": "The two passwords do not match",
-    //   "any.required": "Please re-enter the password",
-    // }),
+    confirmPassword: Joi.string().required().valid(form.password).messages({
+      "any.only": "The two passwords do not match",
+      "any.required": "Please re-enter the password",
+    }),
   });
 
   const handleSubmit = async (event) => {
@@ -96,7 +95,8 @@ const RegisterPage = () => {
       justifyContent="flex-end"
       onSubmit={handleSubmit}
     >
-      <Grid item xs={5}>
+      <Grid justifyContent="flex-end"></Grid>
+      <Grid item xs={5} mt={10}>
         <Card>
           <CardContent>
             <Grid container spacing={2}>
@@ -171,6 +171,7 @@ const RegisterPage = () => {
           </CardContent>
           <CardActions>
             <Button
+              className="btnSignUp"
               disabled={isFormInvalid()}
               type="submit"
               fullWidth
@@ -178,14 +179,14 @@ const RegisterPage = () => {
             >
               Sign up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="/login" variant="body2">
-                  Already have an account?
-                </Link>
-              </Grid>
-            </Grid>
           </CardActions>
+          <Grid container justifyContent="center" ml={1} mt={1}>
+            <Grid item>
+              <Link to="/login" variant="body2" underline="none">
+                Already have an account?
+              </Link>
+            </Grid>
+          </Grid>
         </Card>
       </Grid>
     </Grid>

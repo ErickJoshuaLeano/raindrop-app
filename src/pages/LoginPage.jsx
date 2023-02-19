@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
 
 const LoginPage = ({ onLogin }) => {
@@ -18,7 +18,6 @@ const LoginPage = ({ onLogin }) => {
     password: "",
   });
 
-  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
@@ -118,7 +117,6 @@ const LoginPage = ({ onLogin }) => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
             >
               Sign In <Link to="/home"></Link>
             </Button>

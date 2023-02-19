@@ -10,7 +10,7 @@
   --color-519ca3: #519ca3;
   --color-52bbc7: #52bbc7;
   --color-27abb9: #27abb9;
-  --color-b7781: #1b7781;
+  --color-b7781: #1b778193;
 }
 
 body {
@@ -37,3 +37,13 @@ a {
 .gap-50 {
   gap: 100px;
 }
+/******************** REGISTER PAGE ********************/
+.MuiCardActions-root .btnSignUp {
+  background-color: var(--color-b7781);
+  opacity: 0.5;
+}
+.MuiCardActions-root .btnSignUp:hover {
+  background-color: var(--color-519ca3);
+}
+
+/******************** END REGISTER PAGE ********************/

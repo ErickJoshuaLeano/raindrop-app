@@ -5,7 +5,6 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePages from "./pages/HomePages";
 import * as authService from "./services/auth";
-// import NavBar from "./components/NavBar";
 import { useState } from "react";
 import "../src/App.css";
 function App() {

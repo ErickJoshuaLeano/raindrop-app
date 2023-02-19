@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.10.6",
     "@hapi/joi": "^17.1.1",
     "@material/icon-button": "^14.0.0",
+    "@material/switch": "^14.0.0",
     "@material/typography": "^14.0.0",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
