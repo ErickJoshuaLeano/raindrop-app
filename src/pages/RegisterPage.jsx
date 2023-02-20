@@ -244,13 +244,6 @@ const RegisterPage = () => {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
-                    // InputProps={{
-                    //   startAdornment: (
-                    //     <InputAdornment position="start">
-                    //       <PasswordIcon />
-                    //     </InputAdornment>
-                    //   ),
-                    // }}
                   />
                 </Grid>
               </Grid>

@@ -76,9 +76,14 @@ body::before {
   -webkit-border-radius: 56px 56px 56px 56px;
   margin-left: 8px;
   margin-right: 8px;
+  color: black;
 }
 .MuiCardActions-root .btnSignIn:hover {
   background-color: var(--color-519ca3);
 }
 
 /******************** END LOGIN PAGE ********************/
+
+/******************** TOGGLE BUTTON ********************/
+
+/******************** END TOGGLE BUTTON ********************/
