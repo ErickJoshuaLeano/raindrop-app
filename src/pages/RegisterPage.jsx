@@ -105,12 +105,12 @@ const RegisterPage = () => {
           <Typography
             variant="h6"
             components="h2"
-            ml={16.5}
+            ml={14.7}
             sx={{
               fontFamily: "Nunito",
             }}
           >
-            S I G N U P
+            S I G N - U P
           </Typography>
         </Grid>
         <Grid container component="form" onSubmit={handleSubmit}>
@@ -220,14 +220,13 @@ const RegisterPage = () => {
                 disabled={isFormInvalid()}
                 type="submit"
                 fullWidth
-                variant="contained"
               >
                 Sign up
               </Button>
             </CardActions>
             <Grid container justifyContent="center" ml={1} mt={1}>
               <Grid item>
-                <Link to="/login" variant="body2" underline="none">
+                <Link to="/login" variant="body2">
                   Already have an account?
                 </Link>
               </Grid>

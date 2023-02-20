@@ -60,3 +60,15 @@ body::before {
 }
 
 /******************** END REGISTER PAGE ********************/
+
+/******************** LOGIN PAGE ********************/
+.MuiCardActions-root .btnSignIn {
+  background-color: var(--color-b7781);
+  border-radius: 56px 56px 56px 56px;
+  color: black;
+}
+.MuiCardActions-root .btnSignIn:hover {
+  background-color: var(--color-519ca3);
+}
+
+/******************** END LOGIN PAGE ********************/
