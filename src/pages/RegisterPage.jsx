@@ -11,6 +11,11 @@ import Joi from "joi";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import * as authService from "../services/auth";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import InputAdornment from "@mui/material/InputAdornment";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import PasswordIcon from "@mui/icons-material/Password";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -145,6 +150,13 @@ const RegisterPage = () => {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AccountCircleIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -161,6 +173,13 @@ const RegisterPage = () => {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AlternateEmailIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -176,6 +195,13 @@ const RegisterPage = () => {
                     className="grid-5"
                     sx={{
                       "& fieldset": { border: "none" },
+                    }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonPinCircleIcon />
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 </Grid>
@@ -194,6 +220,13 @@ const RegisterPage = () => {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PasswordIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -211,6 +244,13 @@ const RegisterPage = () => {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
+                    // InputProps={{
+                    //   startAdornment: (
+                    //     <InputAdornment position="start">
+                    //       <PasswordIcon />
+                    //     </InputAdornment>
+                    //   ),
+                    // }}
                   />
                 </Grid>
               </Grid>

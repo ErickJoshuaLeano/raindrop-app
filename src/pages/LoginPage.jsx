@@ -10,6 +10,9 @@ import {
 import Joi from "joi";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import PasswordIcon from "@mui/icons-material/Password";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = useState({
@@ -108,6 +111,13 @@ const LoginPage = ({ onLogin }) => {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonPinCircleIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -124,6 +134,13 @@ const LoginPage = ({ onLogin }) => {
                     className="grid-5"
                     sx={{
                       "& fieldset": { border: "none" },
+                    }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PasswordIcon />
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 </Grid>
