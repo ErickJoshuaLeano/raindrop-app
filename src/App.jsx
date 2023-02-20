@@ -5,13 +5,17 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePages from "./pages/HomePages";
 import * as authService from "./services/auth";
-// import NavBar from "./components/NavBar";
-import { useState } from "react";
 import "../src/App.css";
+import * as React from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 function App() {
   const navigate = useNavigate();
 
-  const [accessToken, setAccessToken] = useState(authService.getAccessToken());
+  const [accessToken, setAccessToken] = React.useState(
+    authService.getAccessToken()
+  );
 
   const handleLogin = async (username, password) => {
     try {
@@ -27,34 +31,64 @@ function App() {
     }
   };
 
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  // System Preference
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
+  // Dark mode
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+  // LightMode
+  const lightTheme = createTheme({
+    palette: {
+      mode: "light",
+    },
+  });
+
   return (
     <>
-      <CssBaseline />
-      <Container sx={{ marginTop: 3 }}>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route
-            path="/home"
-            element={accessToken ? <HomePages /> : <Navigate to="/register" />}
-          />
-          <Route
-            path="/register"
-            element={accessToken ? <Navigate to="/" /> : <RegisterPage />}
-          />
-          <Route
-            path="/login"
-            element={
-              accessToken ? (
-                <Navigate to="/" />
-              ) : (
-                <LoginPage onLogin={handleLogin} />
-              )
-            }
-          />
-          <Route path="/not-found" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/not-found" />} />
-        </Routes>
-      </Container>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container sx={{ marginTop: 3 }}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route
+              path="/home"
+              element={
+                accessToken ? <HomePages /> : <Navigate to="/register" />
+              }
+            />
+            <Route
+              path="/register"
+              element={accessToken ? <Navigate to="/" /> : <RegisterPage />}
+            />
+            <Route
+              path="/login"
+              element={
+                accessToken ? (
+                  <Navigate to="/" />
+                ) : (
+                  <LoginPage onLogin={handleLogin} />
+                )
+              }
+            />
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/not-found" />} />
+          </Routes>
+        </Container>
+      </ThemeProvider>
     </>
   );
 }

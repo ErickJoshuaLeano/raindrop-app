@@ -1,30 +1,13 @@
-* {
-  margin: 0;
-  padding: 0%;
-  box-sizing: border-box;
-}
 :root {
   --color-84e7b3: #84e7b3;
-  --color-8fe5ee: #8fe5ee;
+  --color-8fe5ee: #8fe4ee73;
   --color-74dfea: #74dfea;
   --color-519ca3: #519ca3;
   --color-52bbc7: #52bbc7;
   --color-27abb9: #27abb9;
-  --color-b7781: #1b7781;
+  --color-b7781: #1b778193;
 }
 
-body {
-  font-family: "Rubik", sans-serif;
-}
-
-a {
-  text-decoration: none;
-  display: inline-block;
-}
-.form.control:focus {
-  box-shadow: none;
-  border-color: inherit;
-}
 .gap-10 {
   gap: 10px;
 }
@@ -37,3 +20,70 @@ a {
 .gap-50 {
   gap: 100px;
 }
+
+body {
+  font-family: "Nunito", sans-serif;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-image: url("https://i.pinimg.com/originals/f0/a7/60/f0a760797d14b0529d09298b61586d6e.png");
+  background-size: cover;
+  display: block;
+  opacity: 0.3;
+}
+
+/******************** REGISTER PAGE ********************/
+.whole-grid {
+  position: relative;
+}
+.MuiCardActions-root .btnSignUp {
+  background-color: var(--color-8fe5ee);
+  border-radius: 56px 56px 56px 56px;
+  -moz-border-radius: 56px 56px 56px 56px;
+  -webkit-border-radius: 56px 56px 56px 56px;
+  color: black;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.MuiCardActions-root .btnSignUp:hover {
+  background-color: var(--color-519ca3);
+}
+.grid-5 {
+  background-color: #84e7b296;
+  border-radius: 56px 56px 56px 56px;
+  -moz-border-radius: 56px 56px 56px 56px;
+  -webkit-border-radius: 56px 56px 56px 56px;
+}
+.globe {
+  position: absolute;
+}
+
+/******************** END REGISTER PAGE ********************/
+
+/******************** LOGIN PAGE ********************/
+.MuiCardActions-root .btnSignIn {
+  background-color: var(--color-8fe5ee);
+  border-radius: 56px 56px 56px 56px;
+  -moz-border-radius: 56px 56px 56px 56px;
+  -webkit-border-radius: 56px 56px 56px 56px;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: black;
+}
+.MuiCardActions-root .btnSignIn:hover {
+  background-color: var(--color-519ca3);
+}
+
+/******************** END LOGIN PAGE ********************/
+
+/******************** TOGGLE BUTTON ********************/
+
+/******************** END TOGGLE BUTTON ********************/
