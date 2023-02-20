@@ -20,22 +20,38 @@
 .gap-50 {
   gap: 100px;
 }
+
+body {
+  font-family: "Nunito", sans-serif;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-image: url("https://i.pinimg.com/originals/f0/a7/60/f0a760797d14b0529d09298b61586d6e.png");
+  background-size: cover;
+  display: block;
+  opacity: 0.3;
+}
+
 /******************** REGISTER PAGE ********************/
+.whole-grid {
+  position: relative;
+}
 .MuiCardActions-root .btnSignUp {
   background-color: var(--color-b7781);
   border-radius: 56px 56px 56px 56px;
-  opacity: 0.5;
+  color: black;
 }
 .MuiCardActions-root .btnSignUp:hover {
   background-color: var(--color-519ca3);
 }
-.whole-grid {
-  font-family: "Nunito", sans-serif;
-  background-image: url("https://i.pinimg.com/originals/f0/a7/60/f0a760797d14b0529d09298b61586d6e.png");
-  opacity: 0.5;
-}
 .grid-5 {
-  background-color: #84e7b269;
+  background-color: #84e7b296;
   color: white;
   border-radius: 56px 56px 56px 56px;
   -moz-border-radius: 56px 56px 56px 56px;

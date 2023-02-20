@@ -93,10 +93,23 @@ const RegisterPage = () => {
     <>
       <Grid className="whole-grid">
         <Grid item xs={4} ml={10}>
-          <Typography variant="h4" components="h2">
+          <Typography
+            variant="h4"
+            components="h2"
+            sx={{
+              fontFamily: "Nunito",
+            }}
+          >
             R A I N D R O P
           </Typography>
-          <Typography variant="h6" components="h2" ml={16.5}>
+          <Typography
+            variant="h6"
+            components="h2"
+            ml={16.5}
+            sx={{
+              fontFamily: "Nunito",
+            }}
+          >
             S I G N U P
           </Typography>
         </Grid>
