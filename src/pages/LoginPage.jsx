@@ -57,7 +57,7 @@ const LoginPage = ({ onLogin }) => {
   return (
     <>
       <Grid className="whole-grid">
-        <Grid item xs={4} ml={10}>
+        <Grid item xs={8} ml={10}>
           <Typography
             variant="h4"
             components="h2"
@@ -79,7 +79,7 @@ const LoginPage = ({ onLogin }) => {
           </Typography>
         </Grid>
         <Grid container component="form" onSubmit={handleSubmit}>
-          <Grid item xs={7}>
+          <Grid item xs={6}>
             <Box
               component="img"
               sx={{
@@ -91,7 +91,7 @@ const LoginPage = ({ onLogin }) => {
               mt={5}
             />
           </Grid>
-          <Grid item xs={5} mt={10}>
+          <Grid item xs={6} mt={12}>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12}>

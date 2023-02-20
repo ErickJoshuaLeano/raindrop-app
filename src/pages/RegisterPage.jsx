@@ -124,6 +124,7 @@ const RegisterPage = () => {
               alt="Globe"
               src="images\globe.png"
               mt={5}
+              className="globe"
             />
           </Grid>
 

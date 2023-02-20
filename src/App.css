@@ -24,6 +24,8 @@
 body {
   font-family: "Nunito", sans-serif;
   position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
 body::before {
   content: "";
@@ -59,6 +61,9 @@ body::before {
   border-radius: 56px 56px 56px 56px;
   -moz-border-radius: 56px 56px 56px 56px;
   -webkit-border-radius: 56px 56px 56px 56px;
+}
+.globe {
+  position: absolute;
 }
 
 /******************** END REGISTER PAGE ********************/
