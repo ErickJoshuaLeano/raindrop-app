@@ -258,7 +258,7 @@ const RegisterPage = () => {
                 Sign up
               </Button>
             </CardActions>
-            <Grid container justifyContent="center" ml={1} mt={1}>
+            <Grid container justifyContent="center" ml={1}>
               <Grid item>
                 <Link to="/login" variant="body2">
                   Already have an account?
