@@ -1,6 +1,6 @@
 :root {
   --color-84e7b3: #84e7b3;
-  --color-8fe5ee: #8fe5ee;
+  --color-8fe5ee: #8fe4ee73;
   --color-74dfea: #74dfea;
   --color-519ca3: #519ca3;
   --color-52bbc7: #52bbc7;
@@ -43,29 +43,34 @@ body::before {
   position: relative;
 }
 .MuiCardActions-root .btnSignUp {
-  background-color: var(--color-b7781);
+  background-color: var(--color-8fe5ee);
   border-radius: 56px 56px 56px 56px;
+  -moz-border-radius: 56px 56px 56px 56px;
+  -webkit-border-radius: 56px 56px 56px 56px;
   color: black;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .MuiCardActions-root .btnSignUp:hover {
   background-color: var(--color-519ca3);
 }
 .grid-5 {
   background-color: #84e7b296;
-  color: white;
   border-radius: 56px 56px 56px 56px;
   -moz-border-radius: 56px 56px 56px 56px;
   -webkit-border-radius: 56px 56px 56px 56px;
-  border: 0px none;
 }
 
 /******************** END REGISTER PAGE ********************/
 
 /******************** LOGIN PAGE ********************/
 .MuiCardActions-root .btnSignIn {
-  background-color: var(--color-b7781);
+  background-color: var(--color-8fe5ee);
   border-radius: 56px 56px 56px 56px;
-  color: black;
+  -moz-border-radius: 56px 56px 56px 56px;
+  -webkit-border-radius: 56px 56px 56px 56px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .MuiCardActions-root .btnSignIn:hover {
   background-color: var(--color-519ca3);
