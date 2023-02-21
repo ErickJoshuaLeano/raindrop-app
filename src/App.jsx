@@ -63,6 +63,7 @@ function App() {
   const changeTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
+
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -147,6 +148,7 @@ function App() {
                 )
               }
             />
+
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" />} />
           </Routes>
