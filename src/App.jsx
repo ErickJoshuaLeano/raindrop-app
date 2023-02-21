@@ -4,6 +4,7 @@ import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePages from "./pages/HomePages";
+import Forgot from "./pages/Forgot";
 import * as authService from "./services/auth";
 import "../src/App.css";
 import React, { useState, useMemo } from "react";
@@ -21,6 +22,19 @@ function App() {
   const handleLogin = async (username, password) => {
     try {
       const response = await authService.login(username, password);
+      // console.log(response.data.accessToken);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      setAccessToken(response.data.accessToken);
+      navigate("/");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert(error.response.data.message);
+      }
+    }
+  };
+  const handleForgot = async (email) => {
+    try {
+      const response = await authService.login(email);
       // console.log(response.data.accessToken);
       localStorage.setItem("accessToken", response.data.accessToken);
       setAccessToken(response.data.accessToken);
@@ -149,6 +163,16 @@ function App() {
               }
             />
 
+            <Route
+              path="/forgot"
+              element={
+                accessToken ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Forgot onForgot={handleForgot} />
+                )
+              }
+            />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" />} />
           </Routes>
