@@ -76,12 +76,11 @@ const Forgot = (onForgot) => {
           <Typography
             variant="h6"
             components="h2"
-            ml={14.7}
             sx={{
               fontFamily: "Nunito",
             }}
           >
-            S I G N - U P
+            FORGET PASSWORD
           </Typography>
         </Grid>
         <Grid
