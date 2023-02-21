@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import InputAdornment from "@mui/material/InputAdornment";
+import "./LoginRegisterPage.css";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = useState({
@@ -59,114 +60,116 @@ const LoginPage = ({ onLogin }) => {
 
   return (
     <>
-      <Grid className="whole-grid">
-        <Grid item xs={8}>
-          <Typography
-            variant="h4"
-            components="h2"
-            sx={{
-              fontFamily: "Nunito",
-            }}
-          >
-            R A I N D R O P
-          </Typography>
-          <Typography
-            variant="h6"
-            components="h2"
-            ml={16}
-            sx={{
-              fontFamily: "Nunito",
-            }}
-          >
-            S I G N - I N
-          </Typography>
-        </Grid>
-        <Grid container component="form" onSubmit={handleSubmit}>
-          <Grid item xs={6}>
-            <Box
-              component="img"
+      <div className="body">
+        <Grid className="whole-grid">
+          <Grid item xs={8}>
+            <Typography
+              variant="h4"
+              components="h2"
               sx={{
-                height: 400,
-                width: 500,
+                fontFamily: "Nunito",
               }}
-              alt="Globe"
-              src="images\globe.png"
-              mt={5}
-              className="globe"
-            />
+            >
+              R A I N D R O P
+            </Typography>
+            <Typography
+              variant="h6"
+              components="h2"
+              ml={16}
+              sx={{
+                fontFamily: "Nunito",
+              }}
+            >
+              S I G N - I N
+            </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    name="username"
-                    required
-                    error={!!errors.username}
-                    helperText={errors.username}
-                    onChange={handleChange}
-                    value={form.username}
-                    label="Username"
-                    fullWidth
-                    className="grid-5"
-                    sx={{
-                      "& fieldset": { border: "none" },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="start">
-                          <PersonPinCircleIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+          <Grid container component="form" onSubmit={handleSubmit}>
+            <Grid item xs={6}>
+              <Box
+                component="img"
+                sx={{
+                  height: 400,
+                  width: 500,
+                }}
+                alt="Globe"
+                src="images\globe.png"
+                mt={5}
+                className="globe"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="username"
+                      required
+                      error={!!errors.username}
+                      helperText={errors.username}
+                      onChange={handleChange}
+                      value={form.username}
+                      label="Username"
+                      fullWidth
+                      className="grid-5"
+                      sx={{
+                        "& fieldset": { border: "none" },
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <PersonPinCircleIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="password"
+                      required
+                      error={!!errors.password}
+                      helperText={errors.password}
+                      onChange={handleChange}
+                      value={form.password}
+                      label="Password"
+                      type="password"
+                      fullWidth
+                      className="grid-5"
+                      sx={{
+                        "& fieldset": { border: "none" },
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <PasswordIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="password"
-                    required
-                    error={!!errors.password}
-                    helperText={errors.password}
-                    onChange={handleChange}
-                    value={form.password}
-                    label="Password"
-                    type="password"
-                    fullWidth
-                    className="grid-5"
-                    sx={{
-                      "& fieldset": { border: "none" },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+              </CardContent>
+              <CardActions>
+                <Button
+                  className="btnSignIn"
+                  disabled={isFormInvalid()}
+                  type="submit"
+                  fullWidth
+                >
+                  Sign In <Link to="/home"></Link>
+                </Button>
+              </CardActions>
+              <Grid container justifyContent="center" ml={1} mt={1}>
+                <Grid item>
+                  <Link to="/register" variant="body2">
+                    Create an account?
+                  </Link>
                 </Grid>
-              </Grid>
-            </CardContent>
-            <CardActions>
-              <Button
-                className="btnSignIn"
-                disabled={isFormInvalid()}
-                type="submit"
-                fullWidth
-              >
-                Sign In <Link to="/home"></Link>
-              </Button>
-            </CardActions>
-            <Grid container justifyContent="center" ml={1} mt={1}>
-              <Grid item>
-                <Link to="/register" variant="body2">
-                  Create an account?
-                </Link>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </div>
     </>
   );
 };
