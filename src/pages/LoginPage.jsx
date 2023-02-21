@@ -8,22 +8,26 @@ import {
   Typography,
 } from "@mui/material";
 import Joi from "joi";
-import React, { useState } from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import PasswordIcon from "@mui/icons-material/Password";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 
 const LoginPage = ({ onLogin }) => {
-  const [form, setForm] = useState({
+  const [form, setForm] = React.useState({
     username: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = React.useState({});
 
   const schema = Joi.object({
-    username: Joi.string().required(),
+    username: Joi.string()
+      .min(5)
+      .max(15)
+      .required(),
     password: Joi.string().required(),
   });
 
@@ -55,6 +59,13 @@ const LoginPage = ({ onLogin }) => {
     const result = schema.validate(form);
 
     return !!result.error;
+  };
+
+  const [passwordShown, setPasswordShown] = React.useState(false);
+
+  const handleClickShowPassword = () => setPasswordShown((show) => !show);
+  const handleMouseDownPassword = () => {
+    setPasswordShown(passwordShown);
   };
 
   return (
@@ -130,7 +141,7 @@ const LoginPage = ({ onLogin }) => {
                     onChange={handleChange}
                     value={form.password}
                     label="Password"
-                    type="password"
+                    type={passwordShown ? "text" : "password"}
                     fullWidth
                     className="grid-5"
                     sx={{
@@ -138,8 +149,16 @@ const LoginPage = ({ onLogin }) => {
                     }}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
+                        <InputAdornment
+                          position="start"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {passwordShown ? (
+                            <VisibilityOffIcon />
+                          ) : (
+                            <VisibilityIcon />
+                          )}
                         </InputAdornment>
                       ),
                     }}
@@ -147,6 +166,7 @@ const LoginPage = ({ onLogin }) => {
                 </Grid>
               </Grid>
             </CardContent>
+            <Link to="/login/reset">Forgot password?</Link>
             <CardActions>
               <Button
                 className="btnSignIn"
