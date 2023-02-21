@@ -1,4 +1,4 @@
-import { Container, CssBaseline } from "@mui/material";
+import { Container, CssBaseline, FormGroup } from "@mui/material";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePages from "./pages/HomePages";
 import * as authService from "./services/auth";
 import "../src/App.css";
-import * as React from "react";
+import React, { useState, useMemo } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
@@ -16,9 +16,7 @@ import Switch from "@mui/material/Switch";
 function App() {
   const navigate = useNavigate();
 
-  const [accessToken, setAccessToken] = React.useState(
-    authService.getAccessToken()
-  );
+  const [accessToken, setAccessToken] = useState(authService.getAccessToken());
 
   const handleLogin = async (username, password) => {
     try {
@@ -37,7 +35,7 @@ function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   // System Preference
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {
@@ -48,18 +46,23 @@ function App() {
   );
 
   // Dark mode
-  const darkTheme = createTheme({
+  const dark = createTheme({
     palette: {
       mode: "dark",
     },
   });
   // LightMode
-  const lightTheme = createTheme({
+  const light = createTheme({
     palette: {
       mode: "light",
     },
   });
 
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  const changeTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -110,10 +113,16 @@ function App() {
 
   return (
     <>
-      <FormControlLabel
-        control={<MaterialUISwitch defaultChecked sx={{ ml: 1 }} />}
-      />
-      <ThemeProvider theme={theme}>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <MaterialUISwitch checked={isDarkTheme} onChange={changeTheme} />
+          }
+        />
+      </FormGroup>
+      <ThemeProvider
+        theme={isDarkTheme ? createTheme(dark) : createTheme(light)}
+      >
         <CssBaseline />
         <Container>
           <Routes>

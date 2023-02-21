@@ -97,7 +97,7 @@ const RegisterPage = () => {
   return (
     <>
       <Grid className="whole-grid">
-        <Grid item xs={4} ml={10}>
+        <Grid item xs={4}>
           <Typography
             variant="h4"
             components="h2"
@@ -118,7 +118,12 @@ const RegisterPage = () => {
             S I G N - U P
           </Typography>
         </Grid>
-        <Grid container component="form" onSubmit={handleSubmit}>
+        <Grid
+          container
+          component="form"
+          onSubmit={handleSubmit}
+          className="inputField"
+        >
           <Grid item xs={7}>
             <Box
               component="img"
@@ -151,7 +156,7 @@ const RegisterPage = () => {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
-                      startAdornment: (
+                      endAdornment: (
                         <InputAdornment position="start">
                           <AccountCircleIcon />
                         </InputAdornment>
@@ -174,7 +179,7 @@ const RegisterPage = () => {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
-                      startAdornment: (
+                      endAdornment: (
                         <InputAdornment position="start">
                           <AlternateEmailIcon />
                         </InputAdornment>
@@ -197,7 +202,7 @@ const RegisterPage = () => {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
-                      startAdornment: (
+                      endAdornment: (
                         <InputAdornment position="start">
                           <PersonPinCircleIcon />
                         </InputAdornment>
@@ -221,7 +226,7 @@ const RegisterPage = () => {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
-                      startAdornment: (
+                      endAdornment: (
                         <InputAdornment position="start">
                           <PasswordIcon />
                         </InputAdornment>
