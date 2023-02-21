@@ -24,10 +24,7 @@ const LoginPage = ({ onLogin }) => {
   const [errors, setErrors] = React.useState({});
 
   const schema = Joi.object({
-    username: Joi.string()
-      .min(5)
-      .max(15)
-      .required(),
+    username: Joi.string().min(5).max(15).required(),
     password: Joi.string().required(),
   });
 
@@ -166,7 +163,6 @@ const LoginPage = ({ onLogin }) => {
                 </Grid>
               </Grid>
             </CardContent>
-            <Link to="/login/reset">Forgot password?</Link>
             <CardActions>
               <Button
                 className="btnSignIn"
