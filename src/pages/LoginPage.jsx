@@ -60,7 +60,7 @@ const LoginPage = ({ onLogin }) => {
   return (
     <>
       <Grid className="whole-grid">
-        <Grid item xs={8} ml={10}>
+        <Grid item xs={8}>
           <Typography
             variant="h4"
             components="h2"
@@ -92,9 +92,10 @@ const LoginPage = ({ onLogin }) => {
               alt="Globe"
               src="images\globe.png"
               mt={5}
+              className="globe"
             />
           </Grid>
-          <Grid item xs={6} mt={12}>
+          <Grid item xs={6}>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -112,7 +113,7 @@ const LoginPage = ({ onLogin }) => {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
-                      startAdornment: (
+                      endAdornment: (
                         <InputAdornment position="start">
                           <PersonPinCircleIcon />
                         </InputAdornment>
@@ -136,7 +137,7 @@ const LoginPage = ({ onLogin }) => {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
-                      startAdornment: (
+                      endAdornment: (
                         <InputAdornment position="start">
                           <PasswordIcon />
                         </InputAdornment>

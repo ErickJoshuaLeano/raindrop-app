@@ -10,6 +10,7 @@
     "@material/switch": "^14.0.0",
     "@material/typography": "^14.0.0",
     "@mui/icons-material": "^5.11.9",
+    "@mui/joy": "^5.0.0-alpha.68",
     "@mui/material": "^5.11.9",
     "@mui/styles": "^5.11.9",
     "@mui/system": "^5.11.9",
