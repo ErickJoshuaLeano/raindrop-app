@@ -4,33 +4,56 @@ import {
   CardContent,
   Grid,
   TextField,
-  Box,
   Typography,
+  Box,
 } from "@mui/material";
 import Joi from "joi";
-import * as React from "react";
-import { Link } from "react-router-dom";
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import * as authService from "../services/auth";
+import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import InputAdornment from "@mui/material/InputAdornment";
 
-const LoginPage = ({ onLogin }) => {
-  const [form, setForm] = React.useState({
-    username: "",
+const Reset = () => {
+  const [form, setForm] = useState({
     password: "",
+    confirmPassword: "",
   });
 
-  const [errors, setErrors] = React.useState({});
+  const navigate = useNavigate();
+
+  const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    username: Joi.string().min(5).max(15).required(),
-    password: Joi.string().required(),
+    password: Joi.string()
+      .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
+      .required()
+      .messages({
+        "string.pattern.base": `Password should be between 8 to 20 characters and contain letters, numbers and special character`,
+        "string.empty": `Password cannot be empty`,
+        "any.required": `Password is required`,
+      }),
+    confirmPassword: Joi.string().required().valid(form.password).messages({
+      "any.only": "The two passwords do not match",
+      "any.required": "Please re-enter the password",
+    }),
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    onLogin(form.username, form.password);
+    try {
+      const response = await authService.register(
+        form.password,
+        form.confirmPassword
+      );
+      alert("Registration successful");
+      navigate("/login");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert(error.response.data.message);
+      }
+    }
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -68,7 +91,7 @@ const LoginPage = ({ onLogin }) => {
   return (
     <>
       <Grid className="whole-grid">
-        <Grid item xs={8}>
+        <Grid item xs={4}>
           <Typography
             variant="h4"
             components="h2"
@@ -81,16 +104,21 @@ const LoginPage = ({ onLogin }) => {
           <Typography
             variant="h6"
             components="h2"
-            ml={16}
+            ml={14.7}
             sx={{
               fontFamily: "Nunito",
             }}
           >
-            S I G N - I N
+            S I G N - U P
           </Typography>
         </Grid>
-        <Grid container component="form" onSubmit={handleSubmit}>
-          <Grid item xs={6}>
+        <Grid
+          container
+          component="form"
+          onSubmit={handleSubmit}
+          className="inputField"
+        >
+          <Grid item xs={7}>
             <Box
               component="img"
               sx={{
@@ -103,32 +131,10 @@ const LoginPage = ({ onLogin }) => {
               className="globe"
             />
           </Grid>
-          <Grid item xs={6}>
+
+          <Grid item xs={5}>
             <CardContent>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    name="username"
-                    required
-                    error={!!errors.username}
-                    helperText={errors.username}
-                    onChange={handleChange}
-                    value={form.username}
-                    label="Username"
-                    fullWidth
-                    className="grid-5"
-                    sx={{
-                      "& fieldset": { border: "none" },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="start">
-                          <PersonPinCircleIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     name="password"
@@ -161,30 +167,35 @@ const LoginPage = ({ onLogin }) => {
                     }}
                   />
                 </Grid>
-              </Grid>
-              <Grid container justifyContent="flex-end" mt={1}>
-                <Grid item>
-                  <Link to="/forgot">Forgot password?</Link>
+                <Grid item xs={12}>
+                  <TextField
+                    name="confirmPassword"
+                    required
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword}
+                    onChange={handleChange}
+                    value={form.confirmPassword}
+                    label="Confirm Password"
+                    type="password"
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                  />
                 </Grid>
               </Grid>
             </CardContent>
             <CardActions>
               <Button
-                className="btnSignIn"
+                className="btnSignUp"
                 disabled={isFormInvalid()}
                 type="submit"
                 fullWidth
               >
-                Sign In <Link to="/home"></Link>
+                Sign up
               </Button>
             </CardActions>
-            <Grid container justifyContent="center" ml={1} mt={1}>
-              <Grid item>
-                <Link to="/register" variant="body2">
-                  Create an account?
-                </Link>
-              </Grid>
-            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -192,4 +203,4 @@ const LoginPage = ({ onLogin }) => {
   );
 };
 
-export default LoginPage;
+export default Reset;

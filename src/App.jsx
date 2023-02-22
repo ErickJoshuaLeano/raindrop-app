@@ -31,11 +31,10 @@ function App() {
       }
     }
   };
-
+  // System Preference
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  // System Preference
-  const theme = useMemo(
+  const theme1 = useMemo(
     () =>
       createTheme({
         palette: {
@@ -58,10 +57,18 @@ function App() {
     },
   });
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    JSON.parse(localStorage.getItem("isDarkTheme")) || false
+  );
+  const [isLightTheme, setIsLightTheme] = useState(
+    JSON.parse(localStorage.getItem("isLightTheme")) || false
+  );
 
   const changeTheme = () => {
+    localStorage.setItem("isDarkTheme", !isDarkTheme);
     setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem("isLightTheme", !isLightTheme);
+    setIsLightTheme(!isLightTheme);
   };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -117,12 +124,23 @@ function App() {
       <FormGroup>
         <FormControlLabel
           control={
-            <MaterialUISwitch checked={isDarkTheme} onChange={changeTheme} />
+            <MaterialUISwitch
+              checked={prefersDarkMode !== isDarkTheme}
+              onChange={changeTheme}
+            />
           }
         />
       </FormGroup>
       <ThemeProvider
-        theme={isDarkTheme ? createTheme(dark) : createTheme(light)}
+        theme={
+          prefersDarkMode
+            ? isLightTheme
+              ? createTheme(light)
+              : createTheme(dark)
+            : isDarkTheme
+            ? createTheme(dark)
+            : createTheme(light)
+        }
       >
         <CssBaseline />
         <Container>
