@@ -119,7 +119,7 @@ function App() {
         <FormControlLabel
           control={
             <MaterialUISwitch
-              checked={prefersDarkMode || isDarkTheme}
+              checked={prefersDarkMode != isDarkTheme}
               onChange={changeTheme}
             />
           }
@@ -129,8 +129,8 @@ function App() {
         theme={
           prefersDarkMode
             ? isDarkTheme
-              ? createTheme(dark)
-              : createTheme(light)
+              ? createTheme(light)
+              : createTheme(dark)
             : isLightTheme
             ? createTheme(dark)
             : createTheme(light)
