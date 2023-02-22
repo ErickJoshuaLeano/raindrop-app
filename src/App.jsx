@@ -57,11 +57,17 @@ function App() {
     },
   });
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    localStorage.getItem("isDarkTheme") === false
+  );
+  const [isLightTheme, setIsLightTheme] = useState(
+    localStorage.getItem("isLightTheme") === false
+  );
 
   const changeTheme = () => {
+    localStorage.setItem("isDarkTheme", !isDarkTheme);
     setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem("isLightTheme", !isLightTheme);
     setIsLightTheme(!isLightTheme);
   };
 
