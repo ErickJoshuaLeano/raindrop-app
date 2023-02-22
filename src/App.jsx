@@ -128,10 +128,10 @@ function App() {
       <ThemeProvider
         theme={
           prefersDarkMode
-            ? isDarkTheme
+            ? isLightTheme
               ? createTheme(light)
               : createTheme(dark)
-            : isLightTheme
+            : isDarkTheme
             ? createTheme(dark)
             : createTheme(light)
         }
