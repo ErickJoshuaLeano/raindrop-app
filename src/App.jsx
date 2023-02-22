@@ -58,9 +58,11 @@ function App() {
   });
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(false);
 
   const changeTheme = () => {
     setIsDarkTheme(!isDarkTheme);
+    setIsLightTheme(!isLightTheme);
   };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -125,7 +127,11 @@ function App() {
       </FormGroup>
       <ThemeProvider
         theme={
-          prefersDarkMode || isDarkTheme
+          prefersDarkMode
+            ? isDarkTheme
+              ? createTheme(dark)
+              : createTheme(light)
+            : isLightTheme
             ? createTheme(dark)
             : createTheme(light)
         }
