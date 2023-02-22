@@ -58,10 +58,10 @@ function App() {
   });
 
   const [isDarkTheme, setIsDarkTheme] = useState(
-    localStorage.getItem("isDarkTheme") === false
+    JSON.parse(localStorage.getItem("isDarkTheme")) || false
   );
   const [isLightTheme, setIsLightTheme] = useState(
-    localStorage.getItem("isLightTheme") === false
+    JSON.parse(localStorage.getItem("isLightTheme")) || false
   );
 
   const changeTheme = () => {
@@ -125,7 +125,7 @@ function App() {
         <FormControlLabel
           control={
             <MaterialUISwitch
-              checked={prefersDarkMode != isDarkTheme}
+              checked={prefersDarkMode !== isDarkTheme}
               onChange={changeTheme}
             />
           }
