@@ -1,0 +1,65 @@
+.profile-holder2 {
+  display: grid;
+  justify-content: left;
+  margin-bottom: -20px;
+
+  transform: translateY(-28%);
+}
+
+.layer3,
+.layer4,
+.layer5,
+.layer6 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.layer4 {
+  transform: translateX(+9.5%) translateY(2%);
+}
+
+.layer5 {
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  color: #074147;
+  transform: translateX(37%) translateY(-17%);
+}
+
+.layer6 {
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  color: #074147;
+  transform: translateX(37%);
+  transform: translateX(37%) translateY(30%);
+}
+
+.raindrop2 {
+  height: 65px;
+  transform: translateY(-7%) translateX(-30%) rotate(90deg);
+  justify-self: center;
+}
+
+.raindrop2 path {
+  fill: #27abb9;
+}
+
+.profile-picture-card2 {
+  height: 80px;
+  width: 80px;
+}
+
+.add-photo-button {
+  transform: translateY(-30%);
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
+  .button-text {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .drop-a-thought {
+    display: none;
+  }
+}
