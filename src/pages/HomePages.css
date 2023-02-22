@@ -13,9 +13,25 @@
   justify-content: center;
   width: 100vw;
   position: relative;
-  top: 10vh;
+  top: clamp(16px, 13vh, 100px);
 }
 
 .grid {
   justify-content: center;
+}
+
+.column {
+  height: fit-content;
+  max-height: 100vh;
+  overflow: auto;
+  scrollbar-width: none;
+  padding-bottom: 15vh;
+}
+
+.column::-webkit-scrollbar {
+  display: none;
+}
+
+.column {
+  -ms-overflow-style: none;
 }
