@@ -12,6 +12,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import Waterdrop from "./experimental/Waterdrop";
+import PostDetailsPage from "./experimental/PostDetailsPage";
+import { AddComment } from "@mui/icons-material";
 
 function App() {
   const navigate = useNavigate();
@@ -63,7 +66,6 @@ function App() {
   const changeTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
-
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -129,6 +131,18 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route
+              path="/postdetails"
+              element={
+                accessToken ? <PostDetailsPage /> : <Navigate to="/register" />
+              }
+            />           
+            <Route
+              path="/commentdemo"
+              element={
+                accessToken ? <Waterdrop /> : <Navigate to="/register" />
+              }
+            />             
+            <Route
               path="/home"
               element={
                 accessToken ? <HomePages /> : <Navigate to="/register" />
@@ -148,8 +162,7 @@ function App() {
                 )
               }
             />
-
-            <Route path="/not-found" element={<NotFound />} />
+            <Route path="/not-found" element={<Waterdrop />} />
             <Route path="*" element={<Navigate to="/not-found" />} />
           </Routes>
         </Container>
