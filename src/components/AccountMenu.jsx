@@ -130,7 +130,7 @@ export default function AccountMenu({ currentUser, onLogout }) {
           onClick={handleClose}
           fontFamily="Raleway, Arial, Helvetica, sans-serif"
         >
-          <Avatar />{" "}
+          <Avatar />
           <Typography
             textAlign="center"
             fontFamily="Raleway, Arial, Helvetica, sans-serif"

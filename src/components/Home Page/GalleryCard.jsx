@@ -12,7 +12,7 @@ import * as profilesService from "../../services/profile";
 import { useEffect, useState } from "react";
 import * as authService from "../../services/auth";
 
-const GalleryCard = () => {
+const GalleryCard = ({ posts }) => {
   const currentUser = authService.getCurrentUser();
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ const GalleryCard = () => {
         setMyPosts(response.data);
         setLoading(false);
       });
-  }, []);
+  }, [posts]);
   const myPhotos = myPosts.filter(
     (myPosts) => myPosts.postPicture !== null && myPosts.postPicture !== ""
   );
@@ -157,7 +157,6 @@ const GalleryCard = () => {
                 sx={{
                   height: 140,
                   backgroundColor: "#74dfea",
-                  borderColor: "white",
                 }}
               />
             )}
