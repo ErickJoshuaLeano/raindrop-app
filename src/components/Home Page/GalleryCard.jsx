@@ -30,44 +30,46 @@ const GalleryCard = ({ posts }) => {
 
   if (isLoading) {
     return (
-      <Card
-        xs={12}
-        sx={{
-          borderRadius: "40px",
-          paddingBottom: "3vh",
-          boxShadow: "none",
-          margin: "0.5vw",
-          display: "grid",
-        }}
-      >
-        <Typography
+      <Fade in timeout={1000} style={{ transitionDelay: "500ms" }}>
+        <Card
           xs={12}
           sx={{
-            fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-            fontWeight: "500",
-            margin: "10px",
-            padding: "2px",
-            justifySelf: "center",
-            display: "flex",
+            borderRadius: "40px",
+            paddingBottom: "3vh",
+            boxShadow: "none",
+            margin: "0.5vw",
+            display: "grid",
           }}
         >
-          <PhotoSizeSelectActualOutlinedIcon sx={{ alignSelf: "center" }} />
-          <div className="spacer"></div>My Photos
-        </Typography>
-        <Grid container xs={12}>
-          <Grid
-            item
+          <Typography
             xs={12}
             sx={{
-              justifyContent: "center",
-              display: "grid",
-              justifyItems: "center",
+              fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+              fontWeight: "500",
+              margin: "10px",
+              padding: "2px",
+              justifySelf: "center",
+              display: "flex",
             }}
           >
-            <span class="loader"></span>
+            <PhotoSizeSelectActualOutlinedIcon sx={{ alignSelf: "center" }} />
+            <div className="spacer"></div>My Photos
+          </Typography>
+          <Grid container xs={12}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                justifyContent: "center",
+                display: "grid",
+                justifyItems: "center",
+              }}
+            >
+              <span class="loader"></span>
+            </Grid>
           </Grid>
-        </Grid>
-      </Card>
+        </Card>
+      </Fade>
     );
   }
 
