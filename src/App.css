@@ -41,9 +41,7 @@ body::before {
 }
 
 /******************** REGISTER PAGE ********************/
-.whole-grid {
-  position: relative;
-}
+
 .MuiCardActions-root .btnSignUp {
   background-color: #27acb893;
   border-radius: 56px 56px 56px 56px;

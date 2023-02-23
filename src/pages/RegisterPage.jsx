@@ -106,8 +106,8 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Grid className="whole-grid">
-        <Grid item xs={4}>
+      <Grid>
+        <Grid item>
           <Typography
             variant="h4"
             components="h2"
@@ -134,13 +134,9 @@ const RegisterPage = () => {
           onSubmit={handleSubmit}
           className="inputField"
         >
-          <Grid item xs={7}>
+          <Grid item xs={1} sm={1} lg={5}>
             <Box
               component="img"
-              sx={{
-                height: 400,
-                width: 500,
-              }}
               alt="Globe"
               src="images\globe.png"
               mt={5}
@@ -148,7 +144,7 @@ const RegisterPage = () => {
             />
           </Grid>
 
-          <Grid item xs={5}>
+          <Grid item xs={11} sm={11} lg={7}>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
