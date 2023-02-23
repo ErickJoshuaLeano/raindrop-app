@@ -18,6 +18,7 @@ import AddPost from "./AddPost";
 import "./HomePages.css";
 import PostCardGrid from "../components/Home Page/PostCardGrid";
 import Posts from "./Posts";
+import CommentModule from "../components/Home Page/CommentModule";
 
 const HomePages = () => {
   const currentUser = authService.getCurrentUser();
@@ -193,6 +194,8 @@ const HomePages = () => {
                 onAddLikePost={handleAddLikePost}
                 onDeleteLike={handleDeleteLike}
                 onSubmitComment={handleSubmitComment}
+                updatePage={updatePage}
+                setUpdatePage={setUpdatePage}
               />
             </Grid>
             <Grid

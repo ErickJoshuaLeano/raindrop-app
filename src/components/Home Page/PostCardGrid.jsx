@@ -10,6 +10,8 @@ const PostCardGrid = ({
   onDeleteLike,
   currentUser,
   onSubmitComment,
+  updatePage,
+  setUpdatePage,
 }) => {
   return (
     <div className="image-grid">
@@ -25,6 +27,8 @@ const PostCardGrid = ({
               onAddLikePost={onAddLikePost}
               onDeleteLike={onDeleteLike}
               onSubmitComment={onSubmitComment}
+              updatPage={updatePage}
+              setUpdatePage={setUpdatePage}
             />
           </TableRow>
         ))}

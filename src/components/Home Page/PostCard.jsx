@@ -26,6 +26,8 @@ const PostCard = ({
   onAddLikePost,
   onDeleteLike,
   onSubmitComment,
+  updatePage,
+  setUpdatePage,
 }) => {
   const currentUser = authService.getCurrentUser();
 
@@ -293,7 +295,12 @@ const PostCard = ({
             <div></div>
           ) : (
             <div>
-              <CommentModule post={post} onSubmitComment={onSubmitComment} />
+              <CommentModule
+                post={post}
+                onSubmitComment={onSubmitComment}
+                updatePage={updatePage}
+                setUpdatePage={setUpdatePage}
+              />
             </div>
           )}
         </CardContent>

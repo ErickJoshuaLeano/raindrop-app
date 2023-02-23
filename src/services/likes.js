@@ -11,3 +11,7 @@ export function deleteLike(id) {
 export function addCommentLike(commentId) {
   return http.post("/likes", { commentId });
 }
+
+export function fetchLikes() {
+  return http.get("/likes");
+}

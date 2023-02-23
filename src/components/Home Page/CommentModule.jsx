@@ -18,10 +18,15 @@ import AddComment from "./AddComment";
 import { styled } from "@mui/system";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const CommentModule = ({ post, onSubmitComment }) => {
+const CommentModule = ({
+  post,
+  onSubmitComment,
+  updatePage,
+  setUpdatePage,
+}) => {
   const currentUser = authService.getCurrentUser();
   const [comments, setComments] = useState([]);
-  const [updatePage, setUpdatePage] = useState(false);
+  // const [updatePage, setUpdatePage] = useState(false);
 
   const ColorButton = styled(Button)(({ theme }) => ({
     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
