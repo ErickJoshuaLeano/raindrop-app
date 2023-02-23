@@ -14,6 +14,8 @@ import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = React.useState({
@@ -64,6 +66,8 @@ const LoginPage = ({ onLogin }) => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
+
+  const notify = () => toast("Incorrect Username/Password");
 
   return (
     <>
@@ -174,9 +178,11 @@ const LoginPage = ({ onLogin }) => {
                 disabled={isFormInvalid()}
                 type="submit"
                 fullWidth
+                onClick={notify}
               >
                 Sign In <Link to="/home"></Link>
               </Button>
+              <ToastContainer />
             </CardActions>
             <Grid container justifyContent="center" ml={1} mt={1}>
               <Grid item>
