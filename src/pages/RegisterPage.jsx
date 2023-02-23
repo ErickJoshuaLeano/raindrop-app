@@ -15,9 +15,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -33,16 +34,11 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    name: Joi.string()
-      .max(50)
-      .required(),
+    name: Joi.string().max(50).required(),
     email: Joi.string()
       .required()
       .email({ tlds: { allow: false } }),
-    username: Joi.string()
-      .min(5)
-      .max(15)
-      .required(),
+    username: Joi.string().min(5).max(15).required(),
     password: Joi.string()
       .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
       .required()
@@ -51,13 +47,10 @@ const RegisterPage = () => {
         "string.empty": `Password cannot be empty`,
         "any.required": `Password is required`,
       }),
-    confirmPassword: Joi.string()
-      .required()
-      .valid(form.password)
-      .messages({
-        "any.only": "The two passwords do not match",
-        "any.required": "Please re-enter the password",
-      }),
+    confirmPassword: Joi.string().required().valid(form.password).messages({
+      "any.only": "The two passwords do not match",
+      "any.required": "Please re-enter the password",
+    }),
   });
 
   const handleSubmit = async (event) => {
@@ -71,6 +64,7 @@ const RegisterPage = () => {
         form.confirmPassword
       );
       alert("Registration successful");
+
       navigate("/login");
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -110,6 +104,8 @@ const RegisterPage = () => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
+
+  const notify = () => toast("Invalid Input");
 
   return (
     <>
@@ -284,9 +280,11 @@ const RegisterPage = () => {
                 disabled={isFormInvalid()}
                 type="submit"
                 fullWidth
+                onClick={notify}
               >
                 Sign up
               </Button>
+              <ToastContainer />
             </CardActions>
             <Grid container justifyContent="center" ml={1}>
               <Grid item>
