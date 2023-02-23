@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import * as postsService from "../../services/posts";
 import * as authService from "../../services/auth";
+import * as likesService from "../../services/likes";
 import "./CommentModule.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -48,6 +49,37 @@ const CommentModule = ({ post, onSubmitComment }) => {
       }
       setComments(commentsClone);
     }
+  };
+
+  const handleAddLikeComment = (commentId) => {
+    likesService
+      .addCommentLike(commentId)
+      .then((response) => {
+        console.log(response);
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          alert(error.response.data.message[0]);
+        }
+      });
+  };
+
+  const handleDeleteLike = async (id) => {
+    try {
+      await likesService.deleteLike(id);
+      setUpdatePage(true);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        alert("Not the user post,can't delete");
+      }
+    }
+  };
+
+  const handleRemoveLike = (comment) => {
+    handleDeleteLike(
+      comment.likes.find((comment) => comment.userId === currentUser.id).id
+    );
   };
 
   return (
@@ -112,9 +144,25 @@ const CommentModule = ({ post, onSubmitComment }) => {
                   </Typography>
                 </Grid>
                 <Grid>
-                  <IconButton sx={{ marginTop: "5px" }}>
-                    <FavoriteIcon />
-                  </IconButton>
+                  {!comment.likes.find(
+                    (comment) => comment.userId === currentUser.id
+                  ) ? (
+                    <div>
+                      <IconButton
+                        sx={{ marginTop: "5px" }}
+                        onClick={() => handleAddLikeComment(comment.id)}
+                      >
+                        <FavoriteIcon />
+                      </IconButton>
+                    </div>
+                  ) : (
+                    <IconButton
+                      sx={{ marginTop: "5px" }}
+                      onClick={() => handleRemoveLike(comment)}
+                    >
+                      <FavoriteIcon sx={{ color: "#74dfea" }} />
+                    </IconButton>
+                  )}
                 </Grid>
               </Grid>
             </Grid>

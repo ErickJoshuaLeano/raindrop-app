@@ -7,3 +7,7 @@ export function addPostLike(postId) {
 export function deleteLike(id) {
   return http.delete(`/likes/${id}`);
 }
+
+export function addCommentLike(commentId) {
+  return http.post("/likes", { commentId });
+}
