@@ -9,9 +9,8 @@ import "../src/App.css";
 import React, { useState, useMemo } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+import { MaterialUISwitch } from "./components/MaterialUISwitch";
 
 function App() {
   const navigate = useNavigate();
@@ -71,6 +70,7 @@ function App() {
     setIsLightTheme(!isLightTheme);
   };
 
+
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -119,13 +119,17 @@ function App() {
     },
   }));
 
+
   return (
     <>
       <FormGroup>
         <FormControlLabel
+          className="toggle-button"
           control={
             <MaterialUISwitch
+
               checked={prefersDarkMode !== isDarkTheme}
+
               onChange={changeTheme}
             />
           }

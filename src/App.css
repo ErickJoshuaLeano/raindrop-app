@@ -21,25 +21,6 @@
   gap: 100px;
 }
 
-body {
-  font-family: "Nunito", sans-serif;
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-}
-body::before {
-  content: "";
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-image: url("https://i.pinimg.com/originals/f0/a7/60/f0a760797d14b0529d09298b61586d6e.png");
-  background-size: cover;
-  display: block;
-  opacity: 0.3;
-}
-
 /******************** REGISTER PAGE ********************/
 .whole-grid {
   position: relative;
@@ -87,6 +68,16 @@ body::before {
 .MuiCardActions-root .btnSignIn:hover {
   background-color: #27acb893;
 }
+
+.toggle-button {
+  z-index: 100;
+  width: fit-content;
+  height: 10vh;
+  max-height: 64px;
+  position: fixed;
+  right: 6vw;
+  box-shadow: none;
+}
 /******************** END LOGIN PAGE ********************/
 
 /******************** TOGGLE BUTTON ********************/
@@ -100,5 +91,11 @@ body::before {
 @media screen and (min-width: 1000px) {
   body {
     font-size: 22px;
+  }
+}
+
+@media (max-width: 650px) {
+  .toggle-button {
+    right: -3vw;
   }
 }

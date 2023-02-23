@@ -1,0 +1,37 @@
+.background {
+  background-color: #eaebef;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.grid-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  position: relative;
+  top: clamp(16px, 13vh, 100px);
+}
+
+.grid {
+  justify-content: center;
+}
+
+.column {
+  height: fit-content;
+  max-height: 100vh;
+  overflow: auto;
+  scrollbar-width: none;
+  padding-bottom: 15vh;
+}
+
+.column::-webkit-scrollbar {
+  display: none;
+}
+
+.column {
+  -ms-overflow-style: none;
+}

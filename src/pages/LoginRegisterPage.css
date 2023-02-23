@@ -1,0 +1,19 @@
+.body {
+  font-family: "Nunito", sans-serif;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.body::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-image: url("https://i.pinimg.com/originals/f0/a7/60/f0a760797d14b0529d09298b61586d6e.png");
+  background-size: cover;
+  display: block;
+  opacity: 0.3;
+  z-index: -100;
+}

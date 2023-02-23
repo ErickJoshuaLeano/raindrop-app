@@ -1,0 +1,58 @@
+.navbar {
+  background-color: #27abb9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10vh;
+  max-height: 64px;
+  justify-content: center;
+}
+
+.navbar-grid {
+  height: 7vh;
+  max-height: 47px;
+}
+
+.logo {
+  height: 7vh;
+  max-height: 47px;
+  justify-self: center;
+  margin: 1px;
+}
+
+.logo-container {
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+}
+
+.app-name {
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: clamp(16px, 4vw, 22px);
+  margin: 0.6vh;
+}
+
+.search-box {
+  height: 7vh;
+  max-height: 47px;
+}
+
+.icon-buttons {
+  justify-content: right;
+  align-items: center;
+  height: 7vh;
+  max-height: 47px;
+  padding-left: 3vw;
+}
+
+.profile-picture {
+  height: 7vh;
+  width: 7vh;
+  max-height: 47px;
+  max-width: 47px;
+  object-fit: contain;
+}

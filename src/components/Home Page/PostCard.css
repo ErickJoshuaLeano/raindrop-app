@@ -1,0 +1,64 @@
+.p-profile-holder2 {
+  display: grid;
+  justify-content: left;
+  margin-bottom: 0px;
+
+  transform: translateY(-28%);
+}
+
+.p-layer3,
+.p-layer4,
+.p-layer5,
+.p-layer6 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.p-layer4 {
+  transform: translateX(+2%) translateY(28%);
+}
+
+.p-layer5 {
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  color: #074147;
+  transform: translateX(28%) translateY(15%);
+}
+
+.p-layer6 {
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  color: #074147;
+  transform: translateX(28%) translateY(62%);
+}
+
+.p-raindrop2 {
+  height: 65px;
+  transform: translateX(-38%) translateY(20%);
+  justify-self: center;
+}
+
+.p-raindrop2 path {
+  fill: #74dfea;
+}
+
+.p-profile-picture-card2 {
+  height: 80px;
+  width: 80px;
+}
+
+.p-avatar {
+  transform: translateY(0%);
+}
+
+.edit-post {
+  color: #074147;
+}
+
+.delete-post {
+  color: #074147;
+}
+
+.space {
+  width: 10px;
+}
