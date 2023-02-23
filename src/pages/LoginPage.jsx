@@ -14,6 +14,8 @@ import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./LoginRegisterPage.css";
 
 const LoginPage = ({ onLogin }) => {
@@ -65,6 +67,8 @@ const LoginPage = ({ onLogin }) => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
+
+  const notify = () => toast("Incorrect Username/Password");
 
   return (
     <>
@@ -140,7 +144,7 @@ const LoginPage = ({ onLogin }) => {
                       onChange={handleChange}
                       value={form.password}
                       label="Password"
-                      type="password"
+                      type={passwordShown ? "text" : "password"}
                       fullWidth
                       className="grid-5"
                       sx={{
@@ -148,71 +152,47 @@ const LoginPage = ({ onLogin }) => {
                       }}
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="start">
-                            <PasswordIcon />
+                          <InputAdornment
+                            position="start"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {passwordShown ? (
+                              <VisibilityOffIcon />
+                            ) : (
+                              <VisibilityIcon />
+                            )}
                           </InputAdornment>
                         ),
                       }}
                     />
                   </Grid>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    name="password"
-                    required
-                    error={!!errors.password}
-                    helperText={errors.password}
-                    onChange={handleChange}
-                    value={form.password}
-                    label="Password"
-                    type={passwordShown ? "text" : "password"}
-                    fullWidth
-                    className="grid-5"
-                    sx={{
-                      "& fieldset": { border: "none" },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment
-                          position="start"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {passwordShown ? (
-                            <VisibilityOffIcon />
-                          ) : (
-                            <VisibilityIcon />
-                          )}
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+                <Grid container justifyContent="flex-end" mt={1}>
+                  <Grid item>
+                    <Link to="/forgot">Forgot password?</Link>
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid container justifyContent="flex-end" mt={1}>
+              </CardContent>
+              <CardActions>
+                <Button
+                  className="btnSignIn"
+                  disabled={isFormInvalid()}
+                  type="submit"
+                  fullWidth
+                  onClick={notify}
+                >
+                  Sign In <Link to="/home"></Link>
+                </Button>
+                <ToastContainer />
+              </CardActions>
+              <Grid container justifyContent="center" ml={1} mt={1}>
                 <Grid item>
-                  <Link to="/forgot">Forgot password?</Link>
+                  <Link to="/register" variant="body2">
+                    Create an account?
+                  </Link>
                 </Grid>
               </Grid>
-            </CardContent>
-            <CardActions>
-              <Button
-                className="btnSignIn"
-                disabled={isFormInvalid()}
-                type="submit"
-                fullWidth
-              >
-                Sign In <Link to="/home"></Link>
-              </Button>
-            </CardActions>
-            <Grid container justifyContent="center" ml={1} mt={1}>
-              <Grid item>
-                <Link to="/register" variant="body2">
-                  Create an account?
-                </Link>
-              </Grid>
-
             </Grid>
           </Grid>
         </Grid>

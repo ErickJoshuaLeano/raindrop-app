@@ -15,11 +15,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-
-
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./LoginRegisterPage.css";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -35,16 +35,11 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    name: Joi.string()
-      .max(50)
-      .required(),
+    name: Joi.string().max(50).required(),
     email: Joi.string()
       .required()
       .email({ tlds: { allow: false } }),
-    username: Joi.string()
-      .min(5)
-      .max(15)
-      .required(),
+    username: Joi.string().min(5).max(15).required(),
     password: Joi.string()
       .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
       .required()
@@ -53,13 +48,10 @@ const RegisterPage = () => {
         "string.empty": `Password cannot be empty`,
         "any.required": `Password is required`,
       }),
-    confirmPassword: Joi.string()
-      .required()
-      .valid(form.password)
-      .messages({
-        "any.only": "The two passwords do not match",
-        "any.required": "Please re-enter the password",
-      }),
+    confirmPassword: Joi.string().required().valid(form.password).messages({
+      "any.only": "The two passwords do not match",
+      "any.required": "Please re-enter the password",
+    }),
   });
 
   const handleSubmit = async (event) => {
@@ -73,6 +65,7 @@ const RegisterPage = () => {
         form.confirmPassword
       );
       alert("Registration successful");
+
       navigate("/login");
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -112,6 +105,8 @@ const RegisterPage = () => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
+
+  const notify = () => toast("Invalid Input");
 
   return (
     <>
@@ -239,7 +234,7 @@ const RegisterPage = () => {
                       onChange={handleChange}
                       value={form.password}
                       label="Password"
-                      type="password"
+                      type={passwordShown ? "text" : "password"}
                       fullWidth
                       className="grid-5"
                       sx={{
@@ -247,8 +242,16 @@ const RegisterPage = () => {
                       }}
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="start">
-                            <PasswordIcon />
+                          <InputAdornment
+                            position="start"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {passwordShown ? (
+                              <VisibilityOffIcon />
+                            ) : (
+                              <VisibilityIcon />
+                            )}
                           </InputAdornment>
                         ),
                       }}
@@ -272,39 +275,24 @@ const RegisterPage = () => {
                     />
                   </Grid>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    name="password"
-                    required
-                    error={!!errors.password}
-                    helperText={errors.password}
-                    onChange={handleChange}
-                    value={form.password}
-                    label="Password"
-                    type={passwordShown ? "text" : "password"}
-                    fullWidth
-                    className="grid-5"
-                    sx={{
-                      "& fieldset": { border: "none" },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment
-                          position="start"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {passwordShown ? (
-                            <VisibilityOffIcon />
-                          ) : (
-                            <VisibilityIcon />
-                          )}
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-
+              </CardContent>
+              <CardActions>
+                <Button
+                  className="btnSignUp"
+                  disabled={isFormInvalid()}
+                  type="submit"
+                  fullWidth
+                  onClick={notify}
+                >
+                  Sign up
+                </Button>
+                <ToastContainer />
+              </CardActions>
+              <Grid container justifyContent="center" ml={1}>
+                <Grid item>
+                  <Link to="/login" variant="body2">
+                    Already have an account?
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
