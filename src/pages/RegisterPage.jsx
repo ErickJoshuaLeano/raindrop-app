@@ -17,8 +17,8 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
