@@ -53,6 +53,12 @@ const PostDetailsPage = () => {
           })
       }, [params.postId]);
   
+  const [posts1, setPosts1] = useState([]);
+      useEffect(() => {
+        postService.fetchPostById(params.postId).then((response) => {
+          setPosts1(response.data);
+        });
+      }, [params.postId]);
   // const id = {params.postId};
 
 // <<updates for add comnment 
@@ -74,9 +80,9 @@ const PostDetailsPage = () => {
     
   };
   
-  
   return (
     <>
+    
       <NavBar onLogout={handleLogout} />
       <div>Test Area for Post</div>
       <Card>
@@ -84,14 +90,15 @@ const PostDetailsPage = () => {
           <Avatar variant="rounded" src="https://imageio.forbes.com/specials-images/imageserve/5c76b7d331358e35dd2773a9/0x0.jpg?format=jpg&crop=4401,4401,x0,y0,safe&height=416&width=416&fit=bounds" />
           <Typography fontWeight={700}>
             A post title. the postId: {params.postId}
+            {posts1}
           </Typography>
         </Box>
 {/* updates for add comment */}
         <TableBody>
           {posts.map((post) => (
-            <TableRow key={post.id}>
-              <TableCell>the body: {post.body}</TableCell>
-              <TableCell>postId: {post.id}</TableCell>
+             <TableRow key={params.postId}>
+             <TableCell>the body: {post.body}</TableCell>
+             <TableCell>postId: {post.id}</TableCell>
               <TableCell>postUserId: {post.userId}</TableCell>
             </TableRow>
           ))}
@@ -99,7 +106,7 @@ const PostDetailsPage = () => {
 
         {/* <TableBody>
           {comments.map((comment) => (
-            <TableRow key={comment.postId}>
+              <TableRow key={comment.postId}>
               <TableCell>the comment: {comment.body}</TableCell>
               <TableCell>the user: {comment.userId}</TableCell>
             </TableRow>
