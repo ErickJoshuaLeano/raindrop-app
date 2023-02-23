@@ -6,11 +6,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { Avatar } from "@mui/material";
+import { Avatar, Divider, Grid, IconButton } from "@mui/material";
 import { ReactComponent as RaindropIcon } from "../Raindrop.svg";
 import "./PostCard.css";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import * as authService from "../../services/auth";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const PostCard = ({ post, isLoading }) => {
+const PostCard = ({ post, isLoading, onDeletePost }) => {
+  const currentUser = authService.getCurrentUser();
   function time_ago(time) {
     switch (typeof time) {
       case "number":
@@ -71,7 +76,7 @@ const PostCard = ({ post, isLoading }) => {
       xs={12}
       sx={{
         borderRadius: "40px",
-        paddingBottom: "3vh",
+        paddingBottom: "-vh",
         boxShadow: "none",
         margin: "1vw",
         marginTop: "2vh",
@@ -105,41 +110,109 @@ const PostCard = ({ post, isLoading }) => {
         </div>
       )}
       <CardContent>
-        <div className="p-profile-holder2">
-          <div className="p-layer3">
-            <RaindropIcon className="p-raindrop2"></RaindropIcon>
+        {(post.postPicture === null || post.postPicture === "") && (
+          <div
+            style={{
+              fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+              fontWeight: "300",
+              color: "black",
+
+              marginLeft: "3%",
+              marginBottom: "5px",
+
+              zIndex: "100",
+              textJustify: "baseline",
+            }}
+          >
+            {time_ago(new Date(post.createdAt))}
           </div>
-          <div className="p-layer4">
-            <Avatar
-              className="p-avatar"
-              type="button"
+        )}
+        <Grid container xs={12}>
+          <Grid item xs={6}>
+            <div className="p-profile-holder2">
+              <div className="p-layer3">
+                <RaindropIcon className="p-raindrop2"></RaindropIcon>
+              </div>
+              <div className="p-layer4">
+                <Avatar
+                  className="p-avatar"
+                  type="button"
+                  sx={{
+                    height: "55px",
+                    width: "55px",
+                    border: "solid",
+                    borderWidth: 3,
+                    bordercolor: "white",
+                  }}
+                >
+                  <img
+                    className="p-profile-picture-card2"
+                    src={post.user.profilePicture}
+                  />
+                </Avatar>
+              </div>
+              <div className="p-layer5">{post.user.name}</div>
+              <div className="p-layer6">@ {post.user.username}</div>
+            </div>
+          </Grid>
+          <Grid item xs={6} justifyContent="flex-end" display="flex">
+            {post.userId === currentUser.id && (
+              <div className="edit-post">
+                <IconButton>
+                  <EditOutlinedIcon />
+                </IconButton>
+              </div>
+            )}
+            {post.userId === currentUser.id && (
+              <div
+                className="delete-post"
+                onClick={() => onDeletePost(post.id)}
+              >
+                <IconButton>
+                  <DeleteForeverOutlinedIcon />
+                </IconButton>
+              </div>
+            )}
+          </Grid>
+        </Grid>
+
+        <Typography
+          variant="body1"
+          color="black"
+          sx={{
+            fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+
+            paddingLeft: "76px",
+          }}
+        >
+          {post.body}
+        </Typography>
+        {post.likes.length > 0 && (
+          <div>
+            <Typography
+              className="likes"
               sx={{
-                height: "55px",
-                width: "55px",
-                border: "solid",
-                borderWidth: 3,
-                bordercolor: "white",
+                fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                fontSize: "small",
+                fontWeight: "700",
+                marginTop: "30px",
+                marginLeft: "4px",
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              <img
-                className="p-profile-picture-card2"
-                src={post.user.profilePicture}
-              />
-            </Avatar>
+              <FavoriteIcon sx={{ color: "#074147" }} />
+              <div className="space"></div>
+              {post.likes.length > 1 ? (
+                <div>Liked by {post.likes.length} people</div>
+              ) : (
+                <div>Liked by {post.likes.length} person</div>
+              )}
+            </Typography>
           </div>
-          <div className="p-layer5">{post.user.name}</div>
-          <div className="p-layer6">@ {post.user.username}</div>
-        </div>
-
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+        )}
+        <Divider sx={{ marginTop: "10px" }} />
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 };
