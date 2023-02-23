@@ -92,7 +92,7 @@ const LoginPage = ({ onLogin }) => {
           </Typography>
         </Grid>
         <Grid container component="form" onSubmit={handleSubmit}>
-          <Grid item xs={6}>
+          <Grid item xs={1} sm={1} lg={5} xl={5}>
             <Box
               component="img"
               sx={{
@@ -105,7 +105,7 @@ const LoginPage = ({ onLogin }) => {
               className="globe"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={11} sm={11} lg={7} xl={7}>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12}>

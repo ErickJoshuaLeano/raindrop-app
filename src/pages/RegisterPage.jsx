@@ -134,17 +134,21 @@ const RegisterPage = () => {
           onSubmit={handleSubmit}
           className="inputField"
         >
-          <Grid item xs={1} sm={1} lg={5}>
+          <Grid item xs={1} sm={1} lg={5} xl={5}>
             <Box
               component="img"
               alt="Globe"
               src="images\globe.png"
               mt={5}
               className="globe"
+              sx={{
+                height: 400,
+                width: 500,
+              }}
             />
           </Grid>
 
-          <Grid item xs={11} sm={11} lg={7}>
+          <Grid item xs={11} sm={11} lg={7} xl={7}>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
