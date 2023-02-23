@@ -13,8 +13,8 @@ import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Waterdrop from "./experimental/Waterdrop";
-import PostDetailsPage from "./experimental/PostDetailsPage";
-import { AddComment } from "@mui/icons-material";
+import PostDetailsPage from "./Comments/PostDetailsPage";
+
 
 function App() {
   const navigate = useNavigate();
@@ -130,12 +130,20 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
-            <Route
+            {/* <Route
               path="/postdetails"
               element={
                 accessToken ? <PostDetailsPage /> : <Navigate to="/register" />
               }
-            />           
+            /> */}
+            {/* try*/}
+            <Route
+              path="/postdetails/:postId"
+              element={
+                accessToken ? <PostDetailsPage /> : <Navigate to="/register" />
+              }
+            />
+            {/* try*/}
             <Route
               path="/commentdemo"
               element={
