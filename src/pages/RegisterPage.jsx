@@ -15,8 +15,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import PasswordIcon from "@mui/icons-material/Password";
-import "./LoginRegisterPage.css";
+
+
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -32,11 +35,16 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    name: Joi.string().max(50).required(),
+    name: Joi.string()
+      .max(50)
+      .required(),
     email: Joi.string()
       .required()
       .email({ tlds: { allow: false } }),
-    username: Joi.string().min(5).max(15).required(),
+    username: Joi.string()
+      .min(5)
+      .max(15)
+      .required(),
     password: Joi.string()
       .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
       .required()
@@ -45,10 +53,13 @@ const RegisterPage = () => {
         "string.empty": `Password cannot be empty`,
         "any.required": `Password is required`,
       }),
-    confirmPassword: Joi.string().required().valid(form.password).messages({
-      "any.only": "The two passwords do not match",
-      "any.required": "Please re-enter the password",
-    }),
+    confirmPassword: Joi.string()
+      .required()
+      .valid(form.password)
+      .messages({
+        "any.only": "The two passwords do not match",
+        "any.required": "Please re-enter the password",
+      }),
   });
 
   const handleSubmit = async (event) => {
@@ -93,6 +104,13 @@ const RegisterPage = () => {
     const result = schema.validate(form);
 
     return !!result.error;
+  };
+
+  const [passwordShown, setPasswordShown] = React.useState(false);
+
+  const handleClickShowPassword = () => setPasswordShown((show) => !show);
+  const handleMouseDownPassword = () => {
+    setPasswordShown(passwordShown);
   };
 
   return (
@@ -254,22 +272,39 @@ const RegisterPage = () => {
                     />
                   </Grid>
                 </Grid>
-              </CardContent>
-              <CardActions>
-                <Button
-                  className="btnSignUp"
-                  disabled={isFormInvalid()}
-                  type="submit"
-                  fullWidth
-                >
-                  Sign up
-                </Button>
-              </CardActions>
-              <Grid container justifyContent="center" ml={1}>
-                <Grid item>
-                  <Link to="/login" variant="body2">
-                    Already have an account?
-                  </Link>
+
+                <Grid item xs={12}>
+                  <TextField
+                    name="password"
+                    required
+                    error={!!errors.password}
+                    helperText={errors.password}
+                    onChange={handleChange}
+                    value={form.password}
+                    label="Password"
+                    type={passwordShown ? "text" : "password"}
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="start"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {passwordShown ? (
+                            <VisibilityOffIcon />
+                          ) : (
+                            <VisibilityIcon />
+                          )}
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+
                 </Grid>
               </Grid>
             </Grid>

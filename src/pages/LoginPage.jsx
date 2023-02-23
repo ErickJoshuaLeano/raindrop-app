@@ -8,23 +8,24 @@ import {
   Typography,
 } from "@mui/material";
 import Joi from "joi";
-import React, { useState } from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import PasswordIcon from "@mui/icons-material/Password";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import "./LoginRegisterPage.css";
 
 const LoginPage = ({ onLogin }) => {
-  const [form, setForm] = useState({
+  const [form, setForm] = React.useState({
     username: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = React.useState({});
 
   const schema = Joi.object({
-    username: Joi.string().required(),
+    username: Joi.string().min(5).max(15).required(),
     password: Joi.string().required(),
   });
 
@@ -56,6 +57,13 @@ const LoginPage = ({ onLogin }) => {
     const result = schema.validate(form);
 
     return !!result.error;
+  };
+
+  const [passwordShown, setPasswordShown] = React.useState(false);
+
+  const handleClickShowPassword = () => setPasswordShown((show) => !show);
+  const handleMouseDownPassword = () => {
+    setPasswordShown(passwordShown);
   };
 
   return (
@@ -148,24 +156,63 @@ const LoginPage = ({ onLogin }) => {
                     />
                   </Grid>
                 </Grid>
-              </CardContent>
-              <CardActions>
-                <Button
-                  className="btnSignIn"
-                  disabled={isFormInvalid()}
-                  type="submit"
-                  fullWidth
-                >
-                  Sign In <Link to="/home"></Link>
-                </Button>
-              </CardActions>
-              <Grid container justifyContent="center" ml={1} mt={1}>
-                <Grid item>
-                  <Link to="/register" variant="body2">
-                    Create an account?
-                  </Link>
+
+                <Grid item xs={12}>
+                  <TextField
+                    name="password"
+                    required
+                    error={!!errors.password}
+                    helperText={errors.password}
+                    onChange={handleChange}
+                    value={form.password}
+                    label="Password"
+                    type={passwordShown ? "text" : "password"}
+                    fullWidth
+                    className="grid-5"
+                    sx={{
+                      "& fieldset": { border: "none" },
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="start"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {passwordShown ? (
+                            <VisibilityOffIcon />
+                          ) : (
+                            <VisibilityIcon />
+                          )}
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 </Grid>
               </Grid>
+              <Grid container justifyContent="flex-end" mt={1}>
+                <Grid item>
+                  <Link to="/forgot">Forgot password?</Link>
+                </Grid>
+              </Grid>
+            </CardContent>
+            <CardActions>
+              <Button
+                className="btnSignIn"
+                disabled={isFormInvalid()}
+                type="submit"
+                fullWidth
+              >
+                Sign In <Link to="/home"></Link>
+              </Button>
+            </CardActions>
+            <Grid container justifyContent="center" ml={1} mt={1}>
+              <Grid item>
+                <Link to="/register" variant="body2">
+                  Create an account?
+                </Link>
+              </Grid>
+
             </Grid>
           </Grid>
         </Grid>
