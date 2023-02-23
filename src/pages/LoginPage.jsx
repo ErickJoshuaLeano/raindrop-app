@@ -25,7 +25,7 @@ const LoginPage = ({ onLogin }) => {
   const [errors, setErrors] = React.useState({});
 
   const schema = Joi.object({
-    username: Joi.string().min(5).max(15).required(),
+    username: Joi.string().required(),
     password: Joi.string().required(),
   });
 
