@@ -14,8 +14,6 @@ import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./LoginRegisterPage.css";
 
 const LoginPage = ({ onLogin }) => {
@@ -67,8 +65,6 @@ const LoginPage = ({ onLogin }) => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
-
-  const notify = () => toast("Incorrect Username/Password");
 
   return (
     <>
@@ -168,11 +164,11 @@ const LoginPage = ({ onLogin }) => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container justifyContent="flex-end" mt={1}>
+                {/* <Grid container justifyContent="flex-end" mt={1}>
                   <Grid item>
                     <Link to="/forgot">Forgot password?</Link>
                   </Grid>
-                </Grid>
+                </Grid> */}
               </CardContent>
               <CardActions>
                 <Button
@@ -180,11 +176,9 @@ const LoginPage = ({ onLogin }) => {
                   disabled={isFormInvalid()}
                   type="submit"
                   fullWidth
-                  onClick={notify}
                 >
                   Sign In <Link to="/home"></Link>
                 </Button>
-                <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1} mt={1}>
                 <Grid item>

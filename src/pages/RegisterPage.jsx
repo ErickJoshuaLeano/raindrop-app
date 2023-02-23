@@ -17,8 +17,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import "./LoginRegisterPage.css";
 
 const RegisterPage = () => {
@@ -105,8 +104,6 @@ const RegisterPage = () => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
-
-  const notify = () => toast("Invalid Input");
 
   return (
     <>
@@ -282,11 +279,9 @@ const RegisterPage = () => {
                   disabled={isFormInvalid()}
                   type="submit"
                   fullWidth
-                  onClick={notify}
                 >
                   Sign up
                 </Button>
-                <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1}>
                 <Grid item>
