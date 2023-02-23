@@ -8,6 +8,10 @@ export function fetchPostsbyId(id) {
   return http.get(`/posts/${id}`);
 }
 
+export function fetchCommentsByPost(id) {
+  return http.get(`/posts/${id}/comments`);
+}
+
 export function fetchPostsbyUsername(username) {
   return http.get(`/profiles/${username}/posts`);
 }
@@ -30,6 +34,22 @@ export function addPost(post) {
 
   return http.post("/posts", postClone);
 }
+
+export function addComment(comment, id) {
+  const commentClone = { ...comment };
+  Object.keys(commentClone).forEach((key) => {
+    if (
+      commentClone[key] === "" ||
+      commentClone[key] === null ||
+      commentClone[key] === undefined
+    ) {
+      delete commentClone[key];
+    }
+  });
+
+  return http.post(`/posts/${id}/comments`, commentClone);
+}
+
 export function updatePost(id, post) {
   const postClone = { ...post };
   Object.keys(postClone).forEach((key) => {
@@ -45,4 +65,8 @@ export function updatePost(id, post) {
 }
 export function deletePost(id) {
   return http.delete(`/posts/${id}`);
+}
+
+export function deleteComment(postId, commentId) {
+  return http.delete(`/posts/${postId}/comments/${commentId}`);
 }

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
 import "./GalleryCard.css";
-import { Grid } from "@mui/material";
+import { Fade, Grid } from "@mui/material";
 import * as profilesService from "../../services/profile";
 import { useEffect, useState } from "react";
 import * as authService from "../../services/auth";
@@ -72,110 +72,112 @@ const GalleryCard = ({ posts }) => {
   }
 
   return (
-    <Card
-      xs={12}
-      sx={{
-        borderRadius: "40px",
-
-        boxShadow: "none",
-        margin: "0.5vw",
-        display: "grid",
-      }}
-    >
-      <Typography
+    <Fade in timeout={1000} style={{ transitionDelay: "500ms" }}>
+      <Card
         xs={12}
         sx={{
-          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-          fontWeight: "500",
-          margin: "10px",
-          padding: "2px",
-          justifySelf: "center",
-          display: "flex",
+          borderRadius: "40px",
+
+          boxShadow: "none",
+          margin: "0.5vw",
+          display: "grid",
         }}
       >
-        <PhotoSizeSelectActualOutlinedIcon sx={{ alignSelf: "center" }} />
-        <div className="spacer"></div>My Photos
-      </Typography>
-      <Grid container>
-        <Grid item xs={6}>
-          <div>
-            {myPhotos[myPhotos.length - 1] ? (
-              <CardMedia
-                sx={{ height: 140 }}
-                image={myPhotos[myPhotos.length - 1].postPicture}
-              />
-            ) : (
-              <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
-            )}
-          </div>
+        <Typography
+          xs={12}
+          sx={{
+            fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+            fontWeight: "500",
+            margin: "10px",
+            padding: "2px",
+            justifySelf: "center",
+            display: "flex",
+          }}
+        >
+          <PhotoSizeSelectActualOutlinedIcon sx={{ alignSelf: "center" }} />
+          <div className="spacer"></div>My Photos
+        </Typography>
+        <Grid container>
+          <Grid item xs={6}>
+            <div>
+              {myPhotos[myPhotos.length - 1] ? (
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={myPhotos[myPhotos.length - 1].postPicture}
+                />
+              ) : (
+                <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
+              )}
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div>
+              {myPhotos[myPhotos.length - 2] ? (
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={myPhotos[myPhotos.length - 2].postPicture}
+                />
+              ) : (
+                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+              )}
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div>
+              {myPhotos[myPhotos.length - 3] ? (
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={myPhotos[myPhotos.length - 3].postPicture}
+                />
+              ) : (
+                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+              )}
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div>
+              {myPhotos[myPhotos.length - 4] ? (
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={myPhotos[myPhotos.length - 4].postPicture}
+                />
+              ) : (
+                <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
+              )}
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div>
+              {myPhotos[myPhotos.length - 5] ? (
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={myPhotos[myPhotos.length - 5].postPicture}
+                />
+              ) : (
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: "#74dfea",
+                  }}
+                />
+              )}
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div>
+              {myPhotos[myPhotos.length - 6] ? (
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={myPhotos[myPhotos.length - 6].postPicture}
+                />
+              ) : (
+                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+              )}
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <div>
-            {myPhotos[myPhotos.length - 2] ? (
-              <CardMedia
-                sx={{ height: 140 }}
-                image={myPhotos[myPhotos.length - 2].postPicture}
-              />
-            ) : (
-              <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
-            )}
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            {myPhotos[myPhotos.length - 3] ? (
-              <CardMedia
-                sx={{ height: 140 }}
-                image={myPhotos[myPhotos.length - 3].postPicture}
-              />
-            ) : (
-              <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
-            )}
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            {myPhotos[myPhotos.length - 4] ? (
-              <CardMedia
-                sx={{ height: 140 }}
-                image={myPhotos[myPhotos.length - 4].postPicture}
-              />
-            ) : (
-              <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
-            )}
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            {myPhotos[myPhotos.length - 5] ? (
-              <CardMedia
-                sx={{ height: 140 }}
-                image={myPhotos[myPhotos.length - 5].postPicture}
-              />
-            ) : (
-              <CardMedia
-                sx={{
-                  height: 140,
-                  backgroundColor: "#74dfea",
-                }}
-              />
-            )}
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            {myPhotos[myPhotos.length - 6] ? (
-              <CardMedia
-                sx={{ height: 140 }}
-                image={myPhotos[myPhotos.length - 6].postPicture}
-              />
-            ) : (
-              <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
-            )}
-          </div>
-        </Grid>
-      </Grid>
-    </Card>
+      </Card>
+    </Fade>
   );
 };
 

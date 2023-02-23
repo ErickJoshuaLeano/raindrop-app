@@ -1,0 +1,35 @@
+.c-profile-picture-card2 {
+  height: 20px;
+  width: 20px;
+}
+
+.comment-user {
+  display: flex;
+  align-items: center;
+}
+
+.comment-username {
+  margin-left: 5px;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  margin-right: 20px;
+}
+
+.comment-content {
+  font-size: small;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  margin-left: 30px;
+}
+
+.comment-container {
+  margin-top: 5px;
+}
+
+.single-comment {
+  margin: 8px;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}

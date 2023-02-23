@@ -11,6 +11,7 @@ import NavBar from "../components/NavBar";
 import * as authService from "../services/auth";
 import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
+import * as likesService from "../services/likes";
 import PostDetails from "./PostDetails";
 import AddPost from "./AddPost";
 
@@ -33,6 +34,20 @@ const HomePages = () => {
     setAccessToken(null);
     window.location.reload(false);
     navigate("/login");
+  };
+
+  const handleAddLikePost = (postId) => {
+    likesService
+      .addPostLike(postId)
+      .then((response) => {
+        console.log(response);
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          alert(error.response.data.message[0]);
+        }
+      });
   };
 
   useEffect(() => {
@@ -76,6 +91,20 @@ const HomePages = () => {
       });
   };
 
+  const handleSubmitComment = (comment, id) => {
+    postsService
+      .addComment(comment, id)
+      .then((response) => {
+        console.log(response);
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          alert(error.response.data.message[0]);
+        }
+      });
+  };
+
   const handleUpdateChanged = (id) => {
     const post = posts.find((post) => post.id === id);
     postsService.updatePost(id, post);
@@ -89,6 +118,17 @@ const HomePages = () => {
         return post;
       })
     );
+  };
+
+  const handleDeleteLike = async (id) => {
+    try {
+      await likesService.deleteLike(id);
+      setUpdatePage(true);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        alert("Not the user post,can't delete");
+      }
+    }
   };
 
   const handleDeletePost = async (id) => {
@@ -146,9 +186,13 @@ const HomePages = () => {
               /> */}
 
               <PostCardGrid
+                currentUser={currentUser}
                 posts={posts}
                 isLoading={isLoading}
                 onDeletePost={handleDeletePost}
+                onAddLikePost={handleAddLikePost}
+                onDeleteLike={handleDeleteLike}
+                onSubmitComment={handleSubmitComment}
               />
             </Grid>
             <Grid
