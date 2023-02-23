@@ -1,7 +1,7 @@
 .p-profile-holder2 {
   display: grid;
   justify-content: left;
-  margin-bottom: -45px;
+  margin-bottom: 0px;
 
   transform: translateY(-28%);
 }
@@ -15,7 +15,7 @@
 }
 
 .p-layer4 {
-  transform: translateX(+9.5%) translateY(12%);
+  transform: translateX(+2%) translateY(28%);
 }
 
 .p-layer5 {
@@ -23,19 +23,18 @@
   font-weight: 700;
   font-size: 27px;
   color: #074147;
-  transform: translateX(37%) translateY(10%);
+  transform: translateX(28%) translateY(15%);
 }
 
 .p-layer6 {
   font-family: Raleway, Arial, Helvetica, sans-serif;
   color: #074147;
-  transform: translateX(37%);
-  transform: translateX(37%) translateY(57%);
+  transform: translateX(28%) translateY(62%);
 }
 
 .p-raindrop2 {
   height: 65px;
-
+  transform: translateX(-38%) translateY(20%);
   justify-self: center;
 }
 
@@ -49,5 +48,17 @@
 }
 
 .p-avatar {
-  transform: translateY(20%);
+  transform: translateY(0%);
+}
+
+.edit-post {
+  color: #074147;
+}
+
+.delete-post {
+  color: #074147;
+}
+
+.space {
+  width: 10px;
 }

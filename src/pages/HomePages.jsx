@@ -16,6 +16,7 @@ import AddPost from "./AddPost";
 
 import "./HomePages.css";
 import PostCardGrid from "../components/Home Page/PostCardGrid";
+import Posts from "./Posts";
 
 const HomePages = () => {
   const currentUser = authService.getCurrentUser();
@@ -24,6 +25,7 @@ const HomePages = () => {
   const [myPosts, setMyPosts] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [updatePage, setUpdatePage] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -37,8 +39,9 @@ const HomePages = () => {
     postsService.fetchPosts().then((response) => {
       setPosts(response.data);
       setLoading(false);
+      setUpdatePage(false);
     });
-  }, [posts]);
+  }, [updatePage]);
 
   useEffect(() => {
     profilesService
@@ -47,7 +50,7 @@ const HomePages = () => {
         setMyPosts(response.data);
         setLoading(false);
       });
-  }, [myPosts]);
+  }, [posts]);
 
   useEffect(() => {
     profilesService
@@ -56,7 +59,22 @@ const HomePages = () => {
         setMyLikes(response.data);
         setLoading(false);
       });
-  }, [myLikes]);
+  }, [posts]);
+
+  const handleSubmit = (post) => {
+    postsService
+      .addPost(post)
+      .then((response) => {
+        console.log(response);
+        setUpdatePage(true);
+        navigate("/home");
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          alert(error.response.data.message[0]);
+        }
+      });
+  };
 
   const handleUpdateChanged = (id) => {
     const post = posts.find((post) => post.id === id);
@@ -79,6 +97,7 @@ const HomePages = () => {
     try {
       setPosts(posts.filter((post) => post.userId !== id));
       await postsService.deletePost(id);
+      setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("Not the user post,can't delete");
@@ -101,7 +120,7 @@ const HomePages = () => {
             sx={{ height: "100vh" }}
           >
             <Grid
-              className="column1"
+              className="column"
               item={true}
               lg={3}
               xl={2.5}
@@ -118,15 +137,19 @@ const HomePages = () => {
               />
               <GalleryCard posts={posts} />
             </Grid>
-            <Grid className="column1" item={true} xs={12} sm={8} lg={6} xl={6}>
-              <AddPost />
+            <Grid className="column" item={true} xs={12} sm={8} lg={6} xl={6}>
+              <Posts onSubmit={handleSubmit} />
               {/* <PostDetails
                 onDeletePost={handleDeletePost}
                 onUpdateChanged={handleUpdateChanged}
                 posts={posts}
               /> */}
 
-              <PostCardGrid posts={posts} isLoading={isLoading} />
+              <PostCardGrid
+                posts={posts}
+                isLoading={isLoading}
+                onDeletePost={handleDeletePost}
+              />
             </Grid>
             <Grid
               item={true}
