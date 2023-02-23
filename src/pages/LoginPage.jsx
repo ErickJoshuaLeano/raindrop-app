@@ -67,8 +67,6 @@ const LoginPage = ({ onLogin }) => {
     setPasswordShown(passwordShown);
   };
 
-  const notify = () => toast("Incorrect Username/Password");
-
   return (
     <>
       <Grid className="whole-grid">
@@ -178,11 +176,9 @@ const LoginPage = ({ onLogin }) => {
                 disabled={isFormInvalid()}
                 type="submit"
                 fullWidth
-                onClick={notify}
               >
                 Sign In <Link to="/home"></Link>
               </Button>
-              <ToastContainer />
             </CardActions>
             <Grid container justifyContent="center" ml={1} mt={1}>
               <Grid item>

@@ -64,7 +64,6 @@ const RegisterPage = () => {
         form.confirmPassword
       );
       alert("Registration successful");
-
       navigate("/login");
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -104,8 +103,6 @@ const RegisterPage = () => {
   const handleMouseDownPassword = () => {
     setPasswordShown(passwordShown);
   };
-
-  const notify = () => toast("Invalid Input");
 
   return (
     <>
@@ -280,11 +277,9 @@ const RegisterPage = () => {
                 disabled={isFormInvalid()}
                 type="submit"
                 fullWidth
-                onClick={notify}
               >
                 Sign up
               </Button>
-              <ToastContainer />
             </CardActions>
             <Grid container justifyContent="center" ml={1}>
               <Grid item>
