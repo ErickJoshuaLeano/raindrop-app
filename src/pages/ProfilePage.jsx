@@ -14,6 +14,7 @@ import * as likesService from "../services/likes";
 const ProfilePage = () => {
   const params = useParams();
   const currentUser = authService.getCurrentUser();
+  const otherUser = profilesService.fetchOtherUser();
   const [thisUser, setThisUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
