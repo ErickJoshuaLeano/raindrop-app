@@ -11,6 +11,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { MaterialUISwitch } from "./components/MaterialUISwitch";
+import ProfilePage from "./pages/ProfilePage";
+import DebugPage from "./pages/DebugPage";
 
 function App() {
   const navigate = useNavigate();
@@ -117,8 +119,9 @@ function App() {
                   <LoginPage onLogin={handleLogin} />
                 )
               }
-            />
-
+            />{" "}
+            <Route path="/profiles/:username" element={<ProfilePage />} />
+            <Route path="/debug" element={<DebugPage />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" />} />
           </Routes>

@@ -11,8 +11,10 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function AccountMenu({ currentUser, onLogout }) {
+export default function AccountMenu({ currentUser, thisUser, onLogout }) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -42,7 +44,7 @@ export default function AccountMenu({ currentUser, onLogout }) {
             aria-expanded={open ? "true" : undefined}
           >
             <div>
-              {currentUser.profilePicture ? (
+              {thisUser.profilePicture ? (
                 <>
                   <Avatar
                     sx={{
@@ -57,7 +59,7 @@ export default function AccountMenu({ currentUser, onLogout }) {
                   >
                     <img
                       className="profile-picture"
-                      src={currentUser.profilePicture}
+                      src={thisUser.profilePicture}
                     />
                   </Avatar>
                 </>
@@ -126,8 +128,9 @@ export default function AccountMenu({ currentUser, onLogout }) {
         >
           Account Settings
         </Typography>
+
         <MenuItem
-          onClick={handleClose}
+          onClick={() => navigate(`/profiles/${thisUser.username}`)}
           fontFamily="Raleway, Arial, Helvetica, sans-serif"
         >
           <Avatar />
@@ -138,6 +141,7 @@ export default function AccountMenu({ currentUser, onLogout }) {
             Profile
           </Typography>
         </MenuItem>
+
         <MenuItem onClick={handleClose}>
           <Avatar />{" "}
           <Typography

@@ -1,33 +1,22 @@
 import { Grid } from "@mui/material";
-import { red } from "material-ui-colors";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import AddPost from "../components/Home Page/AddPost";
-import CalendarWidget from "../components/Home Page/CalendarWidget";
+import { useNavigate, useParams } from "react-router-dom";
 import GalleryCard from "../components/Home Page/GalleryCard";
-import HomeProfileCard from "../components/Home Page/HomeProfileCard";
-import PostCard from "../components/Home Page/PostCard";
+import PostCardGrid from "../components/Home Page/PostCardGrid";
 import NavBar from "../components/NavBar";
 import * as authService from "../services/auth";
 import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
-import * as likesService from "../services/likes";
-import PostDetails from "./PostDetails";
-import AddPost from "./AddPost";
-
-import "./HomePages.css";
-import PostCardGrid from "../components/Home Page/PostCardGrid";
 import Posts from "./Posts";
-import CommentModule from "../components/Home Page/CommentModule";
-import RaindropCards from "../components/Home Page/RaindropCards";
+import "./ProfilePage.css";
+import * as likesService from "../services/likes";
 
-const HomePages = () => {
+const ProfilePage = () => {
+  const params = useParams();
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
-  const [myPosts, setMyPosts] = useState([]);
-  const [myLikes, setMyLikes] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
@@ -63,29 +52,12 @@ const HomePages = () => {
   }, [updatePage]);
 
   useEffect(() => {
-    postsService.fetchPosts().then((response) => {
+    postsService.fetchPostsbyUsername(params.username).then((response) => {
       setPosts(response.data);
       setLoading(false);
       setUpdatePage(false);
     });
   }, [updatePage]);
-
-  useEffect(() => {
-    profilesService
-      .fetchPostsbyUsername(currentUser.username)
-      .then((response) => {
-        setMyPosts(response.data);
-        setLoading(false);
-      });
-  }, [posts]);
-
-  useEffect(() => {
-    profilesService
-      .fetchLikesbyUsername(currentUser.username)
-      .then((response) => {
-        setMyLikes(response.data);
-      });
-  }, [posts]);
 
   const handleSubmit = (post) => {
     postsService
@@ -171,7 +143,7 @@ const HomePages = () => {
 
   if (isLoadingUser || isLoading) {
     return (
-      <div class="loader2">
+      <div class="loader3">
         <div class="inner one"></div>
         <div class="inner two"></div>
         <div class="inner three"></div>
@@ -184,73 +156,69 @@ const HomePages = () => {
       <div className="background">
         <NavBar onLogout={handleLogout} thisUser={thisUser} />
         <div className="grid-container">
-          <Grid
-            className="grid"
-            container
-            xs={12}
-            sm={11}
-            md={10.5}
-            sx={{ height: "100vh" }}
-          >
-            <Grid
-              className="column"
-              item={true}
-              lg={3}
-              xl={2.5}
-              sx={{
-                height: "fit-content",
-                display: { xs: "none", lg: "table-cell" },
-              }}
-            >
-              <HomeProfileCard
-                thisUser={thisUser}
-                currentUser={currentUser}
-                myPosts={myPosts}
-                myLikes={myLikes}
-                isLoading={isLoading}
-                onEditUser={handleEditUser}
-              />
-              <div>
-                {!isLoading ? (
-                  <GalleryCard posts={posts} username={thisUser.username} />
-                ) : (
-                  <span class="loader"></span>
-                )}
-              </div>
-            </Grid>
-            <Grid className="column" item={true} xs={12} sm={8} lg={6} xl={6}>
-              <Posts onSubmit={handleSubmit} thisUser={thisUser} />
-              {/* <PostDetails
-                onDeletePost={handleDeletePost}
-                onUpdateChanged={handleUpdateChanged}
-                posts={posts}
-              /> */}
-              <RaindropCards />
-              <PostCardGrid
-                currentUser={currentUser}
-                posts={posts}
-                isLoading={isLoading}
-                onDeletePost={handleDeletePost}
-                onAddLikePost={handleAddLikePost}
-                onDeleteLike={handleDeleteLike}
-                onSubmitComment={handleSubmitComment}
-                updatePage={updatePage}
-                setUpdatePage={setUpdatePage}
-                columns={1}
-              />
-            </Grid>
-            <Grid
-              item={true}
-              sm={4}
-              lg={3}
-              xl={2.5}
-              sx={{
-                backgroundColor: "blue",
-                height: "100vh",
-                display: { xs: "none", sm: "table-cell" },
-              }}
-            >
-              TEST
+          <Grid className="grid" container xs={12} sm={11} md={10.5}>
+            <Grid container lg={12} xl={11}>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  backgroundColor: "black",
+                  height: "30vh",
+                }}
+              ></Grid>
+              <Grid
+                className="column2"
+                item={true}
+                lg={3}
+                xl={2.3}
+                sx={{
+                  display: { xs: "none", lg: "table-cell", maxHeight: "60vh" },
+                }}
+              >
+                <GalleryCard posts={posts} username={params.username} />
+              </Grid>
+              <Grid
+                className="column2"
+                container
+                xs={12}
+                sm={12}
+                lg={9}
+                xl={9.7}
+                sx={{
+                  height: "70vh",
+                  maxHeight: "70vh",
+                }}
+              >
+                <Grid
+                  item={true}
+                  xs={12}
+                  sx={{
+                    display: { xs: "none", sm: "table-cell" },
+                  }}
+                >
+                  <div>
+                    {thisUser.username === params.username ? (
+                      <Posts onSubmit={handleSubmit} thisUser={thisUser} />
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <PostCardGrid
+                    currentUser={currentUser}
+                    posts={posts}
+                    isLoading={isLoading}
+                    onDeletePost={handleDeletePost}
+                    onAddLikePost={handleAddLikePost}
+                    onDeleteLike={handleDeleteLike}
+                    onSubmitComment={handleSubmitComment}
+                    updatePage={updatePage}
+                    setUpdatePage={setUpdatePage}
+                    columns={2}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
             <Grid
               item={true}
@@ -260,9 +228,7 @@ const HomePages = () => {
                 height: "100vh",
                 display: { xs: "none", xl: "table-cell" },
               }}
-            >
-              <CalendarWidget />
-            </Grid>
+            ></Grid>
           </Grid>
         </div>
       </div>
@@ -270,4 +236,4 @@ const HomePages = () => {
   );
 };
 
-export default HomePages;
+export default ProfilePage;
