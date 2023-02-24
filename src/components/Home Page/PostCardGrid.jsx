@@ -1,6 +1,7 @@
-import { TableBody, TableRow } from "@mui/material";
+import { Grid, TableBody, TableRow } from "@mui/material";
 import React, { useState } from "react";
 import PostCard from "./PostCard";
+import Masonry from "@mui/lab/Masonry/Masonry";
 
 const PostCardGrid = ({
   posts,
@@ -12,12 +13,14 @@ const PostCardGrid = ({
   onSubmitComment,
   updatePage,
   setUpdatePage,
+  columns,
 }) => {
   return (
     <div className="image-grid">
-      <TableBody>
+      <Grid container xs={12}>
+        {/* <Grid container xs={12}>
         {posts.map((post) => (
-          <TableRow key={post.id}>
+          <Grid item xs={cardSize}>
             <PostCard
               currentUser={currentUser}
               post={post}
@@ -30,9 +33,26 @@ const PostCardGrid = ({
               updatPage={updatePage}
               setUpdatePage={setUpdatePage}
             />
-          </TableRow>
+          </Grid>
         ))}
-      </TableBody>
+      </Grid> */}
+        <Masonry columns={columns} spacing={0}>
+          {posts.map((post) => (
+            <PostCard
+              currentUser={currentUser}
+              post={post}
+              key={post.id}
+              isLoading={isLoading}
+              onDeletePost={onDeletePost}
+              onAddLikePost={onAddLikePost}
+              onDeleteLike={onDeleteLike}
+              onSubmitComment={onSubmitComment}
+              updatPage={updatePage}
+              setUpdatePage={setUpdatePage}
+            />
+          ))}
+        </Masonry>
+      </Grid>
     </div>
   );
 };

@@ -28,7 +28,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const Posts = ({ onSubmit, initialValue }) => {
+const Posts = ({ onSubmit, initialValue, thisUser }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -142,7 +142,7 @@ const Posts = ({ onSubmit, initialValue }) => {
               >
                 <img
                   className="profile-picture-card2"
-                  src={currentUser.profilePicture}
+                  src={thisUser.profilePicture}
                 />
               </Avatar>
             </div>
@@ -175,26 +175,61 @@ const Posts = ({ onSubmit, initialValue }) => {
                   justifyContent="flex-end"
                   alignContent="baseline"
                 >
-                  <Button
-                    className="add-photo-button"
-                    variant="contained"
-                    startIcon={<InsertPhotoOutlinedIcon />}
-                    disableElevation
-                    fullWidth
-                    onClick={handleClickOpen}
-                    sx={{
-                      borderRadius: "1000px",
-                      margin: "7px",
-                      color: "grey",
-                      backgroundColor: "#eaebef",
-                      fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                      fontWeight: "700",
-                      padding: "5px",
-                      "&:hover": { backgroundColor: "#074147", color: "white" },
-                    }}
-                  >
-                    <div className="button-text">Add Photo</div>
-                  </Button>
+                  <div>
+                    {!form.postPicture || form.postPicture === "" ? (
+                      <Button
+                        className="add-photo-button"
+                        variant="contained"
+                        startIcon={<InsertPhotoOutlinedIcon />}
+                        disableElevation
+                        fullWidth
+                        onClick={handleClickOpen}
+                        sx={{
+                          borderRadius: "1000px",
+                          margin: "7px",
+                          color: "grey",
+                          backgroundColor: "#eaebef",
+                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                          fontWeight: "700",
+                          padding: "5px",
+                          "&:hover": {
+                            backgroundColor: "#074147",
+                            color: "white",
+                          },
+                        }}
+                      >
+                        <div className="button-text">Add Photo</div>
+                      </Button>
+                    ) : (
+                      <Button
+                        className="add-photo-button"
+                        variant="contained"
+                        startIcon={
+                          <InsertPhotoOutlinedIcon sx={{ color: "white" }} />
+                        }
+                        disableElevation
+                        fullWidth
+                        onClick={handleClickOpen}
+                        sx={{
+                          borderRadius: "1000px",
+                          margin: "7px",
+                          color: "grey",
+                          backgroundColor: "#27abb9",
+                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                          fontWeight: "700",
+                          padding: "5px",
+                          "&:hover": {
+                            backgroundColor: "#074147",
+                            color: "white",
+                          },
+                        }}
+                      >
+                        <div className="button-text" style={{ color: "white" }}>
+                          Add Photo
+                        </div>
+                      </Button>
+                    )}
+                  </div>
                 </Box>
               </Grid>
             </Grid>

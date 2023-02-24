@@ -18,6 +18,7 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { styled } from "@mui/system";
 import Fade from "@mui/material/Fade";
 import CommentModule from "./CommentModule";
+import { useNavigate } from "react-router-dom";
 
 const PostCard = ({
   post,
@@ -30,6 +31,8 @@ const PostCard = ({
   setUpdatePage,
 }) => {
   const currentUser = authService.getCurrentUser();
+
+  const navigate = useNavigate();
 
   const [openComments, setOpenComments] = useState(false);
 
@@ -108,203 +111,221 @@ const PostCard = ({
 
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "400ms" }}>
-      <Card
-        className="main-card"
-        xs={12}
-        sx={{
-          borderRadius: "40px",
-          paddingBottom: "-vh",
-          boxShadow: "none",
-          margin: "1vw",
-          marginTop: "2vh",
-          display: "grid",
-        }}
-      >
-        {post.postPicture !== null && post.postPicture !== "" && (
-          <div style={{ position: "relative" }}>
-            <CardMedia
-              component="img"
-              sx={{ objectFit: "cover" }}
-              image={post.postPicture}
-            />
-            <div
-              style={{
-                fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                fontWeight: "300",
-                color: "white",
-                textShadow: "2px 1px 6px black",
-                position: "absolute",
-
-                top: 10,
-                left: "0%",
-                transform: "translateX(50%)",
-                zIndex: "100",
-                textJustify: "baseline",
-              }}
-            >
-              {time_ago(new Date(post.createdAt))}
-            </div>
-          </div>
-        )}
-        <CardContent>
-          {(post.postPicture === null || post.postPicture === "") && (
-            <div
-              style={{
-                fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                fontWeight: "300",
-                color: "black",
-                marginTop: "-11px",
-                marginLeft: "3%",
-                marginBottom: "10px",
-                zIndex: "100",
-                textJustify: "baseline",
-              }}
-            >
-              {time_ago(new Date(post.createdAt))}
-            </div>
-          )}
-          <Grid container xs={12}>
-            <Grid item xs={6}>
-              <div className="p-profile-holder2">
-                <div className="p-layer3">
-                  <RaindropIcon className="p-raindrop2"></RaindropIcon>
-                </div>
-                <div className="p-layer4">
-                  <Avatar
-                    className="p-avatar"
-                    type="button"
-                    sx={{
-                      height: "55px",
-                      width: "55px",
-                      border: "solid",
-                      borderWidth: 3,
-                      bordercolor: "white",
-                    }}
-                  >
-                    <img
-                      className="p-profile-picture-card2"
-                      src={post.user.profilePicture}
-                    />
-                  </Avatar>
-                </div>
-                <div className="p-layer5">{post.user.name}</div>
-                <div className="p-layer6">@ {post.user.username}</div>
-              </div>
-            </Grid>
-            <Grid item xs={6} justifyContent="flex-end" display="flex">
-              {post.userId === currentUser.id && (
-                <div className="edit-post">
-                  <IconButton>
-                    <EditOutlinedIcon />
-                  </IconButton>
-                </div>
-              )}
-              {post.userId === currentUser.id && (
-                <div
-                  className="delete-post"
-                  onClick={() => onDeletePost(post.id)}
-                >
-                  <IconButton>
-                    <DeleteForeverOutlinedIcon />
-                  </IconButton>
-                </div>
-              )}
-            </Grid>
-          </Grid>
-
-          <Typography
-            variant="body1"
-            color="black"
+      <Grid container>
+        <Grid item xs={12}>
+          <Card
+            className="main-card"
+            xs={12}
             sx={{
-              fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-
-              paddingLeft: "76px",
+              borderRadius: "40px",
+              paddingBottom: "-vh",
+              boxShadow: "none",
+              margin: "1vw",
+              marginTop: "2vh",
+              display: "grid",
             }}
           >
-            {post.body}
-          </Typography>
-          {post.likes.length > 0 && (
-            <div>
+            {post.postPicture !== null && post.postPicture !== "" ? (
+              <div style={{ position: "relative" }}>
+                <CardMedia
+                  component="img"
+                  sx={{ objectFit: "cover" }}
+                  image={post.postPicture}
+                />
+                <div
+                  style={{
+                    fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                    fontWeight: "300",
+                    color: "white",
+                    textShadow: "2px 1px 6px black",
+                    position: "absolute",
+
+                    top: 10,
+                    left: "0%",
+                    transform: "translateX(50%)",
+                    zIndex: "100",
+                    textJustify: "baseline",
+                  }}
+                >
+                  {time_ago(new Date(post.createdAt))}
+                </div>
+              </div>
+            ) : (
+              <CardMedia
+                component="img"
+                sx={{
+                  backgroundColor: "red",
+
+                  objectFit: "cover",
+                }}
+              />
+            )}
+            <CardContent>
+              {(post.postPicture === null || post.postPicture === "") && (
+                <div
+                  style={{
+                    fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                    fontWeight: "300",
+                    color: "black",
+                    marginTop: "-11px",
+                    marginLeft: "3%",
+                    marginBottom: "10px",
+                    zIndex: "100",
+                    textJustify: "baseline",
+                  }}
+                >
+                  {time_ago(new Date(post.createdAt))}
+                </div>
+              )}
+              <Grid container xs={12}>
+                <Grid item xs={6}>
+                  <div className="p-profile-holder2">
+                    <div className="p-layer3">
+                      <RaindropIcon className="p-raindrop2"></RaindropIcon>
+                    </div>
+                    <div className="p-layer4">
+                      <Avatar
+                        className="p-avatar"
+                        type="button"
+                        onClick={() =>
+                          navigate(`/profiles/${post.user.username}`)
+                        }
+                        sx={{
+                          height: "55px",
+                          width: "55px",
+                          border: "solid",
+                          borderWidth: 3,
+                          bordercolor: "white",
+                        }}
+                      >
+                        <img
+                          className="p-profile-picture-card2"
+                          src={post.user.profilePicture}
+                        />
+                      </Avatar>
+                    </div>
+                    <div className="p-layer5">{post.user.name}</div>
+                    <div className="p-layer6">@ {post.user.username}</div>
+                  </div>
+                </Grid>
+                <Grid item xs={6} justifyContent="flex-end" display="flex">
+                  {post.userId === currentUser.id && (
+                    <div className="edit-post">
+                      <IconButton>
+                        <EditOutlinedIcon />
+                      </IconButton>
+                    </div>
+                  )}
+                  {post.userId === currentUser.id && (
+                    <div
+                      className="delete-post"
+                      onClick={() => onDeletePost(post.id)}
+                    >
+                      <IconButton>
+                        <DeleteForeverOutlinedIcon />
+                      </IconButton>
+                    </div>
+                  )}
+                </Grid>
+              </Grid>
+
               <Typography
-                className="likes"
+                variant="body1"
+                color="black"
                 sx={{
                   fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                  fontSize: "small",
-                  fontWeight: "700",
-                  marginTop: "30px",
-                  marginLeft: "4px",
-                  display: "flex",
-                  alignItems: "center",
+
+                  paddingLeft: "76px",
                 }}
               >
-                <FavoriteIcon sx={{ color: "#074147", marginLeft: "4%" }} />
-                <div className="space"></div>
-                {post.likes.length > 1 ? (
-                  <div>Liked by {post.likes.length} people</div>
-                ) : (
-                  <div>Liked by {post.likes.length} person</div>
-                )}
+                {post.body}
               </Typography>
-            </div>
-          )}
-          <Divider sx={{ marginTop: "10px" }} />
-          <Grid
-            justifyContent="center"
-            display="flex"
-            sx={{ marginTop: "10px" }}
-          >
-            <Grid>
-              {!post.likes.find((like) => like.userId === currentUser.id) ? (
+              {post.likes.length > 0 && (
                 <div>
-                  <ColorButton
-                    fontFamily="Raleway, Arial, Helvetica, sans-serif"
-                    fontWeight="700"
-                    endIcon={<FavoriteIcon sx={{ color: "#84e7b3" }} />}
-                    sx={{ width: "150px" }}
-                    onClick={() => handleLikePost()}
+                  <Typography
+                    className="likes"
+                    sx={{
+                      fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                      fontSize: "small",
+                      fontWeight: "700",
+                      marginTop: "30px",
+                      marginLeft: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                   >
-                    Like
-                  </ColorButton>
+                    <FavoriteIcon sx={{ color: "#074147", marginLeft: "4%" }} />
+                    <div className="space"></div>
+                    {post.likes.length > 1 ? (
+                      <div>Liked by {post.likes.length} people</div>
+                    ) : (
+                      <div>Liked by {post.likes.length} person</div>
+                    )}
+                  </Typography>
                 </div>
-              ) : (
-                <ColorButton
-                  fontFamily="Raleway, Arial, Helvetica, sans-serif"
-                  fontWeight="700"
-                  endIcon={<FavoriteIcon sx={{ color: "#074147" }} />}
-                  sx={{ width: "150px" }}
-                  onClick={() => handleRemoveLike()}
-                >
-                  Liked
-                </ColorButton>
               )}
-            </Grid>
-            <Grid>
-              <div>
-                <ColorButton
-                  variant="text"
-                  startIcon={<ChatBubbleIcon sx={{ color: "#84e7b3" }} />}
-                  sx={{ width: "150px" }}
-                  onClick={toggleOpenComments}
-                >
-                  Comment
-                </ColorButton>
-              </div>
-            </Grid>
-          </Grid>
-          {!openComments ? (
-            <div></div>
-          ) : (
-            <div>
-              <CommentModule
-                post={post}
-                onSubmitComment={onSubmitComment}
-                updatePage={updatePage}
-                setUpdatePage={setUpdatePage}
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              <Divider sx={{ marginTop: "10px" }} />
+              <Grid
+                justifyContent="center"
+                display="flex"
+                sx={{ marginTop: "10px" }}
+              >
+                <Grid>
+                  {!post.likes.find(
+                    (like) => like.userId === currentUser.id
+                  ) ? (
+                    <div>
+                      <ColorButton
+                        fontFamily="Raleway, Arial, Helvetica, sans-serif"
+                        fontWeight="700"
+                        endIcon={<FavoriteIcon sx={{ color: "#84e7b3" }} />}
+                        sx={{ width: "150px" }}
+                        onClick={() => handleLikePost()}
+                      >
+                        Like
+                      </ColorButton>
+                    </div>
+                  ) : (
+                    <ColorButton
+                      fontFamily="Raleway, Arial, Helvetica, sans-serif"
+                      fontWeight="700"
+                      endIcon={<FavoriteIcon sx={{ color: "#074147" }} />}
+                      sx={{ width: "150px" }}
+                      onClick={() => handleRemoveLike()}
+                    >
+                      Liked
+                    </ColorButton>
+                  )}
+                </Grid>
+                <Grid>
+                  <div>
+                    <ColorButton
+                      variant="text"
+                      startIcon={<ChatBubbleIcon sx={{ color: "#84e7b3" }} />}
+                      sx={{ width: "150px" }}
+                      onClick={toggleOpenComments}
+                    >
+                      Comment
+                    </ColorButton>
+                  </div>
+                </Grid>
+              </Grid>
+              {!openComments ? (
+                <div></div>
+              ) : (
+                <div>
+                  <CommentModule
+                    post={post}
+                    onSubmitComment={onSubmitComment}
+                    updatePage={updatePage}
+                    setUpdatePage={setUpdatePage}
+                  />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </Fade>
   );
 };

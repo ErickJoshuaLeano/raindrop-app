@@ -1,46 +1,20 @@
-.background {
-  background-color: #eaebef;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-}
-
-.grid-container {
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  position: relative;
-  top: clamp(16px, 13vh, 100px);
-}
-
-.grid {
-  justify-content: center;
-}
-
-.column {
+.column2 {
   height: fit-content;
-  max-height: 100vh;
+
   overflow: auto;
   scrollbar-width: none;
   padding-bottom: 15vh;
 }
 
-.column::-webkit-scrollbar {
+.column2::-webkit-scrollbar {
   display: none;
 }
 
-.column {
+.column2 {
   -ms-overflow-style: none;
 }
 
-html {
-  height: 100%;
-}
-
-.loader2 {
+.loader3 {
   position: absolute;
   top: calc(50% - 32px);
   left: calc(50% - 32px);

@@ -15,8 +15,9 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import AccountMenu from "./AccountMenu";
 import SearchBar from "./SearchBar";
+import logo from "./logo.png";
 
-const NavBar = ({ onLogout }) => {
+const NavBar = ({ onLogout, thisUser }) => {
   const currentUser = authService.getCurrentUser();
 
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const NavBar = ({ onLogout }) => {
                 <img
                   type="button"
                   className="logo"
-                  src="images/logo.png"
+                  src={logo}
                   onClick={() => navigate("/")}
                 />
               </div>
@@ -84,7 +85,11 @@ const NavBar = ({ onLogout }) => {
             </Grid>
           </Grid>
           <Grid item xs={1}>
-            <AccountMenu currentUser={currentUser} onLogout={onLogout} />
+            <AccountMenu
+              currentUser={currentUser}
+              thisUser={thisUser}
+              onLogout={onLogout}
+            />
           </Grid>
           <Grid item xs={1}></Grid>
         </Grid>
