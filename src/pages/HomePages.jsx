@@ -23,6 +23,8 @@ import RaindropCards from "../components/Home Page/RaindropCards";
 import LatestCard from "../components/Home Page/LatestCard";
 import AllProfilesCard from "../components/Home Page/AllProfilesCard";
 import AllPhotoGalleryCard from "../components/Home Page/AllPhotoGalleryCard";
+import WeatherWidget from "../components/Home Page/WeatherWidget";
+import NewsWidget from "../components/Home Page/NewsWidget";
 
 const HomePages = () => {
   const currentUser = authService.getCurrentUser();
@@ -272,12 +274,13 @@ const HomePages = () => {
               item={true}
               xl={1}
               sx={{
-                backgroundColor: "yellow",
                 height: "100vh",
                 display: { xs: "none", xl: "table-cell" },
               }}
             >
               <CalendarWidget />
+              <WeatherWidget />
+              <NewsWidget />
             </Grid>
           </Grid>
         </div>
