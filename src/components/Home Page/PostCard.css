@@ -62,3 +62,19 @@
 .space {
   width: 10px;
 }
+
+.img-dialogue {
+  height: fit-content;
+  max-height: 100vh;
+  overflow: auto;
+  scrollbar-width: none;
+  object-fit: cover;
+}
+
+.img-dialogue::-webkit-scrollbar {
+  display: none;
+}
+
+.img-dialogue {
+  -ms-overflow-style: none;
+}

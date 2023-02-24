@@ -27,6 +27,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import ProfileHolder from "./ProfileHolder";
+import { useNavigate } from "react-router-dom";
 
 const HomeProfileCard = ({
   thisUser,
@@ -42,6 +43,7 @@ const HomeProfileCard = ({
     coverPicture: "",
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
@@ -304,6 +306,7 @@ const HomeProfileCard = ({
                 padding: "5px",
                 "&:hover": { backgroundColor: "#074147" },
               }}
+              onClick={() => navigate(`/profiles/${thisUser.username}`)}
             >
               View My Profile
             </Button>

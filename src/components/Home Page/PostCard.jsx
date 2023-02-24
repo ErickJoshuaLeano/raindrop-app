@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { Avatar, Divider, Grid, Grow, IconButton } from "@mui/material";
+import { Avatar, Dialog, Divider, Grid, Grow, IconButton } from "@mui/material";
 import { ReactComponent as RaindropIcon } from "../Raindrop.svg";
 import "./PostCard.css";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
@@ -53,6 +53,20 @@ const PostCard = ({
     fontSize: "16px",
     color: "#074147",
   }));
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
 
   function time_ago(time) {
     switch (typeof time) {
@@ -128,9 +142,11 @@ const PostCard = ({
             {post.postPicture !== null && post.postPicture !== "" ? (
               <div style={{ position: "relative" }}>
                 <CardMedia
+                  type="button"
                   component="img"
                   sx={{ objectFit: "cover" }}
                   image={post.postPicture}
+                  onClick={handleClickOpen}
                 />
                 <div
                   style={{
@@ -185,6 +201,7 @@ const PostCard = ({
                     </div>
                     <div className="p-layer4">
                       <Avatar
+                        alt={post.user.name}
                         className="p-avatar"
                         type="button"
                         onClick={() =>
@@ -324,6 +341,9 @@ const PostCard = ({
               )}
             </CardContent>
           </Card>
+          <Dialog open={open} onClose={handleClose}>
+            <img className="img-dialogue" src={post.postPicture} />
+          </Dialog>
         </Grid>
       </Grid>
     </Fade>

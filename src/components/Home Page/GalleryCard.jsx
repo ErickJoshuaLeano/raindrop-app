@@ -12,7 +12,7 @@ import * as profilesService from "../../services/profile";
 import { useEffect, useState } from "react";
 import * as authService from "../../services/auth";
 
-const GalleryCard = ({ posts, username }) => {
+const GalleryCard = ({ posts, username, title }) => {
   const currentUser = authService.getCurrentUser();
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);

@@ -154,7 +154,12 @@ const ProfilePage = () => {
   return (
     <>
       <div className="background">
-        <NavBar onLogout={handleLogout} thisUser={thisUser} />
+        <NavBar
+          onLogout={handleLogout}
+          thisUser={thisUser}
+          updatePage={updatePage}
+          setUpdatePage={setUpdatePage}
+        />
         <div className="grid-container">
           <Grid className="grid" container xs={12} sm={11} md={10.5}>
             <Grid container lg={12} xl={11}>
@@ -189,13 +194,7 @@ const ProfilePage = () => {
                   maxHeight: "70vh",
                 }}
               >
-                <Grid
-                  item={true}
-                  xs={12}
-                  sx={{
-                    display: { xs: "none", sm: "table-cell" },
-                  }}
-                >
+                <Grid item={true} xs={12}>
                   <div>
                     {thisUser.username === params.username ? (
                       <Posts onSubmit={handleSubmit} thisUser={thisUser} />
@@ -215,7 +214,7 @@ const ProfilePage = () => {
                     onSubmitComment={handleSubmitComment}
                     updatePage={updatePage}
                     setUpdatePage={setUpdatePage}
-                    columns={2}
+                    columns={{ xs: 1, sm: 2 }}
                   />
                 </Grid>
               </Grid>
