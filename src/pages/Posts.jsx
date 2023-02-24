@@ -106,7 +106,6 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
           <CardMedia
             sx={{ height: "34px", backgroundColor: "#cecece", display: "grid" }}
           >
-            {" "}
             <Typography
               gutterBottom
               variant="h5"
