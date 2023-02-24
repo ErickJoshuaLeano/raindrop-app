@@ -19,6 +19,7 @@ import { styled } from "@mui/system";
 import Fade from "@mui/material/Fade";
 import CommentModule from "./CommentModule";
 import { useNavigate } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 const PostCard = ({
   post,
@@ -226,6 +227,11 @@ const PostCard = ({
                   </div>
                 </Grid>
                 <Grid item xs={6} justifyContent="flex-end" display="flex">
+                  <div className="edit-post">
+                    <IconButton>
+                      <RemoveRedEyeIcon />
+                    </IconButton>
+                  </div>
                   {post.userId === currentUser.id && (
                     <div className="edit-post">
                       <IconButton>
