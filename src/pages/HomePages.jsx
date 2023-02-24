@@ -36,8 +36,10 @@ const HomePages = () => {
   const handleLogout = () => {
     authService.logout();
     setAccessToken(null);
-    window.location.reload(false);
     navigate("/login");
+    window.location.reload(false);
+    setLoading(false);
+    setLoadingUser(false);
   };
 
   const handleAddLikePost = (postId) => {
