@@ -4,6 +4,10 @@ export function fetchPostsbyUsername(username) {
   return http.get(`/profiles/${username}/posts`);
 }
 
+export function fetchUserbyUsername(username) {
+  return http.get(`/profiles/${username}`);
+}
+
 export function searchUsers(searchQuery) {
   return http.get(`/profiles/search/${searchQuery}`);
 }
