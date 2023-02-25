@@ -1,3 +1,13 @@
+import Joi from "joi";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as authService from "../services/auth";
+import { ToastContainer, toast } from "react-toastify";
+
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
 import {
   Button,
   CardActions,
@@ -7,25 +17,17 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import Joi from "joi";
-import * as React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import InputAdornment from "@mui/material/InputAdornment";
+
 import "./LoginRegisterPage.css";
-import * as authService from "../services/auth";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = ({ onLogin }) => {
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     username: "",
     password: "",
   });
   const navigate = useNavigate();
-  const [errors, setErrors] = React.useState({});
+  const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
     username: Joi.string().min(5).max(15).required(),
@@ -78,7 +80,7 @@ const LoginPage = ({ onLogin }) => {
     return !!result.error;
   };
 
-  const [passwordShown, setPasswordShown] = React.useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const handleClickShowPassword = () => setPasswordShown((show) => !show);
   const handleMouseDownPassword = () => {

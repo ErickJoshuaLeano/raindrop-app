@@ -1,3 +1,16 @@
+import Joi from "joi";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import ProfileHolder from "../components/Home Page/ProfileHolder";
+import * as authService from "../services/auth";
+import { ToastContainer, toast } from "react-toastify";
+
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import InputAdornment from "@mui/material/InputAdornment";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
   Button,
   CardActions,
@@ -7,19 +20,8 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import Joi from "joi";
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import * as authService from "../services/auth";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import InputAdornment from "@mui/material/InputAdornment";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import ProfileHolder from "../components/Home Page/ProfileHolder";
+
 import "./LoginRegisterPage.css";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RegisterPage = (thisUser, onEditUser) => {
@@ -109,7 +111,7 @@ const RegisterPage = (thisUser, onEditUser) => {
     return !!result.error;
   };
 
-  const [passwordShown, setPasswordShown] = React.useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const handleClickShowPassword = () => setPasswordShown((show) => !show);
   const handleMouseDownPassword = () => {
