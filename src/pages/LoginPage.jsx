@@ -9,19 +9,20 @@ import {
 } from "@mui/material";
 import Joi from "joi";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import "./LoginRegisterPage.css";
+import * as authService from "../services/auth";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = React.useState({
     username: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const [errors, setErrors] = React.useState({});
 
   const schema = Joi.object({
@@ -31,12 +32,17 @@ const LoginPage = ({ onLogin }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    onLogin(form.username, form.password);
     try {
-      onLogin(form.username, form.password);
+      const response = await authService.login(form.username, form.password);
       alert("login successful");
+      navigate("/home");
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        alert("Incorrect Password");
+      if (
+        (error.response && error.response.status === 401) ||
+        (error.response && error.response.status === 403)
+      ) {
+        alert(error.response.data.message);
       }
     }
   };
@@ -184,7 +190,8 @@ const LoginPage = ({ onLogin }) => {
                   type="submit"
                   fullWidth
                 >
-                  Sign In <Link to="/home"></Link>
+                  Sign In
+                  {/* <Link to="/home"></Link> */}
                 </Button>
               </CardActions>
               <Grid container justifyContent="center" ml={1} mt={1}>
