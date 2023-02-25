@@ -25,6 +25,8 @@ import AllProfilesCard from "../components/Home Page/AllProfilesCard";
 import AllPhotoGalleryCard from "../components/Home Page/AllPhotoGalleryCard";
 import WeatherWidget from "../components/Home Page/WeatherWidget";
 import NewsWidget from "../components/Home Page/NewsWidget";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HomePages = () => {
   const currentUser = authService.getCurrentUser();
@@ -56,7 +58,9 @@ const HomePages = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -103,7 +107,9 @@ const HomePages = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -117,7 +123,9 @@ const HomePages = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -143,7 +151,9 @@ const HomePages = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Like has already been removed");
+        toast("Like has already been removed", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -157,7 +167,9 @@ const HomePages = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Post has already been deleted");
+        toast("Post has already been deleted", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
       setPosts(postsClone);
     }
@@ -171,7 +183,9 @@ const HomePages = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -253,8 +267,15 @@ const HomePages = () => {
                 updatePage={updatePage}
                 setUpdatePage={setUpdatePage}
                 columns={1}
+                onClick={
+                  handleDeletePost ||
+                  handleAddLikePost ||
+                  handleDeleteLike ||
+                  handleSubmitComment
+                }
               />
             </Grid>
+            <ToastContainer />
             <Grid
               className="column"
               item={true}
