@@ -66,7 +66,9 @@ const RegisterPage = (thisUser, onEditUser) => {
         form.password,
         form.confirmPassword
       );
-      toast("Registration successful");
+      toast.success("Registration successful", {
+        position: toast.POSITION.TOP_CENTER,
+      });
 
       navigate("/login");
     } catch (error) {
@@ -75,7 +77,9 @@ const RegisterPage = (thisUser, onEditUser) => {
         (error.response && error.response.status === 422) ||
         (error.response && error.response.status === 409)
       ) {
-        toast(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };

@@ -37,14 +37,18 @@ const LoginPage = ({ onLogin }) => {
     onLogin(form.username, form.password);
     try {
       const response = await authService.login(form.username, form.password);
-      toast.success("login successful");
+      toast.success("login successful", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       navigate("/home");
     } catch (error) {
       if (
         (error.response && error.response.status === 401) ||
         (error.response && error.response.status === 403)
       ) {
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
