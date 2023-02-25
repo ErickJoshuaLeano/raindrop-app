@@ -275,7 +275,7 @@ const HomePages = () => {
                 }
               />
             </Grid>
-            <ToastContainer mt={10} />
+            <ToastContainer />
             <Grid
               className="column"
               item={true}
