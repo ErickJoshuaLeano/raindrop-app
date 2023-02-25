@@ -10,6 +10,9 @@ import * as profilesService from "../services/profile";
 import Posts from "./Posts";
 import "./ProfilePage.css";
 import * as likesService from "../services/likes";
+import CalendarWidget from "../components/Home Page/CalendarWidget";
+import WeatherWidget from "../components/Home Page/WeatherWidget";
+import NewsWidget from "../components/Home Page/NewsWidget";
 
 const ProfilePage = () => {
   const params = useParams();
@@ -223,11 +226,15 @@ const ProfilePage = () => {
               item={true}
               xl={1}
               sx={{
-                backgroundColor: "yellow",
                 height: "100vh",
                 display: { xs: "none", xl: "table-cell" },
               }}
-            ></Grid>
+            >
+              {" "}
+              <CalendarWidget />
+              <WeatherWidget />
+              <NewsWidget />
+            </Grid>
           </Grid>
         </div>
       </div>
