@@ -19,6 +19,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ProfileHolder from "../components/Home Page/ProfileHolder";
 import "./LoginRegisterPage.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterPage = (thisUser, onEditUser) => {
   const [form, setForm] = useState({
@@ -64,7 +66,7 @@ const RegisterPage = (thisUser, onEditUser) => {
         form.password,
         form.confirmPassword
       );
-      alert("Registration successful");
+      toast("Registration successful");
 
       navigate("/login");
     } catch (error) {
@@ -73,7 +75,7 @@ const RegisterPage = (thisUser, onEditUser) => {
         (error.response && error.response.status === 422) ||
         (error.response && error.response.status === 409)
       ) {
-        alert(error.response.data.message);
+        toast(error.response.data.message);
       }
     }
   };
@@ -293,9 +295,11 @@ const RegisterPage = (thisUser, onEditUser) => {
                   disabled={isFormInvalid()}
                   type="submit"
                   fullWidth
+                  onClick={handleSubmit}
                 >
                   Sign up
                 </Button>
+                <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1}>
                 <Grid item>

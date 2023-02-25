@@ -16,6 +16,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import "./LoginRegisterPage.css";
 import * as authService from "../services/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = ({ onLogin }) => {
   const [form, setForm] = React.useState({
@@ -35,14 +37,14 @@ const LoginPage = ({ onLogin }) => {
     onLogin(form.username, form.password);
     try {
       const response = await authService.login(form.username, form.password);
-      alert("login successful");
+      toast.success("login successful");
       navigate("/home");
     } catch (error) {
       if (
         (error.response && error.response.status === 401) ||
         (error.response && error.response.status === 403)
       ) {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       }
     }
   };
@@ -189,10 +191,11 @@ const LoginPage = ({ onLogin }) => {
                   disabled={isFormInvalid()}
                   type="submit"
                   fullWidth
+                  onClick={handleSubmit}
                 >
                   Sign In
-                  {/* <Link to="/home"></Link> */}
                 </Button>
+                <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1} mt={1}>
                 <Grid item>
