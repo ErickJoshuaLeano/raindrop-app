@@ -73,7 +73,7 @@ const RegisterPage = (thisUser, onEditUser) => {
         (error.response && error.response.status === 422) ||
         (error.response && error.response.status === 409)
       ) {
-        alert(error.response.data.message[0]);
+        alert(error.response.data.message);
       }
     }
   };
