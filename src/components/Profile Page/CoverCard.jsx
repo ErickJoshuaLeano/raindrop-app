@@ -1,4 +1,4 @@
-import { Card, CardMedia, Typography } from "@mui/material";
+import { Card, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
 
 const CoverCard = ({ otherUser }) => {

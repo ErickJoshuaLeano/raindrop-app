@@ -13,11 +13,13 @@ import * as likesService from "../services/likes";
 import CalendarWidget from "../components/Home Page/CalendarWidget";
 import WeatherWidget from "../components/Home Page/WeatherWidget";
 import NewsWidget from "../components/Home Page/NewsWidget";
+import CoverCard from "../components/Profile Page/CoverCard";
 
 const ProfilePage = () => {
   const params = useParams();
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
+  const [otherUser, setOtherUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -49,6 +51,14 @@ const ProfilePage = () => {
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage]);
+
+  useEffect(() => {
+    profilesService.fetchUserbyUsername(params.username).then((response) => {
+      setOtherUser(response.data);
       setLoadingUser(false);
       setUpdatePage(false);
     });
@@ -166,14 +176,11 @@ const ProfilePage = () => {
         <div className="grid-container">
           <Grid className="grid" container xs={12} sm={11} md={10.5}>
             <Grid container lg={12} xl={11}>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  backgroundColor: "black",
-                  height: "30vh",
-                }}
-              ></Grid>
+              <Grid item xs={12}>
+                <Grid item xs={12}>
+                  <CoverCard otherUser={otherUser} />
+                </Grid>
+              </Grid>
               <Grid
                 className="column2"
                 item={true}
