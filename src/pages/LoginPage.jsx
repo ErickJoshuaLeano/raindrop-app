@@ -35,8 +35,8 @@ const LoginPage = ({ onLogin }) => {
       onLogin(form.username, form.password);
       alert("login successful");
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert(error.response.data.message);
+      if (error.response && error.response.status === 401) {
+        alert("Incorrect Password");
       }
     }
   };

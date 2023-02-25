@@ -68,8 +68,12 @@ const RegisterPage = (thisUser, onEditUser) => {
 
       navigate("/login");
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert(error.response.data.message);
+      if (
+        (error.response && error.response.status === 403) ||
+        (error.response && error.response.status === 422) ||
+        (error.response && error.response.status === 409)
+      ) {
+        alert(error.response.data.message[0]);
       }
     }
   };
