@@ -1,8 +1,16 @@
 import jwtDecode from "jwt-decode";
 import http from "./http";
 
-export function register(name, email, username, password, confirmPassword) {
+export function register(
+  profilePicture,
+  name,
+  email,
+  username,
+  password,
+  confirmPassword
+) {
   return http.post("/users", {
+    profilePicture,
     name,
     email,
     username,

@@ -45,6 +45,14 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    profilesService.fetchOtherUser().then((response) => {
+      setThisUser(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage]);
+
+  useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
       setLoadingUser(false);

@@ -25,13 +25,20 @@ const LoginPage = ({ onLogin }) => {
   const [errors, setErrors] = React.useState({});
 
   const schema = Joi.object({
-    username: Joi.string().required(),
+    username: Joi.string().min(5).max(15).required(),
     password: Joi.string().required(),
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    onLogin(form.username, form.password);
+    try {
+      onLogin(form.username, form.password);
+      alert("login successful");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert(error.response.data.message);
+      }
+    }
   };
 
   const handleChange = ({ currentTarget: input }) => {
