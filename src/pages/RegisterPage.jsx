@@ -17,10 +17,10 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
+import ProfileHolder from "../components/Home Page/ProfileHolder";
 import "./LoginRegisterPage.css";
 
-const RegisterPage = () => {
+const RegisterPage = (thisUser, onEditUser) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -57,6 +57,7 @@ const RegisterPage = () => {
     event.preventDefault();
     try {
       const response = await authService.register(
+        form.profilePicture,
         form.name,
         form.email,
         form.username,
@@ -67,7 +68,11 @@ const RegisterPage = () => {
 
       navigate("/login");
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (
+        (error.response && error.response.status === 403) ||
+        (error.response && error.response.status === 422) ||
+        (error.response && error.response.status === 409)
+      ) {
         alert(error.response.data.message);
       }
     }
@@ -153,6 +158,12 @@ const RegisterPage = () => {
             <Grid item xs={11} sm={11} lg={7} xl={7}>
               <CardContent>
                 <Grid container spacing={2}>
+                  <Grid item xs={11} mt={2}>
+                    <ProfileHolder
+                      thisUser={thisUser}
+                      onEditUser={onEditUser}
+                    />
+                  </Grid>
                   <Grid item xs={12}>
                     <TextField
                       name="name"
@@ -176,30 +187,8 @@ const RegisterPage = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="email"
-                      required
-                      error={!!errors.email}
-                      helperText={errors.email}
-                      onChange={handleChange}
-                      value={form.email}
-                      label="Email"
-                      fullWidth
-                      className="grid-5"
-                      sx={{
-                        "& fieldset": { border: "none" },
-                      }}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="start">
-                            <AlternateEmailIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
+
+                  <Grid item xs={6}>
                     <TextField
                       name="username"
                       required
@@ -222,7 +211,32 @@ const RegisterPage = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+
+                  <Grid item xs={6}>
+                    <TextField
+                      name="email"
+                      required
+                      error={!!errors.email}
+                      helperText={errors.email}
+                      onChange={handleChange}
+                      value={form.email}
+                      label="Email"
+                      fullWidth
+                      className="grid-5"
+                      sx={{
+                        "& fieldset": { border: "none" },
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <AlternateEmailIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
                     <TextField
                       name="password"
                       required
@@ -254,7 +268,7 @@ const RegisterPage = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={6}>
                     <TextField
                       name="confirmPassword"
                       required

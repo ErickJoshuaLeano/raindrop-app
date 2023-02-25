@@ -17,6 +17,7 @@ import NewsWidget from "../components/Home Page/NewsWidget";
 const ProfilePage = () => {
   const params = useParams();
   const currentUser = authService.getCurrentUser();
+  const otherUser = profilesService.fetchOtherUser();
   const [thisUser, setThisUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
@@ -45,6 +46,14 @@ const ProfilePage = () => {
         }
       });
   };
+
+  useEffect(() => {
+    profilesService.fetchOtherUser().then((response) => {
+      setThisUser(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage]);
 
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
