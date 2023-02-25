@@ -58,8 +58,9 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
                     }}
                   >
                     <img
-                      className="profile-picture"
+                      className="profile-picture3"
                       src={thisUser.profilePicture}
+                      style={{ width: "50px" }}
                     />
                   </Avatar>
                 </>

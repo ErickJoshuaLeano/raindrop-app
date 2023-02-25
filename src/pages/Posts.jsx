@@ -27,8 +27,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useNavigate } from "react-router-dom";
 
 const Posts = ({ onSubmit, initialValue, thisUser }) => {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -131,6 +133,7 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
             <div className="layer4">
               <Avatar
                 type="button"
+                onClick={() => navigate(`/profiles/${thisUser.username}`)}
                 sx={{
                   height: "55px",
                   width: "55px",

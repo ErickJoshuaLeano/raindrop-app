@@ -20,6 +20,7 @@ const ProfilePage = () => {
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
   const [otherUser, setOtherUser] = useState([]);
+  const [userLikes, setUserLikes] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -30,8 +31,9 @@ const ProfilePage = () => {
   const handleLogout = () => {
     authService.logout();
     setAccessToken(null);
-    window.location.reload(false);
+
     navigate("/login");
+    window.location.reload(false);
   };
 
   const handleAddLikePost = (postId) => {
@@ -69,6 +71,12 @@ const ProfilePage = () => {
       setPosts(response.data);
       setLoading(false);
       setUpdatePage(false);
+    });
+  }, [updatePage]);
+
+  useEffect(() => {
+    profilesService.fetchLikesbyUsername(params.username).then((response) => {
+      setUserLikes(response.data);
     });
   }, [updatePage]);
 
@@ -174,11 +182,17 @@ const ProfilePage = () => {
           setUpdatePage={setUpdatePage}
         />
         <div className="grid-container">
-          <Grid className="grid" container xs={12} sm={11} md={10.5}>
+          <Grid className="profilegrid" container xs={12} sm={11} md={10.5}>
             <Grid container lg={12} xl={11}>
               <Grid item xs={12}>
                 <Grid item xs={12}>
-                  <CoverCard otherUser={otherUser} />
+                  <CoverCard
+                    posts={posts}
+                    otherUser={otherUser}
+                    onEditUser={handleEditUser}
+                    userLikes={userLikes}
+                    thisUser={thisUser}
+                  />
                 </Grid>
               </Grid>
               <Grid
@@ -187,7 +201,7 @@ const ProfilePage = () => {
                 lg={3}
                 xl={2.3}
                 sx={{
-                  display: { xs: "none", lg: "table-cell", maxHeight: "60vh" },
+                  display: { xs: "none", lg: "table-cell" },
                 }}
               >
                 <GalleryCard posts={posts} username={params.username} />
@@ -200,19 +214,18 @@ const ProfilePage = () => {
                 lg={9}
                 xl={9.7}
                 sx={{
-                  height: "70vh",
-                  maxHeight: "70vh",
+                  height: "130vh",
+                  maxHeight: "130vh",
                 }}
               >
-                <Grid item={true} xs={12}>
-                  <div>
-                    {thisUser.username === params.username ? (
-                      <Posts onSubmit={handleSubmit} thisUser={thisUser} />
-                    ) : (
-                      <div></div>
-                    )}
-                  </div>
-                </Grid>
+                {thisUser.username === params.username ? (
+                  <Grid item={true} xs={12}>
+                    <Posts onSubmit={handleSubmit} thisUser={thisUser} />
+                  </Grid>
+                ) : (
+                  <div style={{ height: "0px" }}></div>
+                )}
+
                 <Grid item xs={12}>
                   <PostCardGrid
                     currentUser={currentUser}
