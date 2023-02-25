@@ -18,8 +18,9 @@ import CoverCard from "../components/Profile Page/CoverCard";
 const ProfilePage = () => {
   const params = useParams();
   const currentUser = authService.getCurrentUser();
-  const otherUser = profilesService.fetchOtherUser();
+
   const [thisUser, setThisUser] = useState([]);
+
   const [otherUser, setOtherUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
