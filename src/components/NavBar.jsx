@@ -17,7 +17,7 @@ import AccountMenu from "./AccountMenu";
 import SearchBar from "./SearchBar";
 import logo from "./logo.png";
 
-const NavBar = ({ onLogout, thisUser }) => {
+const NavBar = ({ onLogout, thisUser, updatePage, setUpdatePage }) => {
   const currentUser = authService.getCurrentUser();
 
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const NavBar = ({ onLogout, thisUser }) => {
             </Grid>
           </Grid>
           <Grid item xs={5} sm={5} md={4.5} lg={5.25}>
-            <SearchBar />
+            <SearchBar updatePage={updatePage} setUpdatePage={setUpdatePage} />
           </Grid>
           <Grid className="icon-buttons" container xs={1} sm={2} md={2}>
             <Grid

@@ -20,6 +20,11 @@ import PostCardGrid from "../components/Home Page/PostCardGrid";
 import Posts from "./Posts";
 import CommentModule from "../components/Home Page/CommentModule";
 import RaindropCards from "../components/Home Page/RaindropCards";
+import LatestCard from "../components/Home Page/LatestCard";
+import AllProfilesCard from "../components/Home Page/AllProfilesCard";
+import AllPhotoGalleryCard from "../components/Home Page/AllPhotoGalleryCard";
+import WeatherWidget from "../components/Home Page/WeatherWidget";
+import NewsWidget from "../components/Home Page/NewsWidget";
 
 const HomePages = () => {
   const currentUser = authService.getCurrentUser();
@@ -184,7 +189,12 @@ const HomePages = () => {
   return (
     <>
       <div className="background">
-        <NavBar onLogout={handleLogout} thisUser={thisUser} />
+        <NavBar
+          onLogout={handleLogout}
+          thisUser={thisUser}
+          updatePage={updatePage}
+          setUpdatePage={setUpdatePage}
+        />
         <div className="grid-container">
           <Grid
             className="grid"
@@ -227,7 +237,11 @@ const HomePages = () => {
                 onUpdateChanged={handleUpdateChanged}
                 posts={posts}
               /> */}
-              <RaindropCards />
+              <RaindropCards
+                posts={posts}
+                updatePage={updatePage}
+                setUpdatePage={setUpdatePage}
+              />
               <PostCardGrid
                 currentUser={currentUser}
                 posts={posts}
@@ -242,28 +256,31 @@ const HomePages = () => {
               />
             </Grid>
             <Grid
+              className="column"
               item={true}
               sm={4}
               lg={3}
               xl={2.5}
               sx={{
-                backgroundColor: "blue",
                 height: "100vh",
                 display: { xs: "none", sm: "table-cell" },
               }}
             >
-              TEST
+              <LatestCard posts={posts} />
+              <AllProfilesCard />
+              <AllPhotoGalleryCard posts={posts} />
             </Grid>
             <Grid
               item={true}
               xl={1}
               sx={{
-                backgroundColor: "yellow",
                 height: "100vh",
                 display: { xs: "none", xl: "table-cell" },
               }}
             >
               <CalendarWidget />
+              <WeatherWidget />
+              <NewsWidget />
             </Grid>
           </Grid>
         </div>
