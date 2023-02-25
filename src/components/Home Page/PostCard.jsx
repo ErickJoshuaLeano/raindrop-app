@@ -100,7 +100,7 @@ const PostCard = ({
     formPost.postPicture = post.postPicture;
   };
 
-  const [formPost, setForm] = useState({
+  const [formPost, setFormPost] = useState({
     body: post.body,
     postPicture: post.postPicture || "",
   });
@@ -129,7 +129,7 @@ const PostCard = ({
   };
 
   const handleChange = ({ currentTarget: input }) => {
-    setForm({
+    setFormPost({
       ...formPost,
       [input.name]: input.value,
     });
@@ -210,7 +210,7 @@ const PostCard = ({
 
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "400ms" }}>
-      <Grid container component="formPost-post" onSubmit={handleSubmit}>
+      <Grid container component="formPost" onSubmit={handleSubmit}>
         <Grid item xs={12}>
           <Card
             className="main-card"
