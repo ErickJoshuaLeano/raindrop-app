@@ -1,3 +1,13 @@
+import Joi from "joi";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as authService from "../services/auth";
+import { ToastContainer, toast } from "react-toastify";
+
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
 import {
   Button,
   CardActions,
@@ -7,31 +17,42 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import Joi from "joi";
-import * as React from "react";
-import { Link } from "react-router-dom";
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import InputAdornment from "@mui/material/InputAdornment";
+
 import "./LoginRegisterPage.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = ({ onLogin }) => {
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     username: "",
     password: "",
   });
-
-  const [errors, setErrors] = React.useState({});
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
-    username: Joi.string().required(),
+    username: Joi.string().min(5).max(15).required(),
     password: Joi.string().required(),
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     onLogin(form.username, form.password);
+    try {
+      const response = await authService.login(form.username, form.password);
+      toast.success("login successful", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      navigate("/home");
+    } catch (error) {
+      if (
+        (error.response && error.response.status === 401) ||
+        (error.response && error.response.status === 403)
+      ) {
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -59,7 +80,7 @@ const LoginPage = ({ onLogin }) => {
     return !!result.error;
   };
 
-  const [passwordShown, setPasswordShown] = React.useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const handleClickShowPassword = () => setPasswordShown((show) => !show);
   const handleMouseDownPassword = () => {
@@ -176,9 +197,11 @@ const LoginPage = ({ onLogin }) => {
                   disabled={isFormInvalid()}
                   type="submit"
                   fullWidth
+                  onClick={handleSubmit}
                 >
-                  Sign In <Link to="/home"></Link>
+                  Sign In
                 </Button>
+                <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1} mt={1}>
                 <Grid item>

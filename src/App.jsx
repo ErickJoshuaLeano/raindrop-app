@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePages from "./pages/HomePages";
 import * as authService from "./services/auth";
 import "../src/App.css";
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -34,16 +34,6 @@ function App() {
   };
   // System Preference
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const theme1 = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
 
   // Dark mode
   const dark = createTheme({

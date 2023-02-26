@@ -1,3 +1,16 @@
+import Joi from "joi";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import ProfileHolder from "../components/Home Page/ProfileHolder";
+import * as authService from "../services/auth";
+import { ToastContainer, toast } from "react-toastify";
+
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import InputAdornment from "@mui/material/InputAdornment";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
   Button,
   CardActions,
@@ -7,20 +20,11 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import Joi from "joi";
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import * as authService from "../services/auth";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import InputAdornment from "@mui/material/InputAdornment";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import "./LoginRegisterPage.css";
+import "react-toastify/dist/ReactToastify.css";
 
-const RegisterPage = () => {
+const RegisterPage = (thisUser, onEditUser) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -57,18 +61,27 @@ const RegisterPage = () => {
     event.preventDefault();
     try {
       const response = await authService.register(
+        form.profilePicture,
         form.name,
         form.email,
         form.username,
         form.password,
         form.confirmPassword
       );
-      alert("Registration successful");
+      toast.success("Registration successful", {
+        position: toast.POSITION.TOP_CENTER,
+      });
 
       navigate("/login");
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert(error.response.data.message);
+      if (
+        (error.response && error.response.status === 403) ||
+        (error.response && error.response.status === 422) ||
+        (error.response && error.response.status === 409)
+      ) {
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -98,7 +111,7 @@ const RegisterPage = () => {
     return !!result.error;
   };
 
-  const [passwordShown, setPasswordShown] = React.useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const handleClickShowPassword = () => setPasswordShown((show) => !show);
   const handleMouseDownPassword = () => {
@@ -153,6 +166,12 @@ const RegisterPage = () => {
             <Grid item xs={11} sm={11} lg={7} xl={7}>
               <CardContent>
                 <Grid container spacing={2}>
+                  <Grid item xs={11} mt={2}>
+                    <ProfileHolder
+                      thisUser={thisUser}
+                      onEditUser={onEditUser}
+                    />
+                  </Grid>
                   <Grid item xs={12}>
                     <TextField
                       name="name"
@@ -176,30 +195,8 @@ const RegisterPage = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="email"
-                      required
-                      error={!!errors.email}
-                      helperText={errors.email}
-                      onChange={handleChange}
-                      value={form.email}
-                      label="Email"
-                      fullWidth
-                      className="grid-5"
-                      sx={{
-                        "& fieldset": { border: "none" },
-                      }}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="start">
-                            <AlternateEmailIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
+
+                  <Grid item xs={6}>
                     <TextField
                       name="username"
                       required
@@ -222,7 +219,32 @@ const RegisterPage = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+
+                  <Grid item xs={6}>
+                    <TextField
+                      name="email"
+                      required
+                      error={!!errors.email}
+                      helperText={errors.email}
+                      onChange={handleChange}
+                      value={form.email}
+                      label="Email"
+                      fullWidth
+                      className="grid-5"
+                      sx={{
+                        "& fieldset": { border: "none" },
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <AlternateEmailIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
                     <TextField
                       name="password"
                       required
@@ -254,7 +276,7 @@ const RegisterPage = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={6}>
                     <TextField
                       name="confirmPassword"
                       required
@@ -279,9 +301,11 @@ const RegisterPage = () => {
                   disabled={isFormInvalid()}
                   type="submit"
                   fullWidth
+                  onClick={handleSubmit}
                 >
                   Sign up
                 </Button>
+                <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1}>
                 <Grid item>

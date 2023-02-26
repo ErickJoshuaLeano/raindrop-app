@@ -20,6 +20,9 @@ import { styled } from "@mui/system";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditComment from "./EditComment";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const CommentModule = ({
   post,
   onSubmitComment,
@@ -64,8 +67,10 @@ const CommentModule = ({
       await postsService.deleteComment(postId, commentId);
       setUpdatePage(true);
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        alert("Not the user post,can't delete");
+      if (error.response && error.response.status === 500) {
+        toast("Not the user post,can't delete", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
       setComments(commentsClone);
     }
@@ -80,7 +85,9 @@ const CommentModule = ({
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -91,7 +98,9 @@ const CommentModule = ({
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Not the user post,can't delete");
+        toast("Not the user post,can't delete", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -150,6 +159,7 @@ const CommentModule = ({
                         >
                           <DeleteIcon sx={{ height: "20px", width: "20px" }} />
                         </IconButton>
+                        <ToastContainer />
                       </div>
                     )}
                   </div>
@@ -174,6 +184,7 @@ const CommentModule = ({
                       >
                         <FavoriteIcon />
                       </IconButton>
+                      <ToastContainer />
                     </div>
                   ) : (
                     <IconButton
@@ -183,6 +194,7 @@ const CommentModule = ({
                       <FavoriteIcon sx={{ color: "#74dfea" }} />
                     </IconButton>
                   )}
+                  <ToastContainer />
                 </Grid>
               </Grid>
               <Dialog open={openEdit} onClose={handleCloseEdit}>

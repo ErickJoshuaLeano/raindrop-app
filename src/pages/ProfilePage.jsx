@@ -14,11 +14,15 @@ import CalendarWidget from "../components/Home Page/CalendarWidget";
 import WeatherWidget from "../components/Home Page/WeatherWidget";
 import NewsWidget from "../components/Home Page/NewsWidget";
 import CoverCard from "../components/Profile Page/CoverCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProfilePage = () => {
   const params = useParams();
   const currentUser = authService.getCurrentUser();
+
   const [thisUser, setThisUser] = useState([]);
+
   const [otherUser, setOtherUser] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
@@ -45,10 +49,20 @@ const ProfilePage = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
+
+  useEffect(() => {
+    profilesService.fetchOtherUser().then((response) => {
+      setThisUser(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage]);
 
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
@@ -89,7 +103,9 @@ const ProfilePage = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -103,7 +119,9 @@ const ProfilePage = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -129,7 +147,9 @@ const ProfilePage = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Like has already been removed");
+        toast("Like has already been removed", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -143,7 +163,9 @@ const ProfilePage = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Post has already been deleted");
+        toast("Post has already been deleted", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
       setPosts(postsClone);
     }
@@ -157,7 +179,9 @@ const ProfilePage = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -238,8 +262,15 @@ const ProfilePage = () => {
                     updatePage={updatePage}
                     setUpdatePage={setUpdatePage}
                     columns={{ xs: 1, sm: 2 }}
+                    onClick={
+                      handleDeletePost ||
+                      handleAddLikePost ||
+                      handleDeleteLike ||
+                      handleSubmitComment
+                    }
                   />
                 </Grid>
+                <ToastContainer />
               </Grid>
             </Grid>
             <Grid

@@ -33,3 +33,7 @@ export function updateProfile(user) {
   });
   return http.patch(`/users/`, userClone);
 }
+
+export function fetchOtherUser(username) {
+  return http.get(`/profiles/${username}`);
+}
