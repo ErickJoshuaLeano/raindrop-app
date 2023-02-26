@@ -193,7 +193,7 @@ const Reset = () => {
                 type="submit"
                 fullWidth
               >
-                Sign up
+                SUBMIT
               </Button>
             </CardActions>
           </Grid>
