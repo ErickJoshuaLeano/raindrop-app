@@ -7,12 +7,21 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { Avatar, Dialog, Divider, Grid, Grow, IconButton } from "@mui/material";
+import {
+  Avatar,
+  Dialog,
+  Divider,
+  Grid,
+  Grow,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import { ReactComponent as RaindropIcon } from "../Raindrop.svg";
 import "./PostCard.css";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import * as authService from "../../services/auth";
+import * as postsService from "../../services/posts";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { styled } from "@mui/system";
@@ -20,6 +29,12 @@ import Fade from "@mui/material/Fade";
 import CommentModule from "./CommentModule";
 import { useNavigate } from "react-router-dom";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import Joi from "joi";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 
 const PostCard = ({
   post,
@@ -67,6 +82,75 @@ const PostCard = ({
 
   const handleCancel = () => {
     setOpen(false);
+  };
+
+  const [openEdit, setOpenEdit] = React.useState(false);
+
+  const handleClickOpenEdit = () => {
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleCancelEdit = () => {
+    setOpenEdit(false);
+    formPost.body = post.body;
+    formPost.postPicture = post.postPicture;
+  };
+
+  const [formPost, setFormPost] = useState({
+    body: post.body,
+    postPicture: post.postPicture || "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const schema = Joi.object({
+    body: Joi.string().required(),
+    postPicture: Joi.string().allow("").optional().uri(),
+  });
+
+  const handleSubmit = () => {
+    handleCloseEdit();
+    // event.preventDefault();
+    postsService
+      .updatePost(post.id, formPost)
+      .then((response) => {
+        console.log(response);
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          alert(error.response.data.message[0]);
+        }
+      });
+  };
+
+  const handleChange = ({ currentTarget: input }) => {
+    setFormPost({
+      ...formPost,
+      [input.name]: input.value,
+    });
+
+    const { error } = schema
+      .extract(input.name)
+      .label(input.name)
+      .validate(input.value);
+
+    if (error) {
+      setErrors({ ...errors, [input.name]: error.details[0].message });
+    } else {
+      delete errors[input.name];
+      setErrors(errors);
+    }
+  };
+
+  const isFormInvalid = () => {
+    const result = schema.validate(formPost);
+
+    return !!result.error;
   };
 
   function time_ago(time) {
@@ -126,7 +210,7 @@ const PostCard = ({
 
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "400ms" }}>
-      <Grid container>
+      <Grid container component="formPost" onSubmit={handleSubmit}>
         <Grid item xs={12}>
           <Card
             className="main-card"
@@ -234,7 +318,7 @@ const PostCard = ({
                   </div>
                   {post.userId === currentUser.id && (
                     <div className="edit-post">
-                      <IconButton>
+                      <IconButton onClick={handleClickOpenEdit}>
                         <EditOutlinedIcon />
                       </IconButton>
                     </div>
@@ -349,6 +433,63 @@ const PostCard = ({
           </Card>
           <Dialog open={open} onClose={handleClose}>
             <img className="img-dialogue" src={post.postPicture} />
+          </Dialog>
+          <Dialog open={openEdit} onClose={handleCloseEdit}>
+            <DialogTitle
+              sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
+            >
+              <EditOutlinedIcon /> Edit
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText
+                sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
+              >
+                Edit Post
+              </DialogContentText>
+              <TextField
+                name="body"
+                error={!!errors.body}
+                helperText={errors.body}
+                onChange={handleChange}
+                value={formPost.body}
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Post Content"
+                fullWidth
+                variant="standard"
+                sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
+              />
+              <TextField
+                name="postPicture"
+                error={!!errors.postPicture}
+                helperText={errors.postPicture}
+                onChange={handleChange}
+                value={formPost.postPicture}
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Image Address"
+                fullWidth
+                variant="standard"
+                sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleCancelEdit}
+                sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                onClick={handleSubmit}
+                sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
+              >
+                Save
+              </Button>
+            </DialogActions>
           </Dialog>
         </Grid>
       </Grid>

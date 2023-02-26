@@ -1,0 +1,86 @@
+.profile-holder-cover {
+  display: grid;
+  justify-content: left;
+  margin-bottom: -200px;
+}
+
+.layer1-cover,
+.layer2-cover {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.layer2-cover {
+  transform: translateX(-33%) translateY(95%);
+}
+
+.raindrop-cover {
+  height: 200px;
+  transform: translateX(-50%) translateY(89%) rotate(45deg);
+  justify-self: center;
+}
+
+.raindrop-cover path {
+  fill: #74dfea;
+}
+
+.profile-picture-card-cover {
+  border-radius: 1000px;
+  width: 175px;
+  height: 175px;
+  object-fit: cover;
+  border: solid;
+  border-width: 8px;
+  border-color: white;
+}
+
+.avatar-cover2 {
+  height: 175px;
+  width: 175px;
+  border: solid;
+  border-width: 8px;
+  border-color: white;
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .layer2-cover {
+    transform: translateX(15%) translateY(52%);
+  }
+
+  .raindrop-cover {
+    height: 200px;
+    transform: translateX(-2%) translateY(46%) rotate(45deg);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-holder-cover {
+    display: none;
+  }
+
+  .layer1-cover,
+  .layer2-cover {
+    display: none;
+  }
+
+  .layer2-cover {
+    display: none;
+  }
+
+  .raindrop-cover {
+    display: none;
+  }
+
+  .raindrop-cover path {
+    display: none;
+  }
+
+  .profile-picture-card-cover {
+    display: none;
+  }
+
+  .avatar-cover {
+    display: none;
+  }
+}

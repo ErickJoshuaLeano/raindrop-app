@@ -13,7 +13,6 @@ import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
 import * as likesService from "../services/likes";
 import PostDetails from "./PostDetails";
-import AddPost from "./AddPost";
 
 import "./HomePages.css";
 import PostCardGrid from "../components/Home Page/PostCardGrid";
@@ -118,7 +117,7 @@ const HomePages = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        console.log(response);
+        console.log("test");
         setUpdatePage(true);
       })
       .catch((error) => {

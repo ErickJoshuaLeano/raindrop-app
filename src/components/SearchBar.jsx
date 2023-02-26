@@ -36,8 +36,6 @@ const SearchBar = ({ setSearchQuery, updatePage, setUpdatePage }) => {
       setSearchResult(response.data);
       setUpdateSearch(false);
       setLoading(false);
-      console.log(isLoading);
-      console.log(searchResult);
     });
   }, [updateSearch]);
 
@@ -63,7 +61,6 @@ const SearchBar = ({ setSearchQuery, updatePage, setUpdatePage }) => {
       ...form,
       [input.name]: input.value,
     });
-
     const { error } = schema
       .extract(input.name)
       .label(input.name)

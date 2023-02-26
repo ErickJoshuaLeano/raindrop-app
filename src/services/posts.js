@@ -67,6 +67,21 @@ export function updatePost(id, post) {
   });
   return http.put(`/posts/${id}`, postClone);
 }
+
+export function updateComment(id, comment, commentId) {
+  const commentClone = { ...comment };
+  Object.keys(commentClone).forEach((key) => {
+    if (
+      commentClone[key] === "" ||
+      commentClone[key] === null ||
+      commentClone[key] === undefined
+    ) {
+      delete commentClone[key];
+    }
+  });
+  return http.put(`/posts/${id}/comments/${commentId}`, commentClone);
+}
+
 export function deletePost(id) {
   return http.delete(`/posts/${id}`);
 }

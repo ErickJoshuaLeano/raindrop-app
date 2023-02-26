@@ -1,6 +1,7 @@
 import {
   Avatar,
   Button,
+  Dialog,
   Grid,
   IconButton,
   TableBody,
@@ -17,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddComment from "./AddComment";
 import { styled } from "@mui/system";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import EditComment from "./EditComment";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,13 +31,26 @@ const CommentModule = ({
 }) => {
   const currentUser = authService.getCurrentUser();
   const [comments, setComments] = useState([]);
-  // const [updatePage, setUpdatePage] = useState(false);
 
   const ColorButton = styled(Button)(({ theme }) => ({
     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
     fontSize: "16px",
     color: "#074147",
   }));
+
+  const [openEdit, setOpenEdit] = React.useState(false);
+
+  const handleClickOpenEdit = () => {
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleCancelEdit = () => {
+    setOpenEdit(false);
+  };
 
   useEffect(() => {
     postsService.fetchCommentsByPost(post.id).then((response) => {
@@ -129,7 +144,7 @@ const CommentModule = ({
                     </div>
                     {comment.userId === currentUser.id && (
                       <div className="delete-post">
-                        <IconButton>
+                        <IconButton onClick={handleClickOpenEdit}>
                           <EditIcon sx={{ height: "20px", width: "20px" }} />
                         </IconButton>
                       </div>
@@ -182,6 +197,14 @@ const CommentModule = ({
                   <ToastContainer />
                 </Grid>
               </Grid>
+              <Dialog open={openEdit} onClose={handleCloseEdit}>
+                <EditComment
+                  comment={comment}
+                  setOpenEdit={setOpenEdit}
+                  setUpdatePage={setUpdatePage}
+                  handleCancelEdit={handleCancelEdit}
+                />
+              </Dialog>
             </Grid>
           ))}
         </div>
