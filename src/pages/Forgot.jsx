@@ -13,14 +13,13 @@ import { useNavigate } from "react-router-dom";
 import * as authService from "../services/auth";
 import InputAdornment from "@mui/material/InputAdornment";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import Parse from "parse";
 
 const Forgot = (onForgot) => {
   const [form, setForm] = useState({
     email: "",
   });
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
-
-  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -148,7 +147,7 @@ const Forgot = (onForgot) => {
                 type="submit"
                 fullWidth
               >
-                Submit
+                Request password reset
               </Button>
             </CardActions>
           </Grid>

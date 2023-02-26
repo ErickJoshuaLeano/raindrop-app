@@ -13,6 +13,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { MaterialUISwitch } from "./components/MaterialUISwitch";
 import ProfilePage from "./pages/ProfilePage";
 import DebugPage from "./pages/DebugPage";
+import Forgot from "./pages/Forgot";
 
 function App() {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ function App() {
                 )
               }
             />{" "}
+            <Route path="/forgot" element={<Forgot />} />
             <Route path="/profiles/:username" element={<ProfilePage />} />
             <Route path="/debug" element={<DebugPage />} />
             <Route path="/not-found" element={<NotFound />} />
