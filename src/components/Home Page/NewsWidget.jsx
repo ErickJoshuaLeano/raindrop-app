@@ -5,11 +5,19 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { CardMedia, Dialog, Fade, Grid, IconButton } from "@mui/material";
+import {
+  CardMedia,
+  Dialog,
+  Fade,
+  Grid,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 
 const NewsWidget = () => {
+  const theme = useTheme();
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "850ms" }}>
       <Card
@@ -27,7 +35,9 @@ const NewsWidget = () => {
             <Grid item xs={12}>
               <a href="https://www.cnnphilippines.com/" target="_blank">
                 <IconButton>
-                  <NewspaperIcon sx={{ fontSize: "75px" }} />
+                  <NewspaperIcon
+                    sx={{ fontSize: "75px", color: theme.palette.card.main }}
+                  />
                 </IconButton>
               </a>
             </Grid>

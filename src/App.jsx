@@ -16,7 +16,7 @@ import DebugPage from "./pages/DebugPage";
 
 function App() {
   const navigate = useNavigate();
-
+  const { palette } = createTheme();
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
 
   const handleLogin = async (username, password) => {
@@ -35,16 +35,79 @@ function App() {
   // System Preference
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  // Dark mode
-  const dark = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
   // LightMode
   const light = createTheme({
     palette: {
+      primary: {
+        main: "#27abb9",
+      },
+      mainColor: palette.augmentColor({ color: { main: "#27abb9" } }),
+      card: palette.augmentColor({ color: { main: "#ffffff" } }),
+      background: palette.augmentColor({ color: { main: "#eaebef" } }),
+      whitePrimary: palette.augmentColor({ color: { main: "#ffffff" } }),
+      postRaindrop: palette.augmentColor({ color: { main: "#74dfea" } }),
+      notifIcons: palette.augmentColor({ color: { main: "#84e7b3" } }),
+      darkAccents: palette.augmentColor({ color: { main: "#cecece" } }),
+      postAccent: palette.augmentColor({
+        color: { main: "#074147", light: "#84e7b3", text: "#074147" },
+      }),
+      postButton: palette.augmentColor({
+        color: { main: "#84e7b3", text: "#074147" },
+      }),
+      profileHolder: palette.augmentColor({
+        color: { main: "#74dfea", light: "#ffffff" },
+      }),
+      profileHolderPost: palette.augmentColor({
+        color: { main: "#74dfea", light: "#27abb9" },
+      }),
+      viewProfile: palette.augmentColor({
+        color: { main: "#1b8b97", light: "#074147", text: "#ffffff" },
+      }),
+      mainText: palette.augmentColor({
+        color: { main: "#074147", light: "#000000" },
+      }),
+      galleryFiller: palette.augmentColor({
+        color: { main: "#74dfea", light: "#84e7b3" },
+      }),
       mode: "light",
+    },
+  });
+
+  // Dark mode
+  const dark = createTheme({
+    palette: {
+      primary: {
+        main: "#074147",
+      },
+      mainColor: palette.augmentColor({ color: { main: "#074147" } }),
+      card: palette.augmentColor({ color: { main: "#1a1c20" } }),
+      background: palette.augmentColor({ color: { main: "#0f0e13" } }),
+      whitePrimary: palette.augmentColor({ color: { main: "#0f0e13" } }),
+      notifIcons: palette.augmentColor({ color: { main: "#0f0e13" } }),
+      postRaindrop: palette.augmentColor({ color: { main: "#74dfea" } }),
+      darkAccents: palette.augmentColor({ color: { main: "#1c1e21" } }),
+      postAccent: palette.augmentColor({
+        color: { main: "#74dfea", light: "#74dfea", text: "#ffffff" },
+      }),
+      postButton: palette.augmentColor({
+        color: { main: "#27abb9", text: "#073135" },
+      }),
+      profileHolder: palette.augmentColor({
+        color: { main: "#27abb9", light: "#74dfea" },
+      }),
+      profileHolderPost: palette.augmentColor({
+        color: { main: "#074147", light: "#074147" },
+      }),
+      viewProfile: palette.augmentColor({
+        color: { main: "#073135", light: "#042124", text: "#ffffff" },
+      }),
+      mainText: palette.augmentColor({
+        color: { main: "#ffffff", light: "#bebebe" },
+      }),
+      galleryFiller: palette.augmentColor({
+        color: { main: "#073135", light: "#074147" },
+      }),
+      mode: "dark",
     },
   });
 

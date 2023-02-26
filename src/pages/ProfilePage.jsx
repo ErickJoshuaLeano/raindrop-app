@@ -16,8 +16,10 @@ import NewsWidget from "../components/Home Page/NewsWidget";
 import CoverCard from "../components/Profile Page/CoverCard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "@mui/material/styles";
 
 const ProfilePage = () => {
+  const theme = useTheme();
   const params = useParams();
   const currentUser = authService.getCurrentUser();
 
@@ -44,7 +46,7 @@ const ProfilePage = () => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -98,7 +100,7 @@ const ProfilePage = () => {
     postsService
       .addPost(post)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -114,7 +116,7 @@ const ProfilePage = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -198,12 +200,16 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className="background">
+      <div
+        className="background"
+        style={{ backgroundColor: theme.palette.background.main }}
+      >
         <NavBar
           onLogout={handleLogout}
           thisUser={thisUser}
           updatePage={updatePage}
           setUpdatePage={setUpdatePage}
+          theme={theme}
         />
         <div className="grid-container">
           <Grid className="profilegrid" container xs={12} sm={11} md={10.5}>

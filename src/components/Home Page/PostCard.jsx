@@ -24,7 +24,7 @@ import * as authService from "../../services/auth";
 import * as postsService from "../../services/posts";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import { styled } from "@mui/system";
+import { styled, useTheme } from "@mui/system";
 import Fade from "@mui/material/Fade";
 import CommentModule from "./CommentModule";
 import { useNavigate } from "react-router-dom";
@@ -46,6 +46,7 @@ const PostCard = ({
   updatePage,
   setUpdatePage,
 }) => {
+  const theme = useTheme();
   const currentUser = authService.getCurrentUser();
 
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ const PostCard = ({
   const ColorButton = styled(Button)(({ theme }) => ({
     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
     fontSize: "16px",
-    color: "#074147",
+    color: theme.palette.postAccent.text,
   }));
 
   const [open, setOpen] = React.useState(false);
@@ -118,7 +119,7 @@ const PostCard = ({
     postsService
       .updatePost(post.id, formPost)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -222,6 +223,7 @@ const PostCard = ({
               margin: "1vw",
               marginTop: "2vh",
               display: "grid",
+              backgroundColor: theme.palette.card.main,
             }}
           >
             {post.postPicture !== null && post.postPicture !== "" ? (
@@ -267,7 +269,7 @@ const PostCard = ({
                   style={{
                     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                     fontWeight: "300",
-                    color: "black",
+                    color: theme.palette.mainText.light,
                     marginTop: "-11px",
                     marginLeft: "3%",
                     marginBottom: "10px",
@@ -282,7 +284,12 @@ const PostCard = ({
                 <Grid item xs={6}>
                   <div className="p-profile-holder2">
                     <div className="p-layer3">
-                      <RaindropIcon className="p-raindrop2"></RaindropIcon>
+                      <RaindropIcon
+                        className="p-raindrop2"
+                        style={{
+                          "--color": theme.palette.profileHolderPost.main,
+                        }}
+                      ></RaindropIcon>
                     </div>
                     <div className="p-layer4">
                       <Avatar
@@ -306,8 +313,18 @@ const PostCard = ({
                         />
                       </Avatar>
                     </div>
-                    <div className="p-layer5">{post.user.name}</div>
-                    <div className="p-layer6">@ {post.user.username}</div>
+                    <div
+                      className="p-layer5"
+                      style={{ color: theme.palette.mainText.main }}
+                    >
+                      {post.user.name}
+                    </div>
+                    <div
+                      className="p-layer6"
+                      style={{ color: theme.palette.mainText.main }}
+                    >
+                      @ {post.user.username}
+                    </div>
                   </div>
                 </Grid>
                 <Grid item xs={6} justifyContent="flex-end" display="flex">
@@ -338,7 +355,7 @@ const PostCard = ({
 
               <Typography
                 variant="body1"
-                color="black"
+                color={theme.palette.mainText.light}
                 sx={{
                   fontFamily: "Raleway, Arial, Helvetica, sans-serif",
 
@@ -361,7 +378,12 @@ const PostCard = ({
                       alignItems: "center",
                     }}
                   >
-                    <FavoriteIcon sx={{ color: "#074147", marginLeft: "4%" }} />
+                    <FavoriteIcon
+                      sx={{
+                        color: theme.palette.postAccent.main,
+                        marginLeft: "4%",
+                      }}
+                    />
                     <div className="space"></div>
                     {post.likes.length > 1 ? (
                       <div>Liked by {post.likes.length} people</div>
@@ -396,7 +418,11 @@ const PostCard = ({
                     <ColorButton
                       fontFamily="Raleway, Arial, Helvetica, sans-serif"
                       fontWeight="700"
-                      endIcon={<FavoriteIcon sx={{ color: "#074147" }} />}
+                      endIcon={
+                        <FavoriteIcon
+                          sx={{ color: theme.palette.postAccent.main }}
+                        />
+                      }
                       sx={{ width: "150px" }}
                       onClick={() => handleRemoveLike()}
                     >

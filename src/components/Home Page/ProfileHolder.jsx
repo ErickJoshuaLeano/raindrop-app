@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuList,
   TextField,
+  useTheme,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
@@ -22,6 +23,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 
 const ProfileHolder = ({ thisUser, onEditUser }) => {
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -94,7 +96,10 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
   return (
     <div className="profile-holder">
       <div className="layer1">
-        <RaindropIcon className="raindrop"></RaindropIcon>
+        <RaindropIcon
+          className="raindrop"
+          style={{ "--color": theme.palette.profileHolder.main }}
+        ></RaindropIcon>
       </div>
       <div className="layer2">
         {" "}
@@ -106,8 +111,8 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
               height: "85px",
               width: "85px",
               border: "solid",
+              borderColor: theme.palette.profileHolder.light,
               borderWidth: 5,
-              bordercolor: "white",
               textJustify: "center",
               "&:hover": { backgroundColor: "#074147", transition: "0.5s" },
             }}
@@ -127,7 +132,7 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
               width: "85px",
               border: "solid",
               borderWidth: 5,
-              bordercolor: "white",
+              borderColor: theme.palette.profileHolder.light,
               textJustify: "center",
               "&:hover": { backgroundColor: "#074147", transition: "0.5s" },
             }}

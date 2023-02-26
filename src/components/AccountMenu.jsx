@@ -23,6 +23,10 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const navigateAway = () => {
+    navigate(`/profiles/${thisUser.username}`);
+    window.location.reload(false);
+  };
   return (
     <React.Fragment>
       <Box
@@ -131,7 +135,7 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
         </Typography>
 
         <MenuItem
-          onClick={() => navigate(`/profiles/${thisUser.username}`)}
+          onClick={() => navigateAway()}
           fontFamily="Raleway, Arial, Helvetica, sans-serif"
         >
           <Avatar />

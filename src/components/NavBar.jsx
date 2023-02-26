@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import * as authService from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
-import { Fade, Grid } from "@mui/material";
+import { Fade, Grid, useTheme } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
@@ -18,17 +18,24 @@ import SearchBar from "./SearchBar";
 import logo from "./logo.png";
 
 const NavBar = ({ onLogout, thisUser, updatePage, setUpdatePage }) => {
+  const theme = useTheme();
   const currentUser = authService.getCurrentUser();
 
   const navigate = useNavigate();
 
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "000ms" }}>
-      <nav className="navbar">
+      <nav
+        className="navbar"
+        style={{ backgroundColor: theme.palette.mainColor.main }}
+      >
         <Grid className="navbar-grid" container xs={11} sm={10.5}>
           <Grid container xs={2} md={3}>
             <Grid item xs={12} md={3} lg={2}>
-              <div className="logo-container">
+              <div
+                className="logo-container"
+                style={{ backgroundColor: theme.palette.whitePrimary.main }}
+              >
                 <img
                   type="button"
                   className="logo"
@@ -58,14 +65,17 @@ const NavBar = ({ onLogout, thisUser, updatePage, setUpdatePage }) => {
               <IconButton
                 type="button"
                 sx={{
-                  color: "#84e7b3",
+                  color: theme.palette.notifIcons.main,
                 }}
               >
                 <PersonRoundedIcon />
               </IconButton>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <IconButton type="button" sx={{ color: "#84e7b3" }}>
+              <IconButton
+                type="button"
+                sx={{ color: theme.palette.notifIcons.main }}
+              >
                 <NotificationsRoundedIcon />
               </IconButton>
             </Grid>
@@ -77,7 +87,7 @@ const NavBar = ({ onLogout, thisUser, updatePage, setUpdatePage }) => {
               <IconButton
                 type="button"
                 sx={{
-                  color: "#84e7b3",
+                  color: theme.palette.notifIcons.main,
                 }}
               >
                 <PublicRoundedIcon />

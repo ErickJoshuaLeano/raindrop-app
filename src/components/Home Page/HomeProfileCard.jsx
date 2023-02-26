@@ -16,6 +16,7 @@ import {
   MenuItem,
   MenuList,
   TextField,
+  useTheme,
 } from "@mui/material";
 import Joi from "joi";
 import * as postsService from "../../services/posts";
@@ -37,6 +38,7 @@ const HomeProfileCard = ({
   isLoading,
   onEditUser,
 }) => {
+  const theme = useTheme();
   const [isMounted, setIsMounted] = useState(false);
 
   const [form, setForm] = useState({
@@ -112,7 +114,7 @@ const HomeProfileCard = ({
           xs={12}
           sx={{
             borderRadius: "40px",
-            backgroundColor: "#27abb9",
+            backgroundColor: theme.palette.mainColor.main,
             boxShadow: "none",
             margin: "0.5vw",
             marginBlock: "1vw",
@@ -300,15 +302,25 @@ const HomeProfileCard = ({
               sx={{
                 borderRadius: "1000px",
                 margin: "7px",
-                backgroundColor: "#1b8b97",
+                backgroundColor: theme.palette.viewProfile.main,
                 fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                 fontWeight: "700",
                 padding: "5px",
-                "&:hover": { backgroundColor: "#074147" },
+                "&:hover": {
+                  backgroundColor: theme.palette.viewProfile.light,
+                },
               }}
               onClick={() => navigate(`/profiles/${thisUser.username}`)}
             >
-              View My Profile
+              <Typography
+                sx={{
+                  fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                  fontWeight: "700",
+                  color: "white",
+                }}
+              >
+                View My Profile
+              </Typography>
             </Button>
           </CardActions>
         </Card>

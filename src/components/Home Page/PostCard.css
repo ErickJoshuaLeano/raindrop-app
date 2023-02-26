@@ -22,13 +22,13 @@
   font-family: Raleway, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 27px;
-  color: #074147;
+
   transform: translateX(28%) translateY(15%);
 }
 
 .p-layer6 {
   font-family: Raleway, Arial, Helvetica, sans-serif;
-  color: #074147;
+
   transform: translateX(28%) translateY(62%);
 }
 
@@ -39,7 +39,7 @@
 }
 
 .p-raindrop2 path {
-  fill: #74dfea;
+  fill: var(--color);
 }
 
 .p-profile-picture-card2 {

@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
   TextField,
+  useTheme,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
@@ -21,6 +22,7 @@ import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import Joi from "joi";
 
 const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -82,7 +84,10 @@ const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
   return (
     <div className="profile-holder-cover">
       <div className="layer1-cover">
-        <RaindropIcon className="raindrop-cover"></RaindropIcon>
+        <RaindropIcon
+          className="raindrop-cover"
+          style={{ "--color": theme.palette.profileHolder.main }}
+        ></RaindropIcon>
       </div>
       <div className="layer2-cover">
         {otherUser.profilePicture && otherUser.profilePicture !== "" ? (
@@ -91,6 +96,7 @@ const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
             onClick={handleClickOpen}
             className="profile-picture-card-cover"
             src={otherUser.profilePicture}
+            style={{ borderColor: theme.palette.profileHolder.light }}
           />
         ) : (
           <div

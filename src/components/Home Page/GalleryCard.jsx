@@ -7,12 +7,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
 import "./GalleryCard.css";
-import { Fade, Grid } from "@mui/material";
+import { Fade, Grid, useTheme } from "@mui/material";
 import * as profilesService from "../../services/profile";
 import { useEffect, useState } from "react";
 import * as authService from "../../services/auth";
 
 const GalleryCard = ({ posts, username, title }) => {
+  const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ const GalleryCard = ({ posts, username, title }) => {
         <Card
           xs={12}
           sx={{
+            backgroundColor: theme.palette.card.main,
             borderRadius: "40px",
             paddingBottom: "3vh",
             boxShadow: "none",
@@ -107,7 +109,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 1].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.main,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -119,7 +126,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 2].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.light,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -131,7 +143,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 3].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.light,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -143,7 +160,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 4].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.main,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -158,7 +180,7 @@ const GalleryCard = ({ posts, username, title }) => {
                 <CardMedia
                   sx={{
                     height: 140,
-                    backgroundColor: "#74dfea",
+                    backgroundColor: theme.palette.galleryFiller.main,
                   }}
                 />
               )}
@@ -172,7 +194,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 6].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.light,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -184,7 +211,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 7].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.light,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -196,7 +228,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 8].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.main,
+                  }}
+                />
               )}
             </div>
           </Grid>
@@ -208,7 +245,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 9].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#74dfea" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.main,
+                  }}
+                />
               )}
             </div>
           </Grid>{" "}
@@ -220,7 +262,12 @@ const GalleryCard = ({ posts, username, title }) => {
                   image={myPhotos[myPhotos.length - 10].postPicture}
                 />
               ) : (
-                <CardMedia sx={{ height: 140, backgroundColor: "#84e7b3" }} />
+                <CardMedia
+                  sx={{
+                    height: 140,
+                    backgroundColor: theme.palette.galleryFiller.light,
+                  }}
+                />
               )}
             </div>
           </Grid>
