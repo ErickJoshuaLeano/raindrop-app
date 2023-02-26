@@ -37,6 +37,7 @@ const ProfileHolderRegister = ({ setProfilePicture }) => {
   const handleCancel = () => {
     setOpen(false);
     setForm({ profilePicture: "" });
+    setProfilePicture(null);
     setErrors({});
   };
 

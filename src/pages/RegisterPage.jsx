@@ -26,7 +26,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfileHolderRegister from "../components/Register Page/ProfileHolderRegister";
 
 const RegisterPage = () => {
-  const [profilePicture, setProfilePicture] = useState({});
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const [form, setForm] = useState({
     name: "",
