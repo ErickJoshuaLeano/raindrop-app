@@ -33,6 +33,7 @@ const RegisterPage = (thisUser, onEditUser) => {
     confirmPassword: "",
   });
 
+
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
@@ -59,31 +60,40 @@ const RegisterPage = (thisUser, onEditUser) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await authService.register(
-        form.profilePicture,
-        form.name,
-        form.email,
-        form.username,
-        form.password,
-        form.confirmPassword
-      );
-      toast.success("Registration successful", {
-        position: toast.POSITION.TOP_CENTER,
-      });
 
-      navigate("/login");
-    } catch (error) {
-      if (
-        (error.response && error.response.status === 403) ||
-        (error.response && error.response.status === 422) ||
-        (error.response && error.response.status === 409)
-      ) {
-        toast.error(error.response.data.message, {
+  //
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+    if(format.test(form.password)){
+      try {
+        const response = await authService.register(
+          form.profilePicture,
+          form.name,
+          form.email,
+          form.username,
+          form.password,
+          form.confirmPassword
+        );
+        toast.success("Registration successful", {
           position: toast.POSITION.TOP_CENTER,
         });
+  
+        navigate("/login");
+      } catch (error) {
+        if (
+          (error.response && error.response.status === 403) ||
+          (error.response && error.response.status === 422) ||
+          (error.response && error.response.status === 409)
+        ) {
+          toast.error(error.response.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      };
+      } else {
+      alert("no special character");
       }
-    }
+
   };
 
   const handleChange = ({ currentTarget: input }) => {
