@@ -66,7 +66,7 @@ const RegisterPage = (thisUser, onEditUser) => {
         form.password,
         form.confirmPassword
       );
-      toast("Registration successful");
+      alert("Registration successful");
 
       navigate("/login");
     } catch (error) {
