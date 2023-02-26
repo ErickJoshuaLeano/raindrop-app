@@ -13,6 +13,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { MaterialUISwitch } from "./components/MaterialUISwitch";
 import ProfilePage from "./pages/ProfilePage";
 import DebugPage from "./pages/DebugPage";
+import PostDetails from "./pages/PostDetails";
 
 function App() {
   const navigate = useNavigate();
@@ -99,6 +100,10 @@ function App() {
             <Route
               path="/register"
               element={accessToken ? <Navigate to="/" /> : <RegisterPage />}
+            />
+            <Route
+              path="/postdetails/:postId"
+              element={accessToken ? <PostDetails /> : <Navigate to="/login" />}
             />
             <Route
               path="/login"

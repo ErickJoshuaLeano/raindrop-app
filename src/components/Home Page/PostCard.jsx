@@ -35,6 +35,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
+import { Link } from "react-router-dom";
 
 const PostCard = ({
   post,
@@ -312,9 +313,11 @@ const PostCard = ({
                 </Grid>
                 <Grid item xs={6} justifyContent="flex-end" display="flex">
                   <div className="edit-post">
-                    <IconButton>
-                      <RemoveRedEyeIcon />
-                    </IconButton>
+                    <Link to={`/postdetails/${post.id}`}>
+                      <IconButton>
+                        <RemoveRedEyeIcon />
+                      </IconButton>
+                    </Link>
                   </div>
                   {post.userId === currentUser.id && (
                     <div className="edit-post">
