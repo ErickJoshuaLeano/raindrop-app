@@ -63,37 +63,28 @@ const RegisterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    //
-    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    try {
+      const response = await authService.register(
+        profilePicture,
+        form.name,
+        form.email,
+        form.username,
+        form.password,
+        form.confirmPassword
+      );
+      alert("Registration successful");
 
-    if (format.test(form.password)) {
-      try {
-        const response = await authService.register(
-          profilePicture,
-          form.name,
-          form.email,
-          form.username,
-          form.password,
-          form.confirmPassword
-        );
-        toast.success("Registration successful", {
+      navigate("/login");
+    } catch (error) {
+      if (
+        (error.response && error.response.status === 403) ||
+        (error.response && error.response.status === 422) ||
+        (error.response && error.response.status === 409)
+      ) {
+        alert(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-
-        navigate("/login");
-      } catch (error) {
-        if (
-          (error.response && error.response.status === 403) ||
-          (error.response && error.response.status === 422) ||
-          (error.response && error.response.status === 409)
-        ) {
-          toast.error(error.response.data.message, {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
       }
-    } else {
-      alert("no special character");
     }
   };
 
