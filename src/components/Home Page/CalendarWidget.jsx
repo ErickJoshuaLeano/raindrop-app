@@ -5,7 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { CardMedia, Fade, Grid } from "@mui/material";
+import { CardMedia, Fade, Grid, useTheme } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export function getCurrentDate(separator = "") {
@@ -20,6 +20,7 @@ export function getCurrentDate(separator = "") {
 }
 
 const CalendarWidget = () => {
+  const theme = useTheme();
   const monthNames = [
     "JAN",
     "FEB",
@@ -63,10 +64,12 @@ const CalendarWidget = () => {
                   padding: "2px",
                   justifySelf: "center",
                   display: "flex",
-                  color: "white",
+                  color: theme.palette.card.main,
                 }}
               >
-                <CalendarMonthIcon sx={{ alignSelf: "center" }} />
+                <CalendarMonthIcon
+                  sx={{ alignSelf: "center", color: theme.palette.card.main }}
+                />
                 <div className="spacer"></div>
                 {monthNames[current.getMonth()]}
               </Typography>
@@ -82,7 +85,7 @@ const CalendarWidget = () => {
                   padding: "2px",
                   justifySelf: "center",
                   display: "flex",
-                  color: "white",
+                  color: theme.palette.card.main,
                   transform: "translateY(-60%)",
                   marginBottom: "-55px",
                 }}

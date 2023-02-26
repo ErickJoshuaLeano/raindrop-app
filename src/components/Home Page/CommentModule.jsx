@@ -16,7 +16,7 @@ import "./CommentModule.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddComment from "./AddComment";
-import { styled } from "@mui/system";
+import { styled, useTheme } from "@mui/system";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditComment from "./EditComment";
 
@@ -29,6 +29,7 @@ const CommentModule = ({
   updatePage,
   setUpdatePage,
 }) => {
+  const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [comments, setComments] = useState([]);
 
@@ -80,7 +81,7 @@ const CommentModule = ({
     likesService
       .addCommentLike(commentId)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {

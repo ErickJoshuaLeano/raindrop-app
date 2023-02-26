@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #27abb9;
+  background-color: "palette.navbar";
   position: fixed;
   top: 0;
   left: 0;
@@ -23,7 +23,6 @@
 }
 
 .logo-container {
-  background-color: white;
   width: fit-content;
   height: fit-content;
   border-radius: 10px;

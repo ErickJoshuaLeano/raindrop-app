@@ -21,7 +21,7 @@
 }
 
 .raindrop-cover path {
-  fill: #74dfea;
+  fill: var(--color);
 }
 
 .profile-picture-card-cover {

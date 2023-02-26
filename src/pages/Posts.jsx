@@ -12,6 +12,7 @@ import {
   CardMedia,
   Grow,
   Fade,
+  useTheme,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Joi from "joi";
@@ -30,6 +31,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 
 const Posts = ({ onSubmit, initialValue, thisUser }) => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
@@ -99,6 +101,7 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
         <Card
           xs={12}
           sx={{
+            backgroundColor: theme.palette.card.main,
             borderRadius: "40px",
             boxShadow: "none",
             margin: "1vw",
@@ -106,7 +109,11 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
           }}
         >
           <CardMedia
-            sx={{ height: "34px", backgroundColor: "#cecece", display: "grid" }}
+            sx={{
+              height: "34px",
+              backgroundColor: theme.palette.darkAccents.main,
+              display: "grid",
+            }}
           >
             <Typography
               gutterBottom
@@ -128,7 +135,10 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
           </CardMedia>
           <div className="profile-holder2">
             <div className="layer3">
-              <RaindropIcon className="raindrop2"></RaindropIcon>
+              <RaindropIcon
+                className="raindrop2"
+                style={{ "--color": theme.palette.profileHolderPost.light }}
+              ></RaindropIcon>
             </div>
             <div className="layer4">
               <Avatar
@@ -190,7 +200,7 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
                           borderRadius: "1000px",
                           margin: "7px",
                           color: "grey",
-                          backgroundColor: "#eaebef",
+                          backgroundColor: theme.palette.darkAccents.main,
                           fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                           fontWeight: "700",
                           padding: "5px",
@@ -253,7 +263,7 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
                 padding: "10px",
                 borderRadius: "1000px",
                 margin: "7px",
-                backgroundColor: "#84e7b3",
+                backgroundColor: theme.palette.postButton.main,
                 fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                 fontWeight: "700",
                 padding: "5px",
@@ -261,7 +271,14 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
                 "&:hover": { backgroundColor: "#074147" },
               }}
             >
-              Submit
+              <Typography
+                sx={{
+                  fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                  fontWeight: "700",
+                }}
+              >
+                Submit
+              </Typography>
             </Button>
           </Box>
         </Card>

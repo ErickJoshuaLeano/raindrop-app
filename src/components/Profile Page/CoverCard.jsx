@@ -10,6 +10,7 @@ import {
   Typography,
   TextField,
   Fade,
+  useTheme,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import Joi from "joi";
@@ -25,6 +26,7 @@ import "./CoverCard.css";
 import ProfileHolderCover from "./ProfileHolderCover";
 
 const CoverCard = ({ otherUser, onEditUser, userLikes, posts, thisUser }) => {
+  const theme = useTheme();
   const [form, setForm] = useState({
     coverPicture: "",
   });
@@ -90,7 +92,7 @@ const CoverCard = ({ otherUser, onEditUser, userLikes, posts, thisUser }) => {
         xs={12}
         sx={{
           borderRadius: "40px",
-          backgroundColor: "#27abb9",
+          backgroundColor: theme.palette.mainColor.main,
           boxShadow: "none",
           margin: "0.5vw",
           marginBlock: "1vw",
@@ -228,6 +230,7 @@ const CoverCard = ({ otherUser, onEditUser, userLikes, posts, thisUser }) => {
                     sx={{
                       fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                       fontWeight: "700",
+                      fontSize: "5vw",
                       color: "white",
                       textShadow: "2px 2px 4px black",
                       position: "relative",

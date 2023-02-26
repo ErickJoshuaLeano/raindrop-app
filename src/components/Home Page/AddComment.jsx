@@ -1,10 +1,11 @@
-import { Box, Button, Grid, InputBase } from "@mui/material";
+import { Box, Button, Grid, InputBase, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import Joi from "joi";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 const AddComment = ({ onSubmitComment, post }) => {
+  const theme = useTheme();
   const [form, setForm] = useState({
     body: "",
   });
@@ -58,7 +59,7 @@ const AddComment = ({ onSubmitComment, post }) => {
           startAdornment={<AddCommentIcon sx={{ marginRight: "10px" }} />}
           endAdornment={
             <Button
-              className="add-photo-button"
+              className="submit"
               disabled={isFormInvalid()}
               variant="contained"
               startIcon={<AddCircleOutlineOutlinedIcon />}
@@ -68,7 +69,7 @@ const AddComment = ({ onSubmitComment, post }) => {
                 transform: "translateY(0%)",
                 width: "130px",
                 borderRadius: "1000px",
-                backgroundColor: "#84e7b3",
+                backgroundColor: theme.palette.postButton.main,
                 fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                 fontWeight: "700",
 
@@ -81,7 +82,7 @@ const AddComment = ({ onSubmitComment, post }) => {
           multiline
           fullWidth
           sx={{
-            backgroundColor: "#eaebef",
+            backgroundColor: theme.palette.darkAccents.main,
             fontFamily: "Raleway, Arial, Helvetica, sans-serif",
             padding: "10px",
             borderRadius: "10px",

@@ -22,15 +22,13 @@
   font-family: Raleway, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 27px;
-  color: #074147;
-  transform: translateX(37%) translateY(-17%);
+  transform: translateX(37%) translateY(-28%);
 }
 
 .layer6 {
   font-family: Raleway, Arial, Helvetica, sans-serif;
-  color: #074147;
   transform: translateX(37%);
-  transform: translateX(37%) translateY(30%);
+  transform: translateX(37%) translateY(23%);
 }
 
 .raindrop2 {
@@ -40,7 +38,7 @@
 }
 
 .raindrop2 path {
-  fill: #27abb9;
+  fill: var(--color);
 }
 
 .profile-picture-card2 {

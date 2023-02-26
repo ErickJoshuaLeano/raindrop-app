@@ -16,12 +16,12 @@
 
 .raindrop {
   height: 100px;
-  transform: translateY(-22%);
+  transform: translateY(-22%) rotate(45deg);
   justify-self: center;
 }
 
 .raindrop path {
-  fill: #74dfea;
+  fill: var(--color);
 }
 
 .profile-picture-card {

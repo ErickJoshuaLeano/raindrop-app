@@ -7,12 +7,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
 import "./GalleryCard.css";
-import { Fade, Grid } from "@mui/material";
+import { Fade, Grid, useTheme } from "@mui/material";
 import * as profilesService from "../../services/profile";
 import { useEffect, useState } from "react";
 import * as authService from "../../services/auth";
 
 const AllPhotoGalleryCard = ({ posts }) => {
+  const theme = useTheme();
   const filter = posts.filter(
     (posts) => posts.postPicture !== null && posts.postPicture !== ""
   );
@@ -25,7 +26,7 @@ const AllPhotoGalleryCard = ({ posts }) => {
         xs={12}
         sx={{
           borderRadius: "40px",
-
+          backgroundColor: theme.palette.card.main,
           boxShadow: "none",
           margin: "0.5vw",
           display: "grid",

@@ -26,8 +26,10 @@ import WeatherWidget from "../components/Home Page/WeatherWidget";
 import NewsWidget from "../components/Home Page/NewsWidget";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "@mui/material/styles";
 
 const HomePages = () => {
+  const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
@@ -52,7 +54,7 @@ const HomePages = () => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -101,7 +103,7 @@ const HomePages = () => {
     postsService
       .addPost(post)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -117,7 +119,7 @@ const HomePages = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        console.log("test");
+        // console.log("test");
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -201,12 +203,16 @@ const HomePages = () => {
 
   return (
     <>
-      <div className="background">
+      <div
+        className="background"
+        style={{ backgroundColor: theme.palette.background.main }}
+      >
         <NavBar
           onLogout={handleLogout}
           thisUser={thisUser}
           updatePage={updatePage}
           setUpdatePage={setUpdatePage}
+          theme={theme}
         />
         <div className="grid-container">
           <Grid
@@ -215,7 +221,9 @@ const HomePages = () => {
             xs={12}
             sm={11}
             md={10.5}
-            sx={{ height: "100vh" }}
+            sx={{
+              height: "100vh",
+            }}
           >
             <Grid
               className="column"

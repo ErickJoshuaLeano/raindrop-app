@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuList,
   TextField,
+  useTheme,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
@@ -22,6 +23,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 
 const ProfileHolderRegister = ({ setProfilePicture }) => {
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -85,7 +87,10 @@ const ProfileHolderRegister = ({ setProfilePicture }) => {
   return (
     <div className="profile-holder">
       <div className="layer1">
-        <RaindropIcon className="raindrop"></RaindropIcon>
+        <RaindropIcon
+          className="raindrop"
+          style={{ "--color": theme.palette.profileHolder.main }}
+        ></RaindropIcon>
       </div>
       <div className="layer2">
         {" "}

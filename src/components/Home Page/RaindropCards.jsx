@@ -9,9 +9,10 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { ReactComponent as RaindropIcon } from "../Raindrop.svg";
 import "./RaindropCards.css";
-import { Fade, ImageListItemBar } from "@mui/material";
+import { Fade, ImageListItemBar, useTheme } from "@mui/material";
 
 const RaindropCards = ({ posts, updatePage, setUpdatePage }) => {
+  const theme = useTheme();
   const filter = posts.filter(
     (posts) => posts.postPicture !== null && posts.postPicture !== ""
   );
@@ -22,6 +23,7 @@ const RaindropCards = ({ posts, updatePage, setUpdatePage }) => {
     <Fade in timeout={1000} style={{ transitionDelay: "400ms" }}>
       <Card
         sx={{
+          backgroundColor: theme.palette.card.main,
           borderRadius: "40px",
           boxShadow: "none",
           margin: "1vw",
