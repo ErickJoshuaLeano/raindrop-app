@@ -52,6 +52,11 @@ const PostCard = ({
 
   const [openComments, setOpenComments] = useState(false);
 
+  const [formPost, setFormPost] = useState({
+    body: post.body,
+    postPicture: post.postPicture || "",
+  });
+
   const toggleOpenComments = () => {
     setOpenComments((value) => !value);
   };
@@ -99,11 +104,6 @@ const PostCard = ({
     formPost.body = post.body;
     formPost.postPicture = post.postPicture;
   };
-
-  const [formPost, setFormPost] = useState({
-    body: post.body,
-    postPicture: post.postPicture || "",
-  });
 
   const [errors, setErrors] = useState({});
 

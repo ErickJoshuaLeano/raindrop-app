@@ -23,8 +23,11 @@ import {
 
 import "./LoginRegisterPage.css";
 import "react-toastify/dist/ReactToastify.css";
+import ProfileHolderRegister from "../components/Register Page/ProfileHolderRegister";
 
-const RegisterPage = (thisUser, onEditUser) => {
+const RegisterPage = () => {
+  const [profilePicture, setProfilePicture] = useState({});
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -61,7 +64,7 @@ const RegisterPage = (thisUser, onEditUser) => {
     event.preventDefault();
     try {
       const response = await authService.register(
-        form.profilePicture,
+        profilePicture,
         form.name,
         form.email,
         form.username,
@@ -167,9 +170,8 @@ const RegisterPage = (thisUser, onEditUser) => {
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={11} mt={2}>
-                    <ProfileHolder
-                      thisUser={thisUser}
-                      onEditUser={onEditUser}
+                    <ProfileHolderRegister
+                      setProfilePicture={setProfilePicture}
                     />
                   </Grid>
                   <Grid item xs={12}>

@@ -21,17 +21,9 @@ import Joi from "joi";
 import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 
-const ProfileHolder = ({ thisUser, onEditUser }) => {
+const ProfileHolderRegister = ({ setProfilePicture }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const openMenu = Boolean(anchorEl);
   const navigate = useNavigate();
-  const handleClickMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -60,10 +52,8 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newdata = { ...thisUser, profilePicture: form.profilePicture };
-    onEditUser(newdata);
+    setProfilePicture(form.profilePicture);
     setOpen(false);
-    form.profilePicture = "";
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -98,10 +88,10 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
       </div>
       <div className="layer2">
         {" "}
-        {thisUser.profilePicture && thisUser.profilePicture !== "" ? (
+        {form.profilePicture !== "" ? (
           <Avatar
             type="button"
-            onClick={handleClickMenu}
+            onClick={handleClick}
             sx={{
               height: "85px",
               width: "85px",
@@ -115,7 +105,7 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
             {" "}
             <img
               className="profile-picture-card"
-              src={thisUser.profilePicture}
+              src={form.profilePicture}
             />{" "}
           </Avatar>
         ) : (
@@ -187,55 +177,9 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
             </Button>
           </DialogActions>
         </Dialog>
-        <Menu
-          anchorEl={anchorEl}
-          id="account-menu"
-          open={openMenu}
-          onClose={handleCloseMenu}
-          onClick={handleCloseMenu}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              ml: 1.5,
-              "& .MuiAvatar-root": {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              "&:before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 45,
-                left: -5,
-                width: 10,
-                height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0,
-              },
-            },
-          }}
-          anchorOrigin={{
-            vertical: "center",
-            horizontal: "right",
-          }}
-          transformOrigin={{
-            vertical: "center",
-            horizontal: "left",
-          }}
-        >
-          <MenuItem onClick={handleClick}>Change Profile Picture</MenuItem>
-          <MenuItem onClick={() => navigate(`/profiles/${thisUser.username}`)}>
-            Visit Profile
-          </MenuItem>
-        </Menu>
       </div>
     </div>
   );
 };
 
-export default ProfileHolder;
+export default ProfileHolderRegister;

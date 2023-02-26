@@ -33,7 +33,7 @@ const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
 
   const handleCancel = () => {
     setOpen(false);
-    // form.coverPicture = "";
+    form.coverPicture = "";
   };
 
   const [form, setForm] = useState({
