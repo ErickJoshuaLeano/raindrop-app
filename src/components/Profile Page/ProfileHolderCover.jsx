@@ -100,13 +100,16 @@ const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
           />
         ) : (
           <div
+            className="profile-picture-card-cover"
             style={{
               fontFamily: "Raleway, Arial, Helvetica, sans-serif",
               fontWeight: "100",
               textAlign: "center",
             }}
           >
-            Upload Photo
+            {otherUser.username === thisUser.username
+              ? "Add Photo"
+              : "No Profile Photo"}
           </div>
         )}
         {otherUser.username === thisUser.username ? (

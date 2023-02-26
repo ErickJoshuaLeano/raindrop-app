@@ -1,4 +1,4 @@
-import { Grid, Avatar, Divider } from "@mui/material";
+import { Grid, Avatar, Divider, Fade } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/system";
 import { useNavigate, useParams } from "react-router-dom";
@@ -311,40 +311,42 @@ const PostDetails = ({ onAddLikePost }) => {
                 display: { xs: "none", sm: "table-cell" },
               }}
             >
-              <Card
-                xs={12}
-                sx={{
-                  borderRadius: "40px",
-                  backgroundColor: "#27abb9",
-                  boxShadow: "none",
-                  margin: "0.5vw",
-                  marginBlock: "1vw",
-                }}
-              >
-                {" "}
-                <Link
-                  style={{ color: "inherit", textDecoration: "inherit" }}
-                  to={"/home"}
+              <Fade in timeout={1000} style={{ transitionDelay: "600ms" }}>
+                <Card
+                  xs={12}
+                  sx={{
+                    borderRadius: "40px",
+                    backgroundColor: "#27abb9",
+                    boxShadow: "none",
+                    margin: "0.5vw",
+                    marginBlock: "1vw",
+                  }}
                 >
-                  <Button
-                    variant="contained"
-                    disableElevation
-                    sx={{
-                      width: "94.5%",
-                      borderRadius: "1000px",
-                      margin: "7px",
-                      backgroundColor: "#1b8b97",
-                      fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                      fontWeight: "700",
-                      padding: "5px",
-                      "&:hover": { backgroundColor: "#074147" },
-                    }}
+                  {" "}
+                  <Link
+                    style={{ color: "inherit", textDecoration: "inherit" }}
+                    to={"/home"}
                   >
-                    <HomeIcon />
-                    Return to Home
-                  </Button>
-                </Link>
-              </Card>
+                    <Button
+                      variant="contained"
+                      disableElevation
+                      sx={{
+                        width: "94.5%",
+                        borderRadius: "1000px",
+                        margin: "7px",
+                        backgroundColor: "#1b8b97",
+                        fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                        fontWeight: "700",
+                        padding: "5px",
+                        "&:hover": { backgroundColor: "#074147" },
+                      }}
+                    >
+                      <HomeIcon />
+                      Return to Home
+                    </Button>
+                  </Link>
+                </Card>
+              </Fade>
               <div>
                 {!isLoading ? (
                   <GalleryCard posts={posts} username={thisUser.username} />

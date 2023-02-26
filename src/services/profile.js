@@ -37,3 +37,7 @@ export function updateProfile(user) {
 export function fetchOtherUser(username) {
   return http.get(`/profiles/${username}`);
 }
+
+export function fetchAllUsers() {
+  return http.get(`/profiles/all`);
+}

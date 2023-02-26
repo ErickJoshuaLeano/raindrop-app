@@ -147,7 +147,7 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
           </Typography>
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => navigate("/profile/edit")}>
           <Avatar />{" "}
           <Typography
             textAlign="center"

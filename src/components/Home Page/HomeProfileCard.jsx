@@ -273,6 +273,7 @@ const HomeProfileCard = ({
                 Liked Posts
               </MenuItem>
               <MenuItem
+                onClick={() => navigate("/profiles/all")}
                 xs={12}
                 sx={{
                   fontFamily: "Raleway, Arial, Helvetica, sans-serif",

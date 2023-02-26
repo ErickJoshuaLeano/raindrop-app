@@ -14,6 +14,8 @@ import { MaterialUISwitch } from "./components/MaterialUISwitch";
 import ProfilePage from "./pages/ProfilePage";
 import DebugPage from "./pages/DebugPage";
 import PostDetails from "./pages/PostDetails";
+import AllProfilesPage from "./pages/AllProfilesPage";
+import EditUserPage from "./pages/EditUserPage";
 
 function App() {
   const navigate = useNavigate();
@@ -178,7 +180,9 @@ function App() {
                 )
               }
             />{" "}
+            <Route path="/profile/edit" element={<EditUserPage />} />
             <Route path="/profiles/:username" element={<ProfilePage />} />
+            <Route path="/profiles/all" element={<AllProfilesPage />} />
             <Route path="/debug" element={<DebugPage />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" />} />

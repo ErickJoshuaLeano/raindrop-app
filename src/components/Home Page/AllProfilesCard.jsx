@@ -1,8 +1,11 @@
 import { Button, Card, Fade, Typography } from "@mui/material";
 import React from "react";
 import GroupIcon from "@mui/icons-material/Group";
+import { useNavigate } from "react-router-dom";
 
 const AllProfilesCard = () => {
+  const navigate = useNavigate();
+
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "800ms" }}>
       <Card
@@ -19,6 +22,7 @@ const AllProfilesCard = () => {
         <Button
           variant="contained"
           disableElevation
+          onClick={() => navigate("/profiles/all")}
           sx={{
             width: "94.5%",
             borderRadius: "1000px",

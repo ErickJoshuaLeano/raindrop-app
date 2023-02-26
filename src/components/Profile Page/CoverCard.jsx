@@ -287,7 +287,9 @@ const CoverCard = ({ otherUser, onEditUser, userLikes, posts, thisUser }) => {
                       justifySelf: "center",
                     }}
                   >
-                    Add Cover Photo
+                    {otherUser.username === thisUser.username
+                      ? "Add Photo"
+                      : "No Cover Photo"}
                   </Typography>
                 </CardMedia>
               )}
