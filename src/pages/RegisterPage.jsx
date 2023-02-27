@@ -1,10 +1,8 @@
 import Joi from "joi";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import ProfileHolder from "../components/Home Page/ProfileHolder";
 import * as authService from "../services/auth";
 import { ToastContainer, toast } from "react-toastify";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -46,13 +44,6 @@ const RegisterPage = () => {
       .required()
       .email({ tlds: { allow: false } }),
     username: Joi.string().min(5).max(15).required(),
-    // password: Joi.string()
-    //   .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
-    //   .required()
-    //   .messages({
-    //     "string.pattern.base": `Password should be between 8 to 20 characters and contain letters, numbers and special character`,
-    //     "string.empty": `Password cannot be empty`,
-    //     "any.required": `Password is required`,
     password: Joi.string()
       .min(8)
       .regex(/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,30}$/)
@@ -72,6 +63,9 @@ const RegisterPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    function timeout(delay) {
+      return new Promise((res) => setTimeout(res, delay));
+    }
 
     try {
       const response = await authService.register(
@@ -82,8 +76,8 @@ const RegisterPage = () => {
         form.password,
         form.confirmPassword
       );
-      alert("Registration successful");
-
+      toast("Registration successful");
+      await timeout(1500);
       navigate("/login");
     } catch (error) {
       if (
@@ -91,7 +85,7 @@ const RegisterPage = () => {
         (error.response && error.response.status === 422) ||
         (error.response && error.response.status === 409)
       ) {
-        alert(error.response.data.message, {
+        toast(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }
@@ -319,7 +313,7 @@ const RegisterPage = () => {
                 <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1}>
-                <Grid item>
+                <Grid item className="alreadyAcc">
                   <Link to="/login" variant="body2">
                     Already have an account?
                   </Link>

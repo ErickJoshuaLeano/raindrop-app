@@ -17,3 +17,7 @@
   opacity: 0.3;
   z-index: -100;
 }
+.createAcc,
+.alreadyAcc {
+  z-index: 100;
+}

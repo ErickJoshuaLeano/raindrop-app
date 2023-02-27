@@ -204,7 +204,7 @@ const LoginPage = ({ onLogin }) => {
                 <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1} mt={1}>
-                <Grid item>
+                <Grid item className="createAcc">
                   <Link to="/register" variant="body2">
                     Create an account?
                   </Link>
