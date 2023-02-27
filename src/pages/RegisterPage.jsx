@@ -1,10 +1,8 @@
 import Joi from "joi";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import ProfileHolder from "../components/Home Page/ProfileHolder";
 import * as authService from "../services/auth";
 import { ToastContainer, toast } from "react-toastify";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -46,7 +44,6 @@ const RegisterPage = () => {
       .required()
       .email({ tlds: { allow: false } }),
     username: Joi.string().min(5).max(15).required(),
-
     password: Joi.string()
       .min(8)
       .regex(/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,30}$/)
