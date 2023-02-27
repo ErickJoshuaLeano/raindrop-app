@@ -37,25 +37,37 @@ const NotFound = () => {
     setLoadingUser(false);
   };
 
-  return (
-    <>
-      <div
-        className="background"
-        style={{ backgroundColor: theme.palette.background.main }}
-      >
-        <NavBar
-          onLogout={handleLogout}
-          thisUser={thisUser}
-          updatePage={updatePage}
-          setUpdatePage={setUpdatePage}
-        />
-      </div>
-      <div class="drop-container">
-        <h1>PAGE NOT FOUND</h1>
-        <div class="drop"></div>
-      </div>
-    </>
-  )
-};
+  if (accessToken == null){
+    return (
+      <>
+        <div class="drop-container">
+          <h1>PAGE NOT FOUND</h1>
+          <div class="drop"></div>
+        </div>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <div
+          className="background"
+          style={{ backgroundColor: theme.palette.background.main }}
+        >
+          <NavBar
+            onLogout={handleLogout}
+            thisUser={thisUser}
+            updatePage={updatePage}
+            setUpdatePage={setUpdatePage}
+          />
+        </div>
+        <div class="drop-container">
+            <h1>PAGE NOT FOUND</h1>
+            <div class="drop"></div>
+        </div>
+      </>
+    )
+  };
+
+}
 
 export default NotFound;
