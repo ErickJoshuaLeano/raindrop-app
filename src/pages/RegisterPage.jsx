@@ -63,6 +63,9 @@ const RegisterPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    function timeout(delay) {
+      return new Promise( res => setTimeout(res, delay) );
+    }
 
     try {
       const response = await authService.register(
@@ -73,8 +76,8 @@ const RegisterPage = () => {
         form.password,
         form.confirmPassword
       );
-      alert("Registration successful");
-
+      toast("Registration successful");
+      await timeout(1500); 
       navigate("/login");
     } catch (error) {
       if (
