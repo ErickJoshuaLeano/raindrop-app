@@ -64,7 +64,7 @@ const RegisterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     function timeout(delay) {
-      return new Promise( res => setTimeout(res, delay) );
+      return new Promise((res) => setTimeout(res, delay));
     }
 
     try {
@@ -77,7 +77,7 @@ const RegisterPage = () => {
         form.confirmPassword
       );
       toast("Registration successful");
-      await timeout(1500); 
+      await timeout(1500);
       navigate("/login");
     } catch (error) {
       if (
@@ -313,7 +313,7 @@ const RegisterPage = () => {
                 <ToastContainer />
               </CardActions>
               <Grid container justifyContent="center" ml={1}>
-                <Grid item>
+                <Grid item className="alreadyAcc">
                   <Link to="/login" variant="body2">
                     Already have an account?
                   </Link>

@@ -42,7 +42,7 @@ const EditComment = ({
   setUpdatePage,
   handleCancelEdit,
 }) => {
-  const [formComment, setFormComment] = useState({
+  const [formcomment, setformcomment] = useState({
     body: comment.body,
   });
 
@@ -55,7 +55,7 @@ const EditComment = ({
   const handleSubmit = () => {
     setOpenEdit(false);
     postsService
-      .updateComment(comment.post.id, formComment, comment.id)
+      .updateComment(comment.post.id, formcomment, comment.id)
       .then((response) => {
         setUpdatePage(true);
       })
@@ -67,8 +67,8 @@ const EditComment = ({
   };
 
   const handleChange = ({ currentTarget: input }) => {
-    setFormComment({
-      ...formComment,
+    setformcomment({
+      ...formcomment,
       [input.name]: input.value,
     });
 
@@ -86,14 +86,14 @@ const EditComment = ({
   };
 
   const isFormInvalid = () => {
-    const result = schema.validate(formComment);
+    const result = schema.validate(formcomment);
 
     return !!result.error;
   };
-
+  console.log(comment.body);
   return (
     <div>
-      <Grid component="formComment" onSubmit={handleSubmit}>
+      <Grid component="formcomment" onSubmit={handleSubmit}>
         <DialogTitle
           sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
         >
@@ -110,7 +110,7 @@ const EditComment = ({
             error={!!errors.body}
             helperText={errors.body}
             onChange={handleChange}
-            value={formComment.body}
+            value={formcomment.body}
             autoFocus
             margin="dense"
             id="name"
