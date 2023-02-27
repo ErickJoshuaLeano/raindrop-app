@@ -91,7 +91,7 @@ const RegisterPage = () => {
         (error.response && error.response.status === 422) ||
         (error.response && error.response.status === 409)
       ) {
-        alert(error.response.data.message, {
+        toast(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }
