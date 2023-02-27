@@ -69,7 +69,7 @@ const CommentModule = ({
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 500) {
-        toast("Not the user post,can't delete", {
+        toast("Comment already deleted", {
           position: toast.POSITION.TOP_CENTER,
         });
       }
@@ -99,7 +99,7 @@ const CommentModule = ({
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast("Not the user post,can't delete", {
+        toast("Like already removed", {
           position: toast.POSITION.TOP_CENTER,
         });
       }

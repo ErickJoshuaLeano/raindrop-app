@@ -46,13 +46,23 @@ const RegisterPage = () => {
       .required()
       .email({ tlds: { allow: false } }),
     username: Joi.string().min(5).max(15).required(),
+    // password: Joi.string()
+    //   .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
+    //   .required()
+    //   .messages({
+    //     "string.pattern.base": `Password should be between 8 to 20 characters and contain letters, numbers and special character`,
+    //     "string.empty": `Password cannot be empty`,
+    //     "any.required": `Password is required`,
     password: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
+      .min(8)
+      .regex(/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,30}$/)
       .required()
+      .label("Password")
       .messages({
-        "string.pattern.base": `Password should be between 8 to 20 characters and contain letters, numbers and special character`,
         "string.empty": `Password cannot be empty`,
-        "any.required": `Password is required`,
+        "string.min": "Password should be between 8 to 20 characters",
+        "object.regex": "Must have at least 8 characters",
+        "string.pattern.base": `Password should be between 8 to 20 characters and contain an uppercase and lowercase letter, numbers and special character`,
       }),
     confirmPassword: Joi.string().required().valid(form.password).messages({
       "any.only": "The two passwords do not match",
