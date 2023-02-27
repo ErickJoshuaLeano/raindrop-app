@@ -32,7 +32,7 @@ const CommentModule = ({
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [comments, setComments] = useState([]);
-
+  const [commentToEdit, setCommentToEdit] = useState([]);
   const ColorButton = styled(Button)(({ theme }) => ({
     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
     fontSize: "16px",
@@ -41,8 +41,10 @@ const CommentModule = ({
 
   const [openEdit, setOpenEdit] = React.useState(false);
 
-  const handleClickOpenEdit = () => {
+  const handleClickOpenEdit = (comment) => {
+    console.log(comment.body);
     setOpenEdit(true);
+    setCommentToEdit(comment);
   };
 
   const handleCloseEdit = () => {
@@ -145,7 +147,9 @@ const CommentModule = ({
                     </div>
                     {comment.userId === currentUser.id && (
                       <div className="delete-post">
-                        <IconButton onClick={handleClickOpenEdit}>
+                        <IconButton
+                          onClick={() => handleClickOpenEdit(comment)}
+                        >
                           <EditIcon sx={{ height: "20px", width: "20px" }} />
                         </IconButton>
                       </div>
@@ -198,16 +202,16 @@ const CommentModule = ({
                   <ToastContainer />
                 </Grid>
               </Grid>
-              <Dialog open={openEdit} onClose={handleCloseEdit}>
-                <EditComment
-                  comment={comment}
-                  setOpenEdit={setOpenEdit}
-                  setUpdatePage={setUpdatePage}
-                  handleCancelEdit={handleCancelEdit}
-                />
-              </Dialog>
             </Grid>
           ))}
+          <Dialog open={openEdit} onClose={handleCloseEdit}>
+            <EditComment
+              comment={commentToEdit}
+              setOpenEdit={setOpenEdit}
+              setUpdatePage={setUpdatePage}
+              handleCancelEdit={handleCancelEdit}
+            />
+          </Dialog>
         </div>
       ) : (
         <div className="comment-content">No Comments yet</div>
