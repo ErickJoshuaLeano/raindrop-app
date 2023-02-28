@@ -272,6 +272,8 @@ const ProfilePage = () => {
                     onEditUser={handleEditUser}
                     userLikes={userLikes}
                     thisUser={thisUser}
+                    isLoadingUser={isLoadingUser}
+                    setLoadingUser={setLoadingUser}
                   />
                 </Grid>
               </Grid>

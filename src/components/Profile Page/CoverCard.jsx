@@ -32,10 +32,14 @@ const CoverCard = ({
   userLikes,
   posts,
   thisUser,
+
   setFollowing,
   following,
   onAddFollower,
   onDeleteFollowing,
+  isLoadingUser,
+  setLoadingUser,
+
 }) => {
   const theme = useTheme();
   const [form, setForm] = useState({
@@ -54,6 +58,7 @@ const CoverCard = ({
     const newdata = { ...otherUser, coverPicture: form.coverPicture };
     onEditUser(newdata);
     setOpen(false);
+    setLoadingUser(true);
     form.coverPicture = "";
   };
 
@@ -96,6 +101,16 @@ const CoverCard = ({
     setOpen(false);
     form.coverPicture = "";
   };
+
+  if (isLoadingUser) {
+    return (
+      <div class="loader3">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+      </div>
+    );
+  }
 
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "000ms" }}>
@@ -218,6 +233,8 @@ const CoverCard = ({
                 thisUser={thisUser}
                 onEditUser={onEditUser}
                 otherUser={otherUser}
+                isLoadingUser={isLoadingUser}
+                setLoadingUser={setLoadingUser}
               />
               {otherUser.coverPicture && otherUser.coverPicture !== "" ? (
                 <CardMedia
