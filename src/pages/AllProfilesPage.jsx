@@ -51,7 +51,7 @@ const AllProfilesPage = () => {
       setLoading(false);
       setUpdatePage(false);
     });
-  }, [users]);
+  }, [updatePage]);
 
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {

@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Button, Card, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import GalleryCard from "../components/Home Page/GalleryCard";
@@ -10,6 +10,7 @@ import * as profilesService from "../services/profile";
 import Posts from "./Posts";
 import "./ProfilePage.css";
 import * as likesService from "../services/likes";
+import * as followingService from "../services/following";
 import CalendarWidget from "../components/Home Page/CalendarWidget";
 import WeatherWidget from "../components/Home Page/WeatherWidget";
 import NewsWidget from "../components/Home Page/NewsWidget";
@@ -17,6 +18,8 @@ import CoverCard from "../components/Profile Page/CoverCard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "@mui/material/styles";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 
 const ProfilePage = () => {
   const theme = useTheme();
@@ -24,7 +27,7 @@ const ProfilePage = () => {
   const currentUser = authService.getCurrentUser();
 
   const [thisUser, setThisUser] = useState([]);
-
+  const [following, setFollowing] = useState([]);
   const [otherUser, setOtherUser] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
@@ -58,6 +61,35 @@ const ProfilePage = () => {
       });
   };
 
+  const handleAddFollower = (userId) => {
+    followingService
+      .addFollowing(userId)
+      .then((response) => {
+        // console.log(response);
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      });
+  };
+
+  const handleDeleteFollowing = async (id) => {
+    try {
+      await followingService.deleteFollowing(id);
+      setUpdatePage(true);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast("Like has already been removed", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
+  };
+
   useEffect(() => {
     profilesService.fetchOtherUser().then((response) => {
       setThisUser(response.data);
@@ -65,6 +97,14 @@ const ProfilePage = () => {
       setUpdatePage(false);
     });
   }, [updatePage]);
+
+  useEffect(() => {
+    followingService.getFollowing().then((response) => {
+      setFollowing(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage, thisUser, otherUser]);
 
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
@@ -188,6 +228,12 @@ const ProfilePage = () => {
       });
   };
 
+  const handleRemoveFollowing = (otherUser) => {
+    handleDeleteFollowing(
+      following.find((following) => following.followingId === otherUser.id).id
+    );
+  };
+
   if (isLoadingUser || isLoading) {
     return (
       <div class="loader3">
@@ -217,6 +263,10 @@ const ProfilePage = () => {
               <Grid item xs={12}>
                 <Grid item xs={12}>
                   <CoverCard
+                    onDeleteFollowing={handleDeleteFollowing}
+                    onAddFollower={handleAddFollower}
+                    setFollowing={setFollowing}
+                    following={following}
                     posts={posts}
                     otherUser={otherUser}
                     onEditUser={handleEditUser}
@@ -245,17 +295,78 @@ const ProfilePage = () => {
                 sm={12}
                 lg={9}
                 xl={9.7}
-                sx={{
-                  height: "130vh",
-                  maxHeight: "130vh",
-                }}
               >
                 {thisUser.username === params.username ? (
                   <Grid item={true} xs={12}>
                     <Posts onSubmit={handleSubmit} thisUser={thisUser} />
                   </Grid>
+                ) : following.find(
+                    (following) => following.followingId === otherUser.id
+                  ) ? (
+                  <Grid item={true} xs={12}>
+                    <Card
+                      xs={12}
+                      sx={{
+                        borderRadius: "40px",
+                        backgroundColor: "#27abb9",
+                        boxShadow: "none",
+                        margin: "0.5vw",
+                        marginBlock: "1vw",
+                      }}
+                    >
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        onClick={() => handleRemoveFollowing(otherUser)}
+                        sx={{
+                          width: "98%",
+                          borderRadius: "1000px",
+                          margin: "7px",
+                          backgroundColor: "#1b8b97",
+                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                          fontWeight: "700",
+                          padding: "5px",
+                          "&:hover": { backgroundColor: "#074147" },
+                        }}
+                      >
+                        <PersonRemoveIcon />
+                        <div style={{ width: "15px" }}></div>
+                        Unfollow
+                      </Button>
+                    </Card>
+                  </Grid>
                 ) : (
-                  <div style={{ height: "0px" }}></div>
+                  <Grid item={true} xs={12} sx={{}}>
+                    <Card
+                      xs={12}
+                      sx={{
+                        borderRadius: "40px",
+                        backgroundColor: "#27abb9",
+                        boxShadow: "none",
+                        margin: "0.5vw",
+                        marginBlock: "1vw",
+                      }}
+                    >
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        onClick={() => handleAddFollower(otherUser.id)}
+                        sx={{
+                          width: "98%",
+                          borderRadius: "1000px",
+                          margin: "7px",
+                          backgroundColor: "#1b8b97",
+                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                          fontWeight: "700",
+                          padding: "5px",
+                          "&:hover": { backgroundColor: "#074147" },
+                        }}
+                      >
+                        <PersonAddIcon />
+                        <div style={{ width: "15px" }}></div> Follow
+                      </Button>
+                    </Card>
+                  </Grid>
                 )}
 
                 <Grid item xs={12}>

@@ -24,6 +24,7 @@ import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import { useNavigate } from "react-router-dom";
 import "./CoverCard.css";
 import ProfileHolderCover from "./ProfileHolderCover";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const CoverCard = ({
   otherUser,
@@ -31,8 +32,14 @@ const CoverCard = ({
   userLikes,
   posts,
   thisUser,
+
+  setFollowing,
+  following,
+  onAddFollower,
+  onDeleteFollowing,
   isLoadingUser,
   setLoadingUser,
+
 }) => {
   const theme = useTheme();
   const [form, setForm] = useState({

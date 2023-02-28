@@ -27,19 +27,38 @@ import NewsWidget from "../components/Home Page/NewsWidget";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "@mui/material/styles";
+import * as followingService from "../services/following";
 
 const HomePages = () => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
   const navigate = useNavigate();
+
+  console.log(following);
+  if (following.length === 0) {
+    followingService
+      .addFollowing(currentUser.id)
+      .then((response) => {
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      });
+  }
 
   const handleLogout = () => {
     authService.logout();
@@ -67,6 +86,14 @@ const HomePages = () => {
   };
 
   useEffect(() => {
+    followingService.getFollowing().then((response) => {
+      setFollowing(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage, thisUser]);
+
+  useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
       setLoadingUser(false);
@@ -81,6 +108,18 @@ const HomePages = () => {
       setUpdatePage(false);
     });
   }, [updatePage]);
+
+  useEffect(() => {
+    setFilteredPosts(
+      posts.filter((posts) => {
+        for (let i = 0; i < following.length; i++) {
+          if (posts.user.id === following[i].followingId) {
+            return true;
+          }
+        }
+      })
+    );
+  }, [posts, updatePage, thisUser]);
 
   useEffect(() => {
     profilesService
@@ -259,13 +298,13 @@ const HomePages = () => {
                 posts={posts}
               /> */}
               <RaindropCards
-                posts={posts}
+                posts={filteredPosts}
                 updatePage={updatePage}
                 setUpdatePage={setUpdatePage}
               />
               <PostCardGrid
                 currentUser={currentUser}
-                posts={posts}
+                posts={filteredPosts}
                 isLoading={isLoading}
                 onDeletePost={handleDeletePost}
                 onAddLikePost={handleAddLikePost}
@@ -294,9 +333,9 @@ const HomePages = () => {
                 display: { xs: "none", sm: "table-cell" },
               }}
             >
-              <LatestCard posts={posts} />
+              <LatestCard posts={filteredPosts} />
               <AllProfilesCard />
-              <AllPhotoGalleryCard posts={posts} />
+              <AllPhotoGalleryCard posts={filteredPosts} />
             </Grid>
             <Grid
               item={true}

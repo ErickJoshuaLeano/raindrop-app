@@ -48,7 +48,7 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
             aria-expanded={open ? "true" : undefined}
           >
             <div>
-              {thisUser.profilePicture ? (
+              {currentUser.profilePicture ? (
                 <>
                   <Avatar
                     sx={{
@@ -63,7 +63,7 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
                   >
                     <img
                       className="profile-picture3"
-                      src={thisUser.profilePicture}
+                      src={currentUser.profilePicture}
                       style={{ width: "50px" }}
                     />
                   </Avatar>
