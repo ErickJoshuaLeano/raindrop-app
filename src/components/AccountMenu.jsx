@@ -1,4 +1,6 @@
 import * as React from "react";
+import * as authService from "../services/auth";
+import * as profilesService from "../services/profile";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -13,10 +15,24 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function AccountMenu({ currentUser, thisUser, onLogout }) {
+export default function AccountMenu({
+  onLogout,
+  updatePicture,
+  setUpdatePicture,
+}) {
+  const currentUser = authService.getCurrentUser();
+  const [thisUser, setThisUser] = React.useState([]);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  React.useEffect(() => {
+    profilesService.fetchCurrentUser().then((response) => {
+      setThisUser(response.data);
+      setUpdatePicture(false);
+    });
+  }, [updatePicture]);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -24,7 +40,7 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
     setAnchorEl(null);
   };
   const navigateAway = () => {
-    navigate(`/profiles/${thisUser.username}`);
+    navigate(`/profiles/${currentUser.username}`);
     window.location.reload(false);
   };
   return (
@@ -63,7 +79,7 @@ export default function AccountMenu({ currentUser, thisUser, onLogout }) {
                   >
                     <img
                       className="profile-picture3"
-                      src={currentUser.profilePicture}
+                      src={thisUser.profilePicture}
                       style={{ width: "50px" }}
                     />
                   </Avatar>

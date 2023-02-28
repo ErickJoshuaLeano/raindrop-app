@@ -25,8 +25,7 @@ const ProfileHolderCover = ({
   otherUser,
   onEditUser,
   thisUser,
-  isLoadingUser,
-  setLoadingUser,
+  currentUser,
 }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -59,7 +58,6 @@ const ProfileHolderCover = ({
     const newdata = { ...otherUser, profilePicture: form.profilePicture };
     onEditUser(newdata);
     setOpen(false);
-    setLoadingUser(true);
     form.profilePicture = "";
   };
 
@@ -87,16 +85,6 @@ const ProfileHolderCover = ({
 
     return !!result.error;
   };
-
-  if (isLoadingUser) {
-    return (
-      <div class="loader3">
-        <div class="inner one"></div>
-        <div class="inner two"></div>
-        <div class="inner three"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="profile-holder-cover">
@@ -129,7 +117,7 @@ const ProfileHolderCover = ({
               : "No Profile Photo"}
           </div>
         )}
-        {otherUser.username === thisUser.username ? (
+        {otherUser.username === currentUser.username ? (
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle
               sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}

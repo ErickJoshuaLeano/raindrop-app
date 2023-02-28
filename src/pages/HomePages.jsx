@@ -33,6 +33,7 @@ const HomePages = () => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
+  const [updatePicture, setUpdatePicture] = useState(false);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -44,7 +45,6 @@ const HomePages = () => {
   const [updatePage, setUpdatePage] = useState(false);
   const navigate = useNavigate();
 
-  console.log(following);
   if (following.length === 0) {
     followingService
       .addFollowing(currentUser.id)
@@ -170,21 +170,6 @@ const HomePages = () => {
       });
   };
 
-  const handleUpdateChanged = (id) => {
-    const post = posts.find((post) => post.id === id);
-    postsService.updatePost(id, post);
-    setPosts(
-      posts.map((post) => {
-        if (post.id === id) {
-          return {
-            ...post,
-          };
-        }
-        return post;
-      })
-    );
-  };
-
   const handleDeleteLike = async (id) => {
     try {
       await likesService.deleteLike(id);
@@ -252,6 +237,8 @@ const HomePages = () => {
           updatePage={updatePage}
           setUpdatePage={setUpdatePage}
           theme={theme}
+          updatePicture={updatePicture}
+          setUpdatePicture={setUpdatePicture}
         />
         <div className="grid-container">
           <Grid
@@ -281,6 +268,7 @@ const HomePages = () => {
                 myLikes={myLikes}
                 isLoading={isLoading}
                 onEditUser={handleEditUser}
+                setUpdatePicture={setUpdatePicture}
               />
               <div>
                 {!isLoading ? (
@@ -292,11 +280,6 @@ const HomePages = () => {
             </Grid>
             <Grid className="column" item={true} xs={12} sm={8} lg={6} xl={6}>
               <Posts onSubmit={handleSubmit} thisUser={thisUser} />
-              {/* <PostDetails
-                onDeletePost={handleDeletePost}
-                onUpdateChanged={handleUpdateChanged}
-                posts={posts}
-              /> */}
               <RaindropCards
                 posts={filteredPosts}
                 updatePage={updatePage}

@@ -22,7 +22,7 @@ import Joi from "joi";
 import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 
-const ProfileHolder = ({ thisUser, onEditUser }) => {
+const ProfileHolder = ({ thisUser, onEditUser, setUpdatePicture }) => {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -65,6 +65,7 @@ const ProfileHolder = ({ thisUser, onEditUser }) => {
     const newdata = { ...thisUser, profilePicture: form.profilePicture };
     onEditUser(newdata);
     setOpen(false);
+    setUpdatePicture(true);
     form.profilePicture = "";
   };
 

@@ -17,7 +17,14 @@ import AccountMenu from "./AccountMenu";
 import SearchBar from "./SearchBar";
 import logo from "./logo.png";
 
-const NavBar = ({ onLogout, thisUser, updatePage, setUpdatePage }) => {
+const NavBar = ({
+  onLogout,
+  thisUser,
+  updatePage,
+  setUpdatePage,
+  updatePicture,
+  setUpdatePicture,
+}) => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
 
@@ -99,6 +106,8 @@ const NavBar = ({ onLogout, thisUser, updatePage, setUpdatePage }) => {
               currentUser={currentUser}
               thisUser={thisUser}
               onLogout={onLogout}
+              updatePicture={updatePicture}
+              setUpdatePicture={setUpdatePicture}
             />
           </Grid>
           <Grid item xs={1}></Grid>

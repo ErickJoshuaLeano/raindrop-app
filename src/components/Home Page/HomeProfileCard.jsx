@@ -37,6 +37,7 @@ const HomeProfileCard = ({
   myLikes,
   isLoading,
   onEditUser,
+  setUpdatePicture,
 }) => {
   const theme = useTheme();
   const [isMounted, setIsMounted] = useState(false);
@@ -204,7 +205,11 @@ const HomeProfileCard = ({
               </CardMedia>
             )}
           </div>
-          <ProfileHolder thisUser={thisUser} onEditUser={onEditUser} />
+          <ProfileHolder
+            thisUser={thisUser}
+            onEditUser={onEditUser}
+            setUpdatePicture={setUpdatePicture}
+          />
           <Divider variant="middle" sx={{ color: "white" }} />
           <CardContent>
             <Grid

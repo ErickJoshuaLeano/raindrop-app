@@ -42,7 +42,7 @@ const CommentModule = ({
   const [openEdit, setOpenEdit] = React.useState(false);
 
   const handleClickOpenEdit = (comment) => {
-    console.log(comment.body);
+    // console.log(comment.body);
     setOpenEdit(true);
     setCommentToEdit(comment);
   };

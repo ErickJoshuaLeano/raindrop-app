@@ -15,6 +15,8 @@ import "./HomePages.css";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import HomeIcon from "@mui/icons-material/Home";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const PostDetails = ({ onAddLikePost }) => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
@@ -47,7 +49,7 @@ const PostDetails = ({ onAddLikePost }) => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -94,7 +96,7 @@ const PostDetails = ({ onAddLikePost }) => {
     postsService
       .addPost(post)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -108,7 +110,7 @@ const PostDetails = ({ onAddLikePost }) => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -148,18 +150,18 @@ const PostDetails = ({ onAddLikePost }) => {
     }
   };
 
-  const handleDeletePost = async (id) => {
-    const postsClone = [...posts];
-
+  const handleDeletePost = async () => {
     try {
-      setPosts(posts.filter((post) => post.userId !== id));
-      await postsService.deletePost(id);
+      await postsService.deletePost(params.postId);
       setUpdatePage(true);
+      navigate("/home");
+      toast("Post deleted", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("Post has already been deleted");
       }
-      setPosts(postsClone);
     }
   };
 

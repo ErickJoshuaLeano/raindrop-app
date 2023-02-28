@@ -27,6 +27,7 @@ const ProfilePage = () => {
   const currentUser = authService.getCurrentUser();
 
   const [thisUser, setThisUser] = useState([]);
+  const [updatePicture, setUpdatePicture] = useState(false);
   const [following, setFollowing] = useState([]);
   const [otherUser, setOtherUser] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
@@ -91,20 +92,12 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    profilesService.fetchOtherUser().then((response) => {
-      setThisUser(response.data);
-      setLoadingUser(false);
-      setUpdatePage(false);
-    });
-  }, [updatePage]);
-
-  useEffect(() => {
     followingService.getFollowing().then((response) => {
       setFollowing(response.data);
       setLoadingUser(false);
       setUpdatePage(false);
     });
-  }, [updatePage, thisUser, otherUser]);
+  }, [updatePage]);
 
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
@@ -140,7 +133,6 @@ const ProfilePage = () => {
     postsService
       .addPost(post)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -256,6 +248,8 @@ const ProfilePage = () => {
           updatePage={updatePage}
           setUpdatePage={setUpdatePage}
           theme={theme}
+          updatePicture={updatePicture}
+          setUpdatePicture={setUpdatePicture}
         />
         <div className="grid-container">
           <Grid className="profilegrid" container xs={12} sm={11} md={10.5}>
@@ -274,6 +268,7 @@ const ProfilePage = () => {
                     thisUser={thisUser}
                     isLoadingUser={isLoadingUser}
                     setLoadingUser={setLoadingUser}
+                    currentUser={currentUser}
                   />
                 </Grid>
               </Grid>
@@ -296,7 +291,7 @@ const ProfilePage = () => {
                 lg={9}
                 xl={9.7}
               >
-                {thisUser.username === params.username ? (
+                {currentUser.username === params.username ? (
                   <Grid item={true} xs={12}>
                     <Posts onSubmit={handleSubmit} thisUser={thisUser} />
                   </Grid>

@@ -32,14 +32,9 @@ const CoverCard = ({
   userLikes,
   posts,
   thisUser,
-
-  setFollowing,
-  following,
-  onAddFollower,
-  onDeleteFollowing,
+  currentUser,
   isLoadingUser,
   setLoadingUser,
-
 }) => {
   const theme = useTheme();
   const [form, setForm] = useState({
@@ -235,6 +230,7 @@ const CoverCard = ({
                 otherUser={otherUser}
                 isLoadingUser={isLoadingUser}
                 setLoadingUser={setLoadingUser}
+                currentUser={currentUser}
               />
               {otherUser.coverPicture && otherUser.coverPicture !== "" ? (
                 <CardMedia
@@ -324,7 +320,7 @@ const CoverCard = ({
             </div>
           </Grid>
         </Grid>
-        {thisUser.username === otherUser.username ? (
+        {currentUser.username === otherUser.username ? (
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle
               sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}

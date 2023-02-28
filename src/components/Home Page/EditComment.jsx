@@ -90,7 +90,7 @@ const EditComment = ({
 
     return !!result.error;
   };
-  console.log(comment.body);
+  // console.log(comment.body);
   return (
     <div>
       <Grid component="formcomment" onSubmit={handleSubmit}>

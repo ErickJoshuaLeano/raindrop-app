@@ -47,8 +47,16 @@ const PostCardDetails = ({
   updatePage,
   setUpdatePage,
 }) => {
+  const [comments, setComments] = useState([]);
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
+
+  React.useEffect(() => {
+    postsService.fetchCommentsByPost(post.id).then((response) => {
+      setComments(response.data);
+      setUpdatePage(false);
+    });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -329,13 +337,7 @@ const PostCardDetails = ({
                   </div>
                 </Grid>
                 <Grid item xs={6} justifyContent="flex-end" display="flex">
-                  <div className="edit-post">
-                    <Link to={`/postdetails/${post.id}`}>
-                      <IconButton>
-                        <RemoveRedEyeIcon />
-                      </IconButton>
-                    </Link>
-                  </div>
+                  <div className="edit-post"></div>
                   {post.userId === currentUser.id && (
                     <div className="edit-post">
                       <IconButton onClick={handleClickOpenEdit}>
@@ -441,7 +443,16 @@ const PostCardDetails = ({
                       sx={{ width: "150px" }}
                       onClick={toggleOpenComments}
                     >
-                      Comment
+                      {comments.length === 0 ? (
+                        <div>Comment</div>
+                      ) : (
+                        <div style={{ display: "flex" }}>
+                          Comments<div style={{ width: "3px" }}></div>
+                          <div style={{ display: "flex", fontFamily: "Arial" }}>
+                            &#x28;{comments.length}&#x29;
+                          </div>
+                        </div>
+                      )}
                     </ColorButton>
                   </div>
                 </Grid>
