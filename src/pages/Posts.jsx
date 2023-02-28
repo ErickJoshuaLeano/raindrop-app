@@ -158,8 +158,8 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
                 />
               </Avatar>
             </div>
-            <div className="layer5">{currentUser.name}</div>
-            <div className="layer6">@ {currentUser.username}</div>
+            <div className="layer5">{thisUser.name}</div>
+            <div className="layer6">@ {thisUser.username}</div>
           </div>
           <CardContent xs={12}>
             <Grid container>

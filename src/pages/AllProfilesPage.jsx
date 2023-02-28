@@ -166,7 +166,7 @@ const AllProfilesPage = () => {
                 >
                   {users.map((user) => (
                     <Grid xs={12} display="flex" alignItems="center">
-                      <Grid item xs={9}>
+                      <Grid item xs={10}>
                         <ListItem
                           alignItems="flex-start"
                           type="button"
@@ -222,7 +222,7 @@ const AllProfilesPage = () => {
                           />
                         </ListItem>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={2}>
                         {following.find(
                           (following) => following.followingId === user.id
                         ) ? (
@@ -233,7 +233,6 @@ const AllProfilesPage = () => {
                               variant="contained"
                               onClick={() => handleRemoveFollowing(user)}
                               sx={{
-                                width: "12vw",
                                 borderRadius: "1000px",
                                 margin: "7px",
                                 backgroundColor: "#1b8b97",
@@ -245,7 +244,6 @@ const AllProfilesPage = () => {
                               }}
                             >
                               <PersonRemoveIcon />
-                              <div style={{ width: "15px" }}></div>
                             </Button>
                           </Grid>
                         ) : (
@@ -255,10 +253,9 @@ const AllProfilesPage = () => {
                               variant="contained"
                               onClick={() => handleAddFollower(user.id)}
                               sx={{
-                                width: "12vw",
                                 borderRadius: "1000px",
                                 margin: "7px",
-                                backgroundColor: "#1b8b97",
+                                backgroundColor: "grey",
                                 fontFamily:
                                   "Raleway, Arial, Helvetica, sans-serif",
                                 fontWeight: "700",
@@ -267,7 +264,6 @@ const AllProfilesPage = () => {
                               }}
                             >
                               <PersonAddAlt1Icon />
-                              <div style={{ width: "15px" }}></div>
                             </Button>
                           </Grid>
                         )}

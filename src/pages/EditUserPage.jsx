@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import HomeIcon from "@mui/icons-material/Home";
 import Joi from "joi";
+import EditUserForm from "../components/EditUserForm";
 
 const EditUserPage = () => {
   const theme = useTheme();
@@ -22,86 +23,6 @@ const EditUserPage = () => {
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
   const navigate = useNavigate();
-
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const schema = Joi.object({
-    name: Joi.string().max(50).required(),
-    email: Joi.string()
-      .required()
-      .email({ tlds: { allow: false } }),
-    username: Joi.string().min(5).max(15).required(),
-    password: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9!@#$%&*]{8,20}$"))
-      .required()
-      .messages({
-        "string.pattern.base": `Password should be between 8 to 20 characters and contain letters, numbers and special character`,
-        "string.empty": `Password cannot be empty`,
-        "any.required": `Password is required`,
-      }),
-    confirmPassword: Joi.string().required().valid(form.password).messages({
-      "any.only": "The two passwords do not match",
-      "any.required": "Please re-enter the password",
-    }),
-  });
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await authService.register(
-        form.name,
-        form.email,
-        form.username
-      );
-      alert("Registration successful");
-
-      navigate("/login");
-    } catch (error) {
-      if (
-        (error.response && error.response.status === 403) ||
-        (error.response && error.response.status === 422) ||
-        (error.response && error.response.status === 409)
-      ) {
-        alert(error.response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
-    }
-  };
-
-  const handleChange = ({ currentTarget: input }) => {
-    setForm({
-      ...form,
-      [input.name]: input.value,
-    });
-
-    const { error } = schema
-      .extract(input.name)
-      .label(input.name)
-      .validate(input.value);
-
-    if (error) {
-      setErrors({ ...errors, [input.name]: error.details[0].message });
-    } else {
-      delete errors[input.name];
-      setErrors(errors);
-    }
-  };
-
-  const isFormInvalid = () => {
-    const result = schema.validate(form);
-
-    return !!result.error;
-  };
 
   const handleLogout = () => {
     authService.logout();
@@ -178,7 +99,9 @@ const EditUserPage = () => {
                 lg={6}
                 xl={6}
                 sx={{ justifyItems: "center" }}
-              ></Grid>
+              >
+                <EditUserForm thisUser={thisUser} />
+              </Grid>
               <Grid
                 className="column"
                 item={true}

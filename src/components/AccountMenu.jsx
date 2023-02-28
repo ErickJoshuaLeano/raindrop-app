@@ -80,7 +80,7 @@ export default function AccountMenu({
                     <img
                       className="profile-picture3"
                       src={thisUser.profilePicture}
-                      style={{ width: "50px" }}
+                      style={{ width: "34px" }}
                     />
                   </Avatar>
                 </>

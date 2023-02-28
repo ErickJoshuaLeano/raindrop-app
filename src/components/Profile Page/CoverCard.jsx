@@ -35,6 +35,7 @@ const CoverCard = ({
   currentUser,
   isLoadingUser,
   setLoadingUser,
+  setUpdatePicture,
 }) => {
   const theme = useTheme();
   const [form, setForm] = useState({
@@ -231,6 +232,7 @@ const CoverCard = ({
                 isLoadingUser={isLoadingUser}
                 setLoadingUser={setLoadingUser}
                 currentUser={currentUser}
+                setUpdatePicture={setUpdatePicture}
               />
               {otherUser.coverPicture && otherUser.coverPicture !== "" ? (
                 <CardMedia

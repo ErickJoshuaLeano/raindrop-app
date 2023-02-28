@@ -269,6 +269,7 @@ const ProfilePage = () => {
                     isLoadingUser={isLoadingUser}
                     setLoadingUser={setLoadingUser}
                     currentUser={currentUser}
+                    setUpdatePicture={setUpdatePicture}
                   />
                 </Grid>
               </Grid>

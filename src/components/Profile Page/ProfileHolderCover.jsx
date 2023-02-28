@@ -26,6 +26,7 @@ const ProfileHolderCover = ({
   onEditUser,
   thisUser,
   currentUser,
+  setUpdatePicture,
 }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -58,6 +59,7 @@ const ProfileHolderCover = ({
     const newdata = { ...otherUser, profilePicture: form.profilePicture };
     onEditUser(newdata);
     setOpen(false);
+    setUpdatePicture(true);
     form.profilePicture = "";
   };
 

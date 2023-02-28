@@ -15,9 +15,24 @@ import {
 } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Iframe from "react-iframe";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const NewsWidget = () => {
   const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "850ms" }}>
       <Card
@@ -32,17 +47,37 @@ const NewsWidget = () => {
       >
         <CardContent sx={{ display: "flex", alignItems: "center" }}>
           <Grid container display="grid" alignContent="center">
-            <Grid item xs={12}>
-              <a href="https://www.cnnphilippines.com/" target="_blank">
-                <IconButton>
-                  <NewspaperIcon
-                    sx={{ fontSize: "75px", color: theme.palette.card.main }}
-                  />
-                </IconButton>
-              </a>
+            <Grid item xs={12} onClick={handleClickOpen}>
+              <IconButton>
+                <NewspaperIcon
+                  sx={{ fontSize: "4vw", color: theme.palette.card.main }}
+                />
+              </IconButton>
             </Grid>
           </Grid>
         </CardContent>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <Grid>
+            {" "}
+            <IconButton onClick={handleClose}>
+              <HighlightOffIcon />
+            </IconButton>{" "}
+          </Grid>{" "}
+          <Iframe
+            url="https://www.cnnphilippines.com/"
+            width="600px"
+            height="720px"
+            id=""
+            className=""
+            display="block"
+            position="relative"
+          />
+        </Dialog>
       </Card>
     </Fade>
   );

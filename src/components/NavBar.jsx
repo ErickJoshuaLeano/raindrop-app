@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import * as authService from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
-import { Fade, Grid, useTheme } from "@mui/material";
+import { Fade, Grid, useTheme, Dialog } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
@@ -16,6 +16,8 @@ import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import AccountMenu from "./AccountMenu";
 import SearchBar from "./SearchBar";
 import logo from "./logo.png";
+import Iframe from "react-iframe";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const NavBar = ({
   onLogout,
@@ -27,9 +29,15 @@ const NavBar = ({
 }) => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
-
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "000ms" }}>
       <nav
@@ -74,6 +82,7 @@ const NavBar = ({
                 sx={{
                   color: theme.palette.notifIcons.main,
                 }}
+                onClick={() => navigate("/profiles/all")}
               >
                 <PersonRoundedIcon />
               </IconButton>
@@ -92,6 +101,7 @@ const NavBar = ({
               sx={{ display: { xs: "none", md: "table-cell" } }}
             >
               <IconButton
+                onClick={handleClickOpen}
                 type="button"
                 sx={{
                   color: theme.palette.notifIcons.main,
@@ -111,6 +121,28 @@ const NavBar = ({
             />
           </Grid>
           <Grid item xs={1}></Grid>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <Grid>
+              {" "}
+              <IconButton onClick={handleClose}>
+                <HighlightOffIcon />
+              </IconButton>{" "}
+            </Grid>{" "}
+            <Iframe
+              url="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d146920.25163636237!2d121.00186552651797!3d14.612048817512678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1677574854212!5m2!1sen!2sph"
+              width="600px"
+              height="720px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </Dialog>
         </Grid>
       </nav>
     </Fade>
