@@ -88,8 +88,8 @@ const HomePages = () => {
   useEffect(() => {
     followingService.getFollowing().then((response) => {
       setFollowing(response.data);
-      setLoadingUser(false);
-      setUpdatePage(false);
+      // setLoadingUser(false);
+      // setUpdatePage(false);
     });
   }, [updatePage, thisUser]);
 
@@ -97,15 +97,15 @@ const HomePages = () => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
       setLoadingUser(false);
-      setUpdatePage(false);
+      // setUpdatePage(false);
     });
   }, [updatePage]);
 
   useEffect(() => {
     postsService.fetchPosts().then((response) => {
       setPosts(response.data);
-      setLoading(false);
-      setUpdatePage(false);
+      // setLoading(false);
+      // setUpdatePage(false);
     });
   }, [updatePage]);
 
@@ -119,6 +119,7 @@ const HomePages = () => {
         }
       })
     );
+    setLoading(false);
   }, [posts, updatePage, thisUser]);
 
   useEffect(() => {
@@ -126,7 +127,7 @@ const HomePages = () => {
       .fetchPostsbyUsername(currentUser.username)
       .then((response) => {
         setMyPosts(response.data);
-        setLoading(false);
+        // setLoading(false);
       });
   }, [posts]);
 
