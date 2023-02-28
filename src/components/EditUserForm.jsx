@@ -5,6 +5,7 @@ import {
   InputAdornment,
   InputBase,
   TextField,
+  Typography,
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -17,6 +18,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import MailIcon from "@mui/icons-material/Mail";
 import PhotoIcon from "@mui/icons-material/Photo";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
+import EditIcon from "@mui/icons-material/Edit";
 
 const EditUserForm = ({ thisUser }) => {
   const navigate = useNavigate();
@@ -115,6 +117,17 @@ const EditUserForm = ({ thisUser }) => {
           component="form"
           onSubmit={handleSubmit}
         >
+          <Grid item xs={11}>
+            <Typography
+              sx={{
+                fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                padding: "10px",
+              }}
+            >
+              <EditIcon sx={{ marginRight: "5px" }} />
+              Edit Account Information
+            </Typography>
+          </Grid>
           <Grid item xs={11}>
             <TextField
               name="name"

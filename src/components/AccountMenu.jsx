@@ -113,8 +113,9 @@ export default function AccountMenu({
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{
-          elevation: 0,
+          elevation: 2,
           sx: {
+            width: "250px",
             paddingBottom: 3,
             overflow: "visible",
             // filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
@@ -162,29 +163,8 @@ export default function AccountMenu({
             Profile
           </Typography>
         </MenuItem>
-
-        <MenuItem onClick={() => navigate("/profile/edit")}>
-          <Avatar />{" "}
-          <Typography
-            textAlign="center"
-            fontFamily="Raleway, Arial, Helvetica, sans-serif"
-          >
-            My Account
-          </Typography>
-        </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          <Typography
-            textAlign="center"
-            fontFamily="Raleway, Arial, Helvetica, sans-serif"
-          >
-            Add another account
-          </Typography>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => navigate("/profile/edit")}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

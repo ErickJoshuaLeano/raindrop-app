@@ -1,4 +1,4 @@
-import { Button, Card, Grid } from "@mui/material";
+import { Button, Card, Fade, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import GalleryCard from "../components/Home Page/GalleryCard";
@@ -292,78 +292,80 @@ const ProfilePage = () => {
                 lg={9}
                 xl={9.7}
               >
-                {currentUser.username === params.username ? (
-                  <Grid item={true} xs={12}>
-                    <Posts onSubmit={handleSubmit} thisUser={thisUser} />
-                  </Grid>
-                ) : following.find(
-                    (following) => following.followingId === otherUser.id
-                  ) ? (
-                  <Grid item={true} xs={12}>
-                    <Card
-                      xs={12}
-                      sx={{
-                        borderRadius: "40px",
-                        backgroundColor: "#27abb9",
-                        boxShadow: "none",
-                        margin: "0.5vw",
-                        marginBlock: "1vw",
-                      }}
-                    >
-                      <Button
-                        fullWidth
-                        variant="contained"
-                        onClick={() => handleRemoveFollowing(otherUser)}
+                <Fade in timeout={1000} style={{ transitionDelay: "300ms" }}>
+                  {currentUser.username === params.username ? (
+                    <Grid item={true} xs={12}>
+                      <Posts onSubmit={handleSubmit} thisUser={thisUser} />
+                    </Grid>
+                  ) : following.find(
+                      (following) => following.followingId === otherUser.id
+                    ) ? (
+                    <Grid item={true} xs={12}>
+                      <Card
+                        xs={12}
                         sx={{
-                          width: "98%",
-                          borderRadius: "1000px",
-                          margin: "7px",
-                          backgroundColor: "#1b8b97",
-                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                          fontWeight: "700",
-                          padding: "5px",
-                          "&:hover": { backgroundColor: "#074147" },
+                          borderRadius: "40px",
+                          backgroundColor: "#27abb9",
+                          boxShadow: "none",
+                          margin: "0.5vw",
+                          marginBlock: "1vw",
                         }}
                       >
-                        <PersonRemoveIcon />
-                        <div style={{ width: "15px" }}></div>
-                        Unfollow
-                      </Button>
-                    </Card>
-                  </Grid>
-                ) : (
-                  <Grid item={true} xs={12} sx={{}}>
-                    <Card
-                      xs={12}
-                      sx={{
-                        borderRadius: "40px",
-                        backgroundColor: "#27abb9",
-                        boxShadow: "none",
-                        margin: "0.5vw",
-                        marginBlock: "1vw",
-                      }}
-                    >
-                      <Button
-                        fullWidth
-                        variant="contained"
-                        onClick={() => handleAddFollower(otherUser.id)}
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          onClick={() => handleRemoveFollowing(otherUser)}
+                          sx={{
+                            width: "98%",
+                            borderRadius: "1000px",
+                            margin: "7px",
+                            backgroundColor: "#1b8b97",
+                            fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                            fontWeight: "700",
+                            padding: "5px",
+                            "&:hover": { backgroundColor: "#074147" },
+                          }}
+                        >
+                          <PersonRemoveIcon />
+                          <div style={{ width: "15px" }}></div>
+                          Unfollow
+                        </Button>
+                      </Card>
+                    </Grid>
+                  ) : (
+                    <Grid item={true} xs={12} sx={{}}>
+                      <Card
+                        xs={12}
                         sx={{
-                          width: "98%",
-                          borderRadius: "1000px",
-                          margin: "7px",
-                          backgroundColor: "#1b8b97",
-                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                          fontWeight: "700",
-                          padding: "5px",
-                          "&:hover": { backgroundColor: "#074147" },
+                          borderRadius: "40px",
+                          backgroundColor: "#27abb9",
+                          boxShadow: "none",
+                          margin: "0.5vw",
+                          marginBlock: "1vw",
                         }}
                       >
-                        <PersonAddIcon />
-                        <div style={{ width: "15px" }}></div> Follow
-                      </Button>
-                    </Card>
-                  </Grid>
-                )}
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          onClick={() => handleAddFollower(otherUser.id)}
+                          sx={{
+                            width: "98%",
+                            borderRadius: "1000px",
+                            margin: "7px",
+                            backgroundColor: "#1b8b97",
+                            fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                            fontWeight: "700",
+                            padding: "5px",
+                            "&:hover": { backgroundColor: "#074147" },
+                          }}
+                        >
+                          <PersonAddIcon />
+                          <div style={{ width: "15px" }}></div> Follow
+                        </Button>
+                      </Card>
+                    </Grid>
+                  )}
+                </Fade>
 
                 <Grid item xs={12}>
                   <PostCardGrid
