@@ -53,28 +53,30 @@ const RaindropCards = ({ posts, updatePage, setUpdatePage }) => {
               rowHeight={300}
             >
               {photos.map((photo) => (
-                <ImageListItem>
-                  <img
-                    className="unselectable"
-                    src={photo.postPicture}
-                    srcSet={photo.postPicture}
-                    alt={photo.user.username}
-                    loading="lazy"
-                    style={{
-                      width: "150px",
-                      padding: "4px",
-                      borderRadius: "30px",
-                    }}
-                  />
-                  <ImageListItemBar
-                    position="top"
-                    title={photo.user.name}
-                    sx={{
-                      background: "none",
-                      fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                    }}
-                  />
-                </ImageListItem>
+                <Fade in timeout={1000} style={{ transitionDelay: "400ms" }}>
+                  <ImageListItem>
+                    <img
+                      className="unselectable"
+                      src={photo.postPicture}
+                      srcSet={photo.postPicture}
+                      alt={photo.user.username}
+                      loading="lazy"
+                      style={{
+                        width: "150px",
+                        padding: "4px",
+                        borderRadius: "30px",
+                      }}
+                    />
+                    <ImageListItemBar
+                      position="top"
+                      title={photo.user.name}
+                      sx={{
+                        background: "none",
+                        fontFamily: "Raleway, Arial, Helvetica, sans-serif",
+                      }}
+                    />
+                  </ImageListItem>
+                </Fade>
               ))}
             </ImageList>
           </Box>

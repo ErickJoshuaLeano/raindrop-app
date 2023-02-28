@@ -10,6 +10,7 @@ import {
   ListItemAvatar,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import * as followingService from "../services/following";
 import { styled, useTheme } from "@mui/system";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -25,6 +26,9 @@ import "./HomePages.css";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import HomeIcon from "@mui/icons-material/Home";
+import { ToastContainer, toast } from "react-toastify";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 
 const AllProfilesPage = () => {
   const theme = useTheme();
@@ -34,6 +38,7 @@ const AllProfilesPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
+  const [following, setFollowing] = useState([]);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -44,6 +49,49 @@ const AllProfilesPage = () => {
     setLoading(false);
     setLoadingUser(false);
   };
+
+  const handleAddFollower = (userId) => {
+    followingService
+      .addFollowing(userId)
+      .then((response) => {
+        // console.log(response);
+        setUpdatePage(true);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      });
+  };
+
+  const handleDeleteFollowing = async (id) => {
+    try {
+      await followingService.deleteFollowing(id);
+      setUpdatePage(true);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast("Like has already been removed", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
+  };
+
+  const handleRemoveFollowing = (user) => {
+    handleDeleteFollowing(
+      following.find((following) => following.followingId === user.id).id
+    );
+  };
+
+  useEffect(() => {
+    followingService.getFollowing().then((response) => {
+      setFollowing(response.data);
+      setLoadingUser(false);
+      setUpdatePage(false);
+    });
+  }, [updatePage]);
 
   useEffect(() => {
     profilesService.fetchAllUsers().then((response) => {
@@ -117,56 +165,114 @@ const AllProfilesPage = () => {
                   }}
                 >
                   {users.map((user) => (
-                    <ListItem
-                      alignItems="flex-start"
-                      type="button"
-                      onClick={() => navigate(`/profiles/${user.username}`)}
-                    >
-                      <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src={user.profilePicture} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        disableTypography
-                        sx={{
-                          display: "inline",
-                          fontFamily: "Raleway, Arial, Helvetica, sans-serif",
-                          fontWeight: "700",
-                          fontSize: "18px",
-                          color: theme.palette.mainText.main,
-                        }}
-                        primary={user.name}
-                        secondary={
-                          <React.Fragment>
-                            <Typography
+                    <Grid xs={12} display="flex" alignItems="center">
+                      <Grid item xs={9}>
+                        <ListItem
+                          alignItems="flex-start"
+                          type="button"
+                          onClick={() => navigate(`/profiles/${user.username}`)}
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={user.profilePicture}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            disableTypography
+                            sx={{
+                              display: "inline",
+                              fontFamily:
+                                "Raleway, Arial, Helvetica, sans-serif",
+                              fontWeight: "700",
+                              fontSize: "18px",
+                              color: theme.palette.mainText.main,
+                            }}
+                            primary={user.name}
+                            secondary={
+                              <React.Fragment>
+                                <Typography
+                                  sx={{
+                                    display: "flex",
+                                    fontFamily:
+                                      "Raleway, Arial, Helvetica, sans-serif",
+                                    fontWeight: "500",
+                                    color: theme.palette.mainText.light,
+                                  }}
+                                  variant="body2"
+                                  color="grey"
+                                >
+                                  @{user.username}{" "}
+                                  <div style={{ width: "20px" }}></div>
+                                  <Typography
+                                    sx={{
+                                      display: "flex",
+                                      fontFamily:
+                                        "Raleway, Arial, Helvetica, sans-serif",
+                                      fontWeight: "300",
+                                      fontSize: "14px",
+                                      color: theme.palette.mainText.light,
+                                    }}
+                                  >
+                                    Joined on: {user.createdAt.substring(0, 10)}
+                                  </Typography>
+                                </Typography>
+                              </React.Fragment>
+                            }
+                          />
+                        </ListItem>
+                      </Grid>
+                      <Grid item xs={3}>
+                        {following.find(
+                          (following) => following.followingId === user.id
+                        ) ? (
+                          <Grid item={true} xs={12}>
+                            <Button
+                              disableElevation
+                              width="10vw"
+                              variant="contained"
+                              onClick={() => handleRemoveFollowing(user)}
                               sx={{
-                                display: "flex",
+                                width: "12vw",
+                                borderRadius: "1000px",
+                                margin: "7px",
+                                backgroundColor: "#1b8b97",
                                 fontFamily:
                                   "Raleway, Arial, Helvetica, sans-serif",
-                                fontWeight: "500",
-                                color: theme.palette.mainText.light,
+                                fontWeight: "700",
+                                padding: "5px",
+                                "&:hover": { backgroundColor: "#074147" },
                               }}
-                              variant="body2"
-                              color="grey"
                             >
-                              @{user.username}{" "}
-                              <div style={{ width: "20px" }}></div>
-                              <Typography
-                                sx={{
-                                  display: "flex",
-                                  fontFamily:
-                                    "Raleway, Arial, Helvetica, sans-serif",
-                                  fontWeight: "300",
-                                  fontSize: "14px",
-                                  color: theme.palette.mainText.light,
-                                }}
-                              >
-                                Joined on: {user.createdAt.substring(0, 10)}
-                              </Typography>
-                            </Typography>
-                          </React.Fragment>
-                        }
-                      />
-                    </ListItem>
+                              <PersonRemoveIcon />
+                              <div style={{ width: "15px" }}></div>
+                            </Button>
+                          </Grid>
+                        ) : (
+                          <Grid item={true} xs={12} sx={{}}>
+                            <Button
+                              disableElevation
+                              variant="contained"
+                              onClick={() => handleAddFollower(user.id)}
+                              sx={{
+                                width: "12vw",
+                                borderRadius: "1000px",
+                                margin: "7px",
+                                backgroundColor: "#1b8b97",
+                                fontFamily:
+                                  "Raleway, Arial, Helvetica, sans-serif",
+                                fontWeight: "700",
+                                padding: "5px",
+                                "&:hover": { backgroundColor: "#074147" },
+                              }}
+                            >
+                              <PersonAddAlt1Icon />
+                              <div style={{ width: "15px" }}></div>
+                            </Button>
+                          </Grid>
+                        )}
+                      </Grid>
+                    </Grid>
                   ))}
                 </List>
               </Grid>
