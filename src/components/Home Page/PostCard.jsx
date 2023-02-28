@@ -47,12 +47,22 @@ const PostCard = ({
   updatePage,
   setUpdatePage,
 }) => {
+  const [comments, setComments] = useState([]);
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
 
   const navigate = useNavigate();
 
   const [openComments, setOpenComments] = useState(false);
+
+  React.useEffect(() => {
+    postsService.fetchCommentsByPost(post.id).then((response) => {
+      setComments(response.data);
+      setUpdatePage(false);
+    });
+  }, []);
+
+  console.log(comments);
 
   const [formPost, setFormPost] = useState({
     body: post.body,
@@ -209,7 +219,6 @@ const PostCard = ({
       }
     return time;
   }
-
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "400ms" }}>
       <Grid container component="formPost" onSubmit={handleSubmit}>
@@ -441,7 +450,16 @@ const PostCard = ({
                       sx={{ width: "150px" }}
                       onClick={toggleOpenComments}
                     >
-                      Comment
+                      {comments.length === 0 ? (
+                        <div>Comment</div>
+                      ) : (
+                        <div style={{ display: "flex" }}>
+                          Comments<div style={{ width: "3px" }}></div>
+                          <div style={{ display: "flex", fontFamily: "Arial" }}>
+                            &#x28;{comments.length}&#x29;
+                          </div>
+                        </div>
+                      )}
                     </ColorButton>
                   </div>
                 </Grid>
