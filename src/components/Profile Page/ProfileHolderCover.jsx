@@ -21,7 +21,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import Joi from "joi";
 
-const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
+const ProfileHolderCover = ({
+  otherUser,
+  onEditUser,
+  thisUser,
+  isLoadingUser,
+  setLoadingUser,
+}) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -53,6 +59,7 @@ const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
     const newdata = { ...otherUser, profilePicture: form.profilePicture };
     onEditUser(newdata);
     setOpen(false);
+    setLoadingUser(true);
     form.profilePicture = "";
   };
 
@@ -80,6 +87,16 @@ const ProfileHolderCover = ({ otherUser, onEditUser, thisUser }) => {
 
     return !!result.error;
   };
+
+  if (isLoadingUser) {
+    return (
+      <div class="loader3">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-holder-cover">

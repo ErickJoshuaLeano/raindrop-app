@@ -54,7 +54,11 @@ const HomeProfileCard = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newdata = { ...currentUser, coverPicture: form.coverPicture };
+    const newdata = {
+      ...currentUser,
+      profilePicture: thisUser.profilePicture,
+      coverPicture: form.coverPicture,
+    };
     onEditUser(newdata);
     setOpen(false);
     form.coverPicture = "";
