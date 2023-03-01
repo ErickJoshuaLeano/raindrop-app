@@ -1,7 +1,6 @@
 import {
   Grid,
   Avatar,
-  Divider,
   Fade,
   List,
   ListItem,
@@ -11,17 +10,12 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import * as followingService from "../services/following";
-import { styled, useTheme } from "@mui/system";
+import { useTheme } from "@mui/system";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
-import GalleryCard from "../components/Home Page/GalleryCard";
-import HomeProfileCard from "../components/Home Page/HomeProfileCard";
-import PostCardDetails from "../components/Home Page/PostCardDetails";
 import NavBar from "../components/NavBar";
 import * as authService from "../services/auth";
-import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
-import * as likesService from "../services/likes";
 import "./HomePages.css";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -56,7 +50,6 @@ const AllProfilesPage = () => {
     followingService
       .addFollowing(userId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -74,7 +67,7 @@ const AllProfilesPage = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast("Like has already been removed", {
+        toast("Follow has already been removed", {
           position: toast.POSITION.TOP_CENTER,
         });
       }
@@ -274,6 +267,7 @@ const AllProfilesPage = () => {
                             </Button>
                           </Grid>
                         )}
+                        <ToastContainer />
                       </Grid>
                     </Grid>
                   ))}

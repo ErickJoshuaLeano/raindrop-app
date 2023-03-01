@@ -1,23 +1,17 @@
 import { Grid } from "@mui/material";
-import { red } from "material-ui-colors";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import AddPost from "../components/Home Page/AddPost";
 import CalendarWidget from "../components/Home Page/CalendarWidget";
 import GalleryCard from "../components/Home Page/GalleryCard";
 import HomeProfileCard from "../components/Home Page/HomeProfileCard";
-import PostCard from "../components/Home Page/PostCard";
 import NavBar from "../components/NavBar";
 import * as authService from "../services/auth";
 import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
 import * as likesService from "../services/likes";
-import PostDetails from "./PostDetails";
-
 import "./HomePages.css";
 import PostCardGrid from "../components/Home Page/PostCardGrid";
 import Posts from "./Posts";
-import CommentModule from "../components/Home Page/CommentModule";
 import RaindropCards from "../components/Home Page/RaindropCards";
 import LatestCard from "../components/Home Page/LatestCard";
 import AllProfilesCard from "../components/Home Page/AllProfilesCard";
@@ -73,7 +67,6 @@ const HomePages = () => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -143,7 +136,6 @@ const HomePages = () => {
     postsService
       .addPost(post)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -159,7 +151,6 @@ const HomePages = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        // console.log("test");
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -290,7 +281,11 @@ const HomePages = () => {
               lg={6}
               xl={6}
             >
-              <Posts onSubmit={handleSubmit} thisUser={thisUser} />
+              <Posts
+                onSubmit={handleSubmit}
+                thisUser={thisUser}
+                onClick={handleSubmit}
+              />
               <RaindropCards
                 posts={filteredPosts}
                 updatePage={updatePage}
