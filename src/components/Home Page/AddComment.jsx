@@ -1,9 +1,8 @@
-import { Box, Button, Grid, InputBase, useTheme } from "@mui/material";
+import { Button, Grid, InputBase, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import Joi from "joi";
 import SendIcon from "@mui/icons-material/Send";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 const AddComment = ({ onSubmitComment, post, setUpdateComments }) => {
   const theme = useTheme();

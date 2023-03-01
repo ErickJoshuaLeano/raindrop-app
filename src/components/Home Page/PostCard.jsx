@@ -1,18 +1,15 @@
 import * as React from "react";
 import { useState } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import {
   Avatar,
   Dialog,
   Divider,
   Grid,
-  Grow,
   IconButton,
   TextField,
 } from "@mui/material";
@@ -34,12 +31,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import { Link } from "react-router-dom";
 
 const PostCard = ({
   post,
-  isLoading,
   onDeletePost,
   onAddLikePost,
   onDeleteLike,
@@ -97,10 +92,6 @@ const PostCard = ({
     setOpen(false);
   };
 
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
   const [openEdit, setOpenEdit] = React.useState(false);
 
   const handleClickOpenEdit = () => {
@@ -126,11 +117,9 @@ const PostCard = ({
 
   const handleSubmit = () => {
     handleCloseEdit();
-    // event.preventDefault();
     postsService
       .updatePost(post.id, formPost)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -157,12 +146,6 @@ const PostCard = ({
       delete errors[input.name];
       setErrors(errors);
     }
-  };
-
-  const isFormInvalid = () => {
-    const result = schema.validate(formPost);
-
-    return !!result.error;
   };
 
   function time_ago(time) {

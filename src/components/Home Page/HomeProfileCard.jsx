@@ -6,20 +6,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "./HomeProfileCard.css";
-
 import {
-  Avatar,
   Divider,
   Fade,
   Grid,
-  Grow,
   MenuItem,
   MenuList,
   TextField,
   useTheme,
 } from "@mui/material";
 import Joi from "joi";
-import * as postsService from "../../services/posts";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";

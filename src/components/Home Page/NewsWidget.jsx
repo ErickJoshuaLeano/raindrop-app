@@ -1,24 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import {
-  CardMedia,
-  Dialog,
-  Fade,
-  Grid,
-  IconButton,
-  useTheme,
-} from "@mui/material";
-import CloudIcon from "@mui/icons-material/Cloud";
+import { Dialog, Fade, Grid, IconButton, useTheme } from "@mui/material";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Iframe from "react-iframe";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 

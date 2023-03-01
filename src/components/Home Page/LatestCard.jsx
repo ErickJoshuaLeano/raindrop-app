@@ -16,8 +16,6 @@ const LatestCard = ({ posts, isLoading }) => {
 
   const textPosts = filter.slice(0, 10);
 
-  // console.log(textPosts);
-
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "700ms" }}>
       <Card

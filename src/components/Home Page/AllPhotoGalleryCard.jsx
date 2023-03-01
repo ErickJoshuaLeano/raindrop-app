@@ -1,16 +1,10 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
 import "./GalleryCard.css";
 import { Fade, Grid, useTheme } from "@mui/material";
-import * as profilesService from "../../services/profile";
-import { useEffect, useState } from "react";
-import * as authService from "../../services/auth";
 
 const AllPhotoGalleryCard = ({ posts }) => {
   const theme = useTheme();

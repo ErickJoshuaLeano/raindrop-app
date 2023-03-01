@@ -4,8 +4,6 @@ import {
   Dialog,
   Grid,
   IconButton,
-  TableBody,
-  TableRow,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -19,7 +17,6 @@ import AddComment from "./AddComment";
 import { styled, useTheme } from "@mui/system";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditComment from "./EditComment";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -43,7 +40,6 @@ const CommentModule = ({
   const [openEdit, setOpenEdit] = React.useState(false);
 
   const handleClickOpenEdit = (comment) => {
-    // console.log(comment.body);
     setOpenEdit(true);
     setCommentToEdit(comment);
   };
@@ -67,7 +63,6 @@ const CommentModule = ({
     const commentsClone = [...comments];
 
     try {
-      //setComments(comments.filter((comment) => comment.userId !== id));
       await postsService.deleteComment(postId, commentId);
       setUpdatePage(true);
       toast("Comment has been deleted", {
@@ -87,7 +82,6 @@ const CommentModule = ({
     likesService
       .addCommentLike(commentId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {

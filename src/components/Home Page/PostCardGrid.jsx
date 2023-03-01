@@ -1,5 +1,5 @@
-import { Grid, TableBody, TableRow } from "@mui/material";
-import React, { useState } from "react";
+import { Grid } from "@mui/material";
+import React from "react";
 import PostCard from "./PostCard";
 import Masonry from "@mui/lab/Masonry/Masonry";
 

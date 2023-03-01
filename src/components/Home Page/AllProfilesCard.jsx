@@ -1,4 +1,4 @@
-import { Button, Card, Fade, Typography } from "@mui/material";
+import { Button, Card, Fade } from "@mui/material";
 import React from "react";
 import GroupIcon from "@mui/icons-material/Group";
 import { useNavigate } from "react-router-dom";
