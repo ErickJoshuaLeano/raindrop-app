@@ -50,7 +50,6 @@ const ProfilePage = () => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -66,7 +65,6 @@ const ProfilePage = () => {
     followingService
       .addFollowing(userId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -84,7 +82,7 @@ const ProfilePage = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast("Like has already been removed", {
+        toast("Follow has already been removed", {
           position: toast.POSITION.TOP_CENTER,
         });
       }
@@ -148,7 +146,6 @@ const ProfilePage = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -390,7 +387,6 @@ const ProfilePage = () => {
                     }
                   />
                 </Grid>
-                <ToastContainer />
               </Grid>
             </Grid>
             <Grid
@@ -406,6 +402,7 @@ const ProfilePage = () => {
               <WeatherWidget />
               <NewsWidget />
             </Grid>
+            <ToastContainer />
           </Grid>
         </div>
       </div>
