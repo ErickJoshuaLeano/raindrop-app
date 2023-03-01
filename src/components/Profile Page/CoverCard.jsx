@@ -15,13 +15,11 @@ import {
 import Button from "@mui/material/Button";
 import Joi from "joi";
 import React, { useState } from "react";
-
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
-
 import { useNavigate } from "react-router-dom";
 import "./CoverCard.css";
 import ProfileHolderCover from "./ProfileHolderCover";
