@@ -1,12 +1,8 @@
-import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import HomeProfileCard from "../components/Home Page/HomeProfileCard";
 import NavBar from "../components/NavBar";
 import * as authService from "../services/auth";
 import "./HomePages.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "@mui/material/styles";
 import * as profilesService from "../services/profile";
 
@@ -37,7 +33,7 @@ const NotFound = () => {
     setLoadingUser(false);
   };
 
-  if (accessToken == null){
+  if (accessToken == null) {
     return (
       <>
         <div class="drop-container">
@@ -45,7 +41,7 @@ const NotFound = () => {
           <div class="drop"></div>
         </div>
       </>
-    )
+    );
   } else {
     return (
       <>
@@ -61,13 +57,12 @@ const NotFound = () => {
           />
         </div>
         <div class="drop-container">
-            <h1>PAGE NOT FOUND</h1>
-            <div class="drop"></div>
+          <h1>PAGE NOT FOUND</h1>
+          <div class="drop"></div>
         </div>
       </>
-    )
-  };
-
-}
+    );
+  }
+};
 
 export default NotFound;

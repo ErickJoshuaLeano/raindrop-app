@@ -17,6 +17,7 @@ import Card from "@mui/material/Card";
 import HomeIcon from "@mui/icons-material/Home";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const PostDetails = () => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
@@ -50,7 +51,9 @@ const PostDetails = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -97,7 +100,9 @@ const PostDetails = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -108,7 +113,9 @@ const PostDetails = () => {
       setUpdatePage(true);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Like has already been removed");
+        toast("Like has already been removed", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -123,7 +130,9 @@ const PostDetails = () => {
       });
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Post has already been deleted");
+        toast("Post has already been deleted", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -136,7 +145,9 @@ const PostDetails = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert(error.response.data.message[0]);
+          toast(error.response.data.message[0], {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -205,8 +216,15 @@ const PostDetails = () => {
                 onSubmitComment={handleSubmitComment}
                 updatPage={updatePage}
                 setUpdatePage={setUpdatePage}
+                onClick={
+                  handleDeletePost ||
+                  handleAddLikePost ||
+                  handleDeleteLike ||
+                  handleSubmitComment
+                }
               />
             </Grid>
+            <ToastContainer />
             <Grid
               className="column"
               item={true}

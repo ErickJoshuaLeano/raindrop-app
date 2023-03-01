@@ -6,20 +6,13 @@ import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
 import * as likesService from "../services/likes";
 import "./GalleryPage.css";
-import {
-  Button,
-  Card,
-  Dialog,
-  Fade,
-  Grid,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Button, Fade, Grid, Typography, useTheme } from "@mui/material";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PostCard from "../components/Home Page/PostCard";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./MyPostsPage.css";
 
 export const MyPostsPage = () => {
@@ -125,7 +118,6 @@ export const MyPostsPage = () => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -141,7 +133,6 @@ export const MyPostsPage = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -241,7 +232,6 @@ export const MyPostsPage = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sm={8} lg={6} xl={6} textAlign="left">
-              {/* <Fade in timeout={1000} style={{ transitionDelay: "800ms" }}> */}
               {myPosts.map((post) => (
                 <PostCard
                   currentUser={currentUser}
@@ -254,11 +244,17 @@ export const MyPostsPage = () => {
                   onSubmitComment={handleSubmitComment}
                   updatPage={updatePage}
                   setUpdatePage={setUpdatePage}
+                  onClick={
+                    handleDeletePost ||
+                    handleAddLikePost ||
+                    handleDeleteLike ||
+                    handleSubmitComment
+                  }
                 />
               ))}
-              {/* </Fade> */}
             </Grid>
           </Grid>
+          <ToastContainer />
         </div>
       </div>
     </>
