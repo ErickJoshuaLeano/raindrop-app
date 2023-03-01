@@ -90,6 +90,7 @@ const GalleryCard = ({ posts, username, title }) => {
           sx={{
             fontFamily: "Raleway, Arial, Helvetica, sans-serif",
             fontWeight: "500",
+            color: theme.palette.button.main,
             margin: "10px",
             padding: "2px",
             justifySelf: "center",

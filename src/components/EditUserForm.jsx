@@ -275,16 +275,13 @@ const EditUserForm = ({ thisUser }) => {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} display="flex" justifyContent="center">
             <Button
               onClick={handleCancel}
               sx={{ fontFamily: "Raleway, Arial, Helvetica, sans-serif" }}
             >
               Cancel
             </Button>
-          </Grid>
-          <Grid item xs={6}>
-            {" "}
             <Button
               disabled={isFormInvalid()}
               type="submit"

@@ -290,6 +290,7 @@ const HomeProfileCard = ({
               </MenuItem>
               <MenuItem
                 xs={12}
+                onClick={() => navigate("/gallery")}
                 sx={{
                   fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                   fontWeight: "300",

@@ -71,6 +71,9 @@ function App() {
       galleryFiller: palette.augmentColor({
         color: { main: "#74dfea", light: "#84e7b3" },
       }),
+      button: palette.augmentColor({
+        color: { main: "#000000" },
+      }),
       mode: "light",
     },
   });
@@ -78,7 +81,7 @@ function App() {
   const dark = createTheme({
     palette: {
       primary: {
-        main: "#074147",
+        main: "#ffffff",
       },
       mainColor: palette.augmentColor({ color: { main: "#074147" } }),
       card: palette.augmentColor({ color: { main: "#1a1c20" } }),
@@ -107,6 +110,9 @@ function App() {
       }),
       galleryFiller: palette.augmentColor({
         color: { main: "#073135", light: "#074147" },
+      }),
+      button: palette.augmentColor({
+        color: { main: "#ffffff" },
       }),
       mode: "dark",
     },

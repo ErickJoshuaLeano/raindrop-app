@@ -217,6 +217,7 @@ const CoverCard = ({
                     fontWeight: "300",
                     color: "white",
                   }}
+                  onClick={() => navigate(`/gallery`)}
                 >
                   My Photos
                 </MenuItem>
