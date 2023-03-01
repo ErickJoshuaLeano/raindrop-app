@@ -1,16 +1,13 @@
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
-  CardHeader,
   Grid,
   TextField,
   Avatar,
   InputBase,
   Divider,
   CardMedia,
-  Grow,
   Fade,
   useTheme,
 } from "@mui/material";
@@ -93,7 +90,6 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
 
     return !!result.error;
   };
-  const currentUser = authService.getCurrentUser();
 
   return (
     <Fade in timeout={1000} style={{ transitionDelay: "300ms" }}>

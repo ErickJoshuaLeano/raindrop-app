@@ -25,7 +25,6 @@ function App() {
   const handleLogin = async (username, password) => {
     try {
       const response = await authService.login(username, password);
-      // console.log(response.data.accessToken);
       localStorage.setItem("accessToken", response.data.accessToken);
       setAccessToken(response.data.accessToken);
       navigate("/");
@@ -35,10 +34,9 @@ function App() {
       }
     }
   };
-  // System Preference
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  // LightMode
   const light = createTheme({
     palette: {
       primary: {
@@ -76,7 +74,6 @@ function App() {
     },
   });
 
-  // Dark mode
   const dark = createTheme({
     palette: {
       primary: {

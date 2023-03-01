@@ -1,40 +1,15 @@
 import * as React from "react";
 import { useState } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import {
-  Avatar,
-  Dialog,
-  Divider,
-  Grid,
-  Grow,
-  IconButton,
-  TextField,
-} from "@mui/material";
-import { ReactComponent as RaindropIcon } from "../Raindrop.svg";
+import { Grid, TextField } from "@mui/material";
 import "./PostCard.css";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import * as authService from "../../services/auth";
 import * as postsService from "../../services/posts";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import { styled } from "@mui/system";
-import Fade from "@mui/material/Fade";
-import CommentModule from "./CommentModule";
-import { useNavigate } from "react-router-dom";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Joi from "joi";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 
 const EditComment = ({
   comment,
@@ -85,12 +60,6 @@ const EditComment = ({
     }
   };
 
-  const isFormInvalid = () => {
-    const result = schema.validate(formcomment);
-
-    return !!result.error;
-  };
-  // console.log(comment.body);
   return (
     <div>
       <Grid component="formcomment" onSubmit={handleSubmit}>

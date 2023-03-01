@@ -11,7 +11,6 @@ http.interceptors.response.use(null, (error) => {
     error.response.status <= 500;
 
   if (!expectedError) {
-    // console.log("inside interceptor");
     alert("An unexpected error occurred");
   }
 
