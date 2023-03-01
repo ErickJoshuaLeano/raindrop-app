@@ -193,6 +193,7 @@ const CoverCard = ({
                 </MenuItem>
                 <MenuItem
                   xs={12}
+                  onClick={() => navigate("/likedposts")}
                   sx={{
                     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                     fontWeight: "300",
@@ -203,6 +204,7 @@ const CoverCard = ({
                 </MenuItem>
                 <MenuItem
                   xs={12}
+                  onClick={() => navigate("/profiles/all")}
                   sx={{
                     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                     fontWeight: "300",
