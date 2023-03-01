@@ -1,11 +1,8 @@
-.spacer {
-  width: 5px;
-}
-.loader {
+.loader-acc {
   color: #ffffff;
   margin-top: 10px;
-  margin-left: 30px;
-  font-size: 23px;
+  margin-left: 40px;
+  font-size: 25px;
   text-indent: -9999em;
   overflow: hidden;
   width: 1em;

@@ -1,10 +1,7 @@
-.spacer {
-  width: 5px;
-}
 .loader {
-  color: #ffffff;
+  color: #1b8b97;
   margin-top: 10px;
-  margin-left: 30px;
+  margin-left: 0px;
   font-size: 23px;
   text-indent: -9999em;
   overflow: hidden;

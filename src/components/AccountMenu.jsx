@@ -14,6 +14,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
+import "./AccountMenu.css";
 
 export default function AccountMenu({
   onLogout,
@@ -25,11 +26,13 @@ export default function AccountMenu({
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
       setUpdatePicture(false);
+      setLoading(false);
     });
   }, [updatePicture]);
 
@@ -43,6 +46,11 @@ export default function AccountMenu({
     navigate(`/profiles/${currentUser.username}`);
     window.location.reload(false);
   };
+
+  if (isLoading) {
+    return <div class="loader-acc"></div>;
+  }
+
   return (
     <React.Fragment>
       <Box
@@ -64,7 +72,7 @@ export default function AccountMenu({
             aria-expanded={open ? "true" : undefined}
           >
             <div>
-              {currentUser.profilePicture ? (
+              {thisUser.profilePicture ? (
                 <>
                   <Avatar
                     sx={{
@@ -80,7 +88,13 @@ export default function AccountMenu({
                     <img
                       className="profile-picture3"
                       src={thisUser.profilePicture}
-                      style={{ width: "34px" }}
+                      style={{
+                        height: "7vh",
+                        width: "7vh",
+                        maxHeight: "47px",
+                        maxWidth: "47px",
+                        objectFit: "cover",
+                      }}
                     />
                   </Avatar>
                 </>
