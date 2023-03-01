@@ -15,3 +15,7 @@ export function addCommentLike(commentId) {
 export function fetchLikes() {
   return http.get("/likes");
 }
+
+export function fetchLiked() {
+  return http.get("/likes/user");
+}

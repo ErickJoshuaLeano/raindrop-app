@@ -282,7 +282,14 @@ const HomePages = () => {
                 )}
               </div>
             </Grid>
-            <Grid className="column" item={true} xs={12} sm={8} lg={6} xl={6}>
+            <Grid
+              className="column-main"
+              item={true}
+              xs={12}
+              sm={8}
+              lg={6}
+              xl={6}
+            >
               <Posts onSubmit={handleSubmit} thisUser={thisUser} />
               <RaindropCards
                 posts={filteredPosts}

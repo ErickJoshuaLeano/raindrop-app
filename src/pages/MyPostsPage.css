@@ -1,0 +1,15 @@
+.column-myposts {
+  height: fit-content;
+  max-height: 87vh;
+  overflow: auto;
+  scrollbar-width: none;
+  padding-bottom: 15vh;
+}
+
+.column-myposts::-webkit-scrollbar {
+  width: 10px;
+}
+.column-myposts::-webkit-scrollbar-thumb {
+  background-color: #84e7b3; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+}

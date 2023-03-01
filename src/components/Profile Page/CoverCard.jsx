@@ -182,6 +182,7 @@ const CoverCard = ({
                 </MenuItem>
                 <MenuItem
                   xs={12}
+                  onClick={() => navigate(`/userposts`)}
                   sx={{
                     fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                     fontWeight: "300",

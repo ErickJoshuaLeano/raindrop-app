@@ -17,6 +17,8 @@ import PostDetails from "./pages/PostDetails";
 import AllProfilesPage from "./pages/AllProfilesPage";
 import EditUserPage from "./pages/EditUserPage";
 import { GalleryPage } from "./pages/GalleryPage";
+import { MyPostsPage } from "./pages/MyPostsPage";
+import { LikedPostsPage } from "./pages/LikedPostsPage";
 
 function App() {
   const navigate = useNavigate();
@@ -185,6 +187,8 @@ function App() {
               }
             />{" "}
             <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/userposts" element={<MyPostsPage />} />
+            <Route path="/likedposts" element={<LikedPostsPage />} />
             <Route path="/profile/edit" element={<EditUserPage />} />
             <Route path="/profiles/:username" element={<ProfilePage />} />
             <Route path="/profiles/all" element={<AllProfilesPage />} />
