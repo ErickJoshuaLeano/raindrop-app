@@ -195,6 +195,9 @@ const ProfilePage = () => {
       setPosts(posts.filter((post) => post.userId !== id));
       await postsService.deletePost(id);
       setUpdatePage(true);
+      toast("Post has been removed", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } catch (error) {
       if (error.response && error.response.status === 404) {
         toast("Post has already been deleted", {

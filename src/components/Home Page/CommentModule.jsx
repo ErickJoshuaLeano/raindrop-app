@@ -28,6 +28,7 @@ const CommentModule = ({
   onSubmitComment,
   updatePage,
   setUpdatePage,
+  setUpdateComments,
 }) => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
@@ -69,6 +70,9 @@ const CommentModule = ({
       //setComments(comments.filter((comment) => comment.userId !== id));
       await postsService.deleteComment(postId, commentId);
       setUpdatePage(true);
+      toast("Comment has been deleted", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } catch (error) {
       if (error.response && error.response.status === 500) {
         toast("Comment already deleted", {
@@ -116,7 +120,11 @@ const CommentModule = ({
 
   return (
     <div className="comment-container">
-      <AddComment post={post} onSubmitComment={onSubmitComment} />
+      <AddComment
+        post={post}
+        onSubmitComment={onSubmitComment}
+        setUpdateComments={setUpdateComments}
+      />
       {comments.length > 0 ? (
         <div>
           {comments.map((comment) => (

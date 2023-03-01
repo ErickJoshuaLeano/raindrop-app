@@ -21,11 +21,13 @@ const PostDetails = ({ onAddLikePost }) => {
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
   const [thisUser, setThisUser] = useState([]);
+  const [updatePicture, setUpdatePicture] = useState(false);
   const [accessToken, setAccessToken] = useState(authService.getAccessToken());
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [isLoadingPosts, setLoadingPosts] = useState(true);
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
   const navigate = useNavigate();
@@ -72,6 +74,7 @@ const PostDetails = ({ onAddLikePost }) => {
       setPosts(response.data);
       setLoading(false);
       setUpdatePage(false);
+      setLoadingPosts(false);
     });
   }, [updatePage]);
 
@@ -259,6 +262,8 @@ const PostDetails = ({ onAddLikePost }) => {
           thisUser={thisUser}
           updatePage={updatePage}
           setUpdatePage={setUpdatePage}
+          updatePicture={updatePicture}
+          setUpdatePicture={setUpdatePicture}
         />
         <div className="grid-container">
           <Grid
@@ -293,7 +298,7 @@ const PostDetails = ({ onAddLikePost }) => {
                 post={posts}
                 currentUser={currentUser}
                 key={posts.id}
-                isLoading={isLoading}
+                isLoadingPosts={isLoadingPosts}
                 onDeletePost={handleDeletePost}
                 onAddLikePost={handleAddLikePost}
                 onDeleteLike={handleDeleteLike}

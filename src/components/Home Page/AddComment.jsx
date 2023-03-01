@@ -5,7 +5,7 @@ import Joi from "joi";
 import SendIcon from "@mui/icons-material/Send";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
-const AddComment = ({ onSubmitComment, post }) => {
+const AddComment = ({ onSubmitComment, post, setUpdateComments }) => {
   const theme = useTheme();
   const [form, setForm] = useState({
     body: "",
@@ -21,6 +21,7 @@ const AddComment = ({ onSubmitComment, post }) => {
     event.preventDefault();
     onSubmitComment(form, post.id);
     form.body = "";
+    setUpdateComments(true);
   };
 
   const handleChange = ({ currentTarget: input }) => {

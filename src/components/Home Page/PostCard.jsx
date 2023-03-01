@@ -54,15 +54,15 @@ const PostCard = ({
   const navigate = useNavigate();
 
   const [openComments, setOpenComments] = useState(false);
+  const [updateComments, setUpdateComments] = useState(false);
 
   React.useEffect(() => {
     postsService.fetchCommentsByPost(post.id).then((response) => {
       setComments(response.data);
       setUpdatePage(false);
+      setUpdateComments(false);
     });
-  }, []);
-
-  // console.log(comments);
+  }, [updateComments]);
 
   const [formPost, setFormPost] = useState({
     body: post.body,
@@ -473,6 +473,7 @@ const PostCard = ({
                     onSubmitComment={onSubmitComment}
                     updatePage={updatePage}
                     setUpdatePage={setUpdatePage}
+                    setUpdateComments={setUpdateComments}
                   />
                 </div>
               )}

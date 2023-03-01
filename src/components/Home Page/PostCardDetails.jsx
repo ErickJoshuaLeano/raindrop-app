@@ -36,10 +36,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import { Link } from "react-router-dom";
+import "./PostCardDetails.css";
 
 const PostCardDetails = ({
   post,
-  isLoading,
+  isLoadingPosts,
   onDeletePost,
   onAddLikePost,
   onDeleteLike,
@@ -50,13 +51,15 @@ const PostCardDetails = ({
   const [comments, setComments] = useState([]);
   const theme = useTheme();
   const currentUser = authService.getCurrentUser();
+  const [updateComments, setUpdateComments] = useState(false);
 
   React.useEffect(() => {
     postsService.fetchCommentsByPost(post.id).then((response) => {
       setComments(response.data);
       setUpdatePage(false);
+      setUpdateComments(false);
     });
-  }, []);
+  }, [updateComments]);
 
   const navigate = useNavigate();
 
@@ -216,6 +219,10 @@ const PostCardDetails = ({
           );
       }
     return time;
+  }
+
+  if (isLoadingPosts) {
+    return <div class="loader-pcd"></div>;
   }
 
   return (
@@ -466,6 +473,7 @@ const PostCardDetails = ({
                     onSubmitComment={onSubmitComment}
                     updatePage={updatePage}
                     setUpdatePage={setUpdatePage}
+                    setUpdateComments={setUpdateComments}
                   />
                 </div>
               )}
