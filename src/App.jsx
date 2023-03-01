@@ -16,6 +16,7 @@ import DebugPage from "./pages/DebugPage";
 import PostDetails from "./pages/PostDetails";
 import AllProfilesPage from "./pages/AllProfilesPage";
 import EditUserPage from "./pages/EditUserPage";
+import { GalleryPage } from "./pages/GalleryPage";
 
 function App() {
   const navigate = useNavigate();
@@ -177,6 +178,7 @@ function App() {
                 )
               }
             />{" "}
+            <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/profile/edit" element={<EditUserPage />} />
             <Route path="/profiles/:username" element={<ProfilePage />} />
             <Route path="/profiles/all" element={<AllProfilesPage />} />

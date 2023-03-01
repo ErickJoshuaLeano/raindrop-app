@@ -185,11 +185,6 @@ const LoginPage = ({ onLogin }) => {
                     />
                   </Grid>
                 </Grid>
-                {/* <Grid container justifyContent="flex-end" mt={1}>
-                  <Grid item>
-                    <Link to="/forgot">Forgot password?</Link>
-                  </Grid>
-                </Grid> */}
               </CardContent>
               <CardActions>
                 <Button

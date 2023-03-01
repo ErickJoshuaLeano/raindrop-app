@@ -1,19 +1,18 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
 import "./GalleryCard.css";
-import { Fade, Grid, useTheme } from "@mui/material";
+import { Button, Fade, Grid, useTheme } from "@mui/material";
 import * as profilesService from "../../services/profile";
 import { useEffect, useState } from "react";
 import * as authService from "../../services/auth";
 
 const GalleryCard = ({ posts, username, title }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const currentUser = authService.getCurrentUser();
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -53,7 +52,7 @@ const GalleryCard = ({ posts, username, title }) => {
             }}
           >
             <PhotoSizeSelectActualOutlinedIcon sx={{ alignSelf: "center" }} />
-            <div className="spacer"></div>My Photos
+            <div className="spacer"></div> My Photos
           </Typography>
           <Grid container xs={12}>
             <Grid
@@ -86,7 +85,7 @@ const GalleryCard = ({ posts, username, title }) => {
           marginTop: "2vh",
         }}
       >
-        <Typography
+        <Button
           xs={12}
           sx={{
             fontFamily: "Raleway, Arial, Helvetica, sans-serif",
@@ -96,10 +95,11 @@ const GalleryCard = ({ posts, username, title }) => {
             justifySelf: "center",
             display: "flex",
           }}
+          onClick={() => navigate("/gallery")}
         >
           <PhotoSizeSelectActualOutlinedIcon sx={{ alignSelf: "center" }} />
           <div className="spacer"></div>My Photos
-        </Typography>
+        </Button>
         <Grid container>
           <Grid item xs={6}>
             <div>
