@@ -40,9 +40,6 @@ export const MyPostsPage = () => {
     setLoadingUser(false);
   };
 
-  const myPhotos = myPosts.filter(
-    (myPosts) => myPosts.postPicture !== null && myPosts.postPicture !== ""
-  );
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
@@ -142,16 +139,6 @@ export const MyPostsPage = () => {
           });
         }
       });
-  };
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   if (isLoadingUser || isLoading) {
