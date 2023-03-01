@@ -1,14 +1,4 @@
-import {
-  Avatar,
-  Divider,
-  Fade,
-  Grid,
-  Grow,
-  MenuItem,
-  MenuList,
-  TextField,
-  useTheme,
-} from "@mui/material";
+import { Avatar, TextField, useTheme } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { ReactComponent as RaindropIcon } from "../Raindrop.svg";
@@ -19,7 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import Joi from "joi";
-import Menu from "@mui/material/Menu";
+
 import { useNavigate } from "react-router-dom";
 
 const ProfileHolderRegister = ({ setProfilePicture }) => {

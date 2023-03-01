@@ -1,0 +1,7 @@
+.picList {
+  margin-top: 90px;
+}
+
+.picList::-webkit-scrollbar {
+  display: none;
+}
