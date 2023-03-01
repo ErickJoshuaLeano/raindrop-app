@@ -5,7 +5,7 @@ import * as authService from "../services/auth";
 import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
 import "./GalleryPage.css";
-import { useTheme } from "@mui/material";
+import { Fade, useTheme } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 
@@ -75,8 +75,19 @@ export const GalleryPage = () => {
       });
   }, [posts]);
 
+  if (isLoadingUser || isLoading) {
+    return (
+      <div class="loader2">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+      </div>
+    );
+  }
+
   return (
     <>
+      {/* <Fade in timeout={1000} style={{ transitionDelay: "500ms" }}> */}
       <NavBar
         onLogout={handleLogout}
         thisUser={thisUser}
@@ -99,6 +110,7 @@ export const GalleryPage = () => {
           </ImageListItem>
         ))}
       </ImageList>
+      {/* </Fade> */}
     </>
   );
 };
