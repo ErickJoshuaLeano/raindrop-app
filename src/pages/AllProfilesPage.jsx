@@ -39,6 +39,8 @@ const AllProfilesPage = () => {
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
   const [following, setFollowing] = useState([]);
+  const [updatePicture, setUpdatePicture] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -90,6 +92,7 @@ const AllProfilesPage = () => {
       setFollowing(response.data);
       setLoadingUser(false);
       setUpdatePage(false);
+      setUpdatePicture(true);
     });
   }, [updatePage]);
 
@@ -98,6 +101,7 @@ const AllProfilesPage = () => {
       setUsers(response.data);
       setLoading(false);
       setUpdatePage(false);
+      setUpdatePicture(true);
     });
   }, [updatePage]);
 
@@ -106,6 +110,7 @@ const AllProfilesPage = () => {
       setThisUser(response.data);
       setLoadingUser(false);
       setUpdatePage(false);
+      setUpdatePicture(true);
     });
   }, [updatePage]);
 
@@ -131,6 +136,8 @@ const AllProfilesPage = () => {
             thisUser={thisUser}
             updatePage={updatePage}
             setUpdatePage={setUpdatePage}
+            setUpdatePicture={setUpdatePicture}
+            updatePicture={updatePicture}
           />
           <div className="grid-container">
             <Grid

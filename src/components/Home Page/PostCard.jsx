@@ -62,7 +62,7 @@ const PostCard = ({
     });
   }, []);
 
-  console.log(comments);
+  // console.log(comments);
 
   const [formPost, setFormPost] = useState({
     body: post.body,

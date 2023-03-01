@@ -23,6 +23,7 @@ const EditUserPage = () => {
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [updatePage, setUpdatePage] = useState(false);
   const navigate = useNavigate();
+  const [updatePicture, setUpdatePicture] = useState(false);
 
   const handleLogout = () => {
     authService.logout();
@@ -38,6 +39,7 @@ const EditUserPage = () => {
       setUsers(response.data);
       setLoading(false);
       setUpdatePage(false);
+      setUpdatePicture(true);
     });
   }, [users]);
 
@@ -71,6 +73,8 @@ const EditUserPage = () => {
             thisUser={thisUser}
             updatePage={updatePage}
             setUpdatePage={setUpdatePage}
+            updatePicture={updatePicture}
+            setUpdatePicture={setUpdatePicture}
           />
           <div className="grid-container">
             <Grid
