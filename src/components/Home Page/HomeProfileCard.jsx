@@ -104,7 +104,7 @@ const HomeProfileCard = ({
   if (isLoading) {
     return (
       <Card>
-        <span class="loader"></span>
+        <span className="loader"></span>
       </Card>
     );
   }

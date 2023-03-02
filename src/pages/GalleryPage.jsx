@@ -101,9 +101,9 @@ export const GalleryPage = () => {
       <div>
         <Fade in timeout={1000} style={{ transitionDelay: "800ms" }}>
           <div class="loader2">
-            <div class="inner one"></div>
-            <div class="inner two"></div>
-            <div class="inner three"></div>
+            <div className="inner one"></div>
+            <div className="inner two"></div>
+            <div className="inner three"></div>
           </div>
         </Fade>
       </div>

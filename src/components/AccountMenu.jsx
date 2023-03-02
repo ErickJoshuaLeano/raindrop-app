@@ -47,7 +47,7 @@ export default function AccountMenu({
   };
 
   if (isLoading) {
-    return <div class="loader-acc"></div>;
+    return <div className="loader-acc"></div>;
   }
 
   return (

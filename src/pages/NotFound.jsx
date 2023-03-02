@@ -36,9 +36,9 @@ const NotFound = () => {
   if (accessToken == null) {
     return (
       <>
-        <div class="drop-container">
+        <div className="drop-container">
           <h1>PAGE NOT FOUND</h1>
-          <div class="drop"></div>
+          <div className="drop"></div>
         </div>
       </>
     );
@@ -56,9 +56,9 @@ const NotFound = () => {
             setUpdatePage={setUpdatePage}
           />
         </div>
-        <div class="drop-container">
+        <div className="drop-container">
           <h1>PAGE NOT FOUND</h1>
-          <div class="drop"></div>
+          <div className="drop"></div>
         </div>
       </>
     );

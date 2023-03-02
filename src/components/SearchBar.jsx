@@ -161,7 +161,7 @@ const SearchBar = ({ setSearchQuery, updatePage, setUpdatePage }) => {
               ) : (
                 <MenuItem onClick={handleClose}>
                   <div style={{ display: "grid", alignContent: "center" }}>
-                    <div class="s-loader"></div>
+                    <div className="s-loader"></div>
                   </div>
                 </MenuItem>
               )}
