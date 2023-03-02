@@ -17,7 +17,6 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import * as authService from "../services/auth";
 import { ReactComponent as RaindropIcon } from "../components/Raindrop.svg";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import "./Posts.css";
 import Dialog from "@mui/material/Dialog";
@@ -26,6 +25,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
+import SendIcon from "@mui/icons-material/Send";
 
 const Posts = ({ onSubmit, initialValue, thisUser }) => {
   const theme = useTheme();
@@ -251,11 +251,11 @@ const Posts = ({ onSubmit, initialValue, thisUser }) => {
               className="add-photo-button"
               disabled={isFormInvalid()}
               variant="contained"
-              startIcon={<AddCircleOutlineOutlinedIcon />}
+              startIcon={<SendIcon />}
               disableElevation
               type="submit"
               sx={{
-                width: "100px",
+                width: "120px",
                 padding: "10px",
                 borderRadius: "1000px",
                 margin: "7px",
