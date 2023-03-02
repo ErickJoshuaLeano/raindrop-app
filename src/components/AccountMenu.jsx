@@ -47,7 +47,7 @@ export default function AccountMenu({
   };
 
   if (isLoading) {
-    return <div class="loader-acc"></div>;
+    return <div className="loader-acc"></div>;
   }
 
   return (
@@ -131,7 +131,6 @@ export default function AccountMenu({
             width: "250px",
             paddingBottom: 3,
             overflow: "visible",
-            // filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             borderRadius: "40px",
             mt: 1.5,
             "& .MuiAvatar-root": {

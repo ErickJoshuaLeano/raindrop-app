@@ -37,10 +37,6 @@
   border-top: 3px solid #84e7b3;
 }
 
-.picList {
-  margin-top: 90px;
-}
-
 .picList::-webkit-scrollbar {
   display: none;
 }

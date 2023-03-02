@@ -64,7 +64,7 @@ const GalleryCard = ({ posts, username, title }) => {
                 justifyItems: "center",
               }}
             >
-              <span class="loader"></span>
+              <span className="loader"></span>
             </Grid>
           </Grid>
         </Card>

@@ -6,20 +6,13 @@ import * as postsService from "../services/posts";
 import * as profilesService from "../services/profile";
 import * as likesService from "../services/likes";
 import "./GalleryPage.css";
-import {
-  Button,
-  Card,
-  Dialog,
-  Fade,
-  Grid,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Button, Fade, Grid, Typography, useTheme } from "@mui/material";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PostCard from "../components/Home Page/PostCard";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./MyPostsPage.css";
 
 export const LikedPostsPage = () => {
@@ -48,9 +41,6 @@ export const LikedPostsPage = () => {
     setLoadingUser(false);
   };
 
-  const myPhotos = myPosts.filter(
-    (myPosts) => myPosts.postPicture !== null && myPosts.postPicture !== ""
-  );
   useEffect(() => {
     profilesService.fetchCurrentUser().then((response) => {
       setThisUser(response.data);
@@ -133,7 +123,6 @@ export const LikedPostsPage = () => {
     likesService
       .addPostLike(postId)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -149,7 +138,6 @@ export const LikedPostsPage = () => {
     postsService
       .addComment(comment, id)
       .then((response) => {
-        // console.log(response);
         setUpdatePage(true);
       })
       .catch((error) => {
@@ -161,24 +149,14 @@ export const LikedPostsPage = () => {
       });
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   if (isLoadingUser || isLoading) {
     return (
       <div>
         <Fade in timeout={1000} style={{ transitionDelay: "800ms" }}>
-          <div class="loader2">
-            <div class="inner one"></div>
-            <div class="inner two"></div>
-            <div class="inner three"></div>
+          <div className="loader2">
+            <div className="inner one"></div>
+            <div className="inner two"></div>
+            <div className="inner three"></div>
           </div>
         </Fade>
       </div>
@@ -257,7 +235,6 @@ export const LikedPostsPage = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sm={8} lg={6} xl={6} textAlign="left">
-              {/* <Fade in timeout={1000} style={{ transitionDelay: "800ms" }}> */}
               {myLikedPosts.map((post) => (
                 <PostCard
                   currentUser={currentUser}
@@ -270,11 +247,17 @@ export const LikedPostsPage = () => {
                   onSubmitComment={handleSubmitComment}
                   updatPage={updatePage}
                   setUpdatePage={setUpdatePage}
+                  onClick={
+                    handleDeletePost ||
+                    handleAddLikePost ||
+                    handleDeleteLike ||
+                    handleSubmitComment
+                  }
                 />
               ))}
-              {/* </Fade> */}
             </Grid>
           </Grid>
+          <ToastContainer />
         </div>
       </div>
     </>

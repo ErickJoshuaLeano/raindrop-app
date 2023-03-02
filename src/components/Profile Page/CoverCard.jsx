@@ -15,13 +15,11 @@ import {
 import Button from "@mui/material/Button";
 import Joi from "joi";
 import React, { useState } from "react";
-
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
-
 import { useNavigate } from "react-router-dom";
 import "./CoverCard.css";
 import ProfileHolderCover from "./ProfileHolderCover";
@@ -100,10 +98,10 @@ const CoverCard = ({
 
   if (isLoadingUser) {
     return (
-      <div class="loader3">
-        <div class="inner one"></div>
-        <div class="inner two"></div>
-        <div class="inner three"></div>
+      <div className="loader3">
+        <div className="inner one"></div>
+        <div className="inner two"></div>
+        <div className="inner three"></div>
       </div>
     );
   }

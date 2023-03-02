@@ -203,7 +203,7 @@ const PostCardDetails = ({
   }
 
   if (isLoadingPosts) {
-    return <div class="loader-pcd"></div>;
+    return <div className="loader-pcd"></div>;
   }
 
   return (

@@ -1,8 +1,7 @@
-import { Grid, Fade, TextField } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import { Grid, Fade } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { styled, useTheme } from "@mui/system";
-import { useNavigate, useParams } from "react-router-dom";
+import { useTheme } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import NavBar from "../components/NavBar";
 import * as authService from "../services/auth";
@@ -11,7 +10,7 @@ import "./HomePages.css";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import HomeIcon from "@mui/icons-material/Home";
-import Joi from "joi";
+
 import EditUserForm from "../components/EditUserForm";
 
 const EditUserPage = () => {
@@ -53,10 +52,10 @@ const EditUserPage = () => {
 
   if (isLoadingUser || isLoading) {
     return (
-      <div class="loader2">
-        <div class="inner one"></div>
-        <div class="inner two"></div>
-        <div class="inner three"></div>
+      <div className="loader2">
+        <div className="inner one"></div>
+        <div className="inner two"></div>
+        <div className="inner three"></div>
       </div>
     );
   }

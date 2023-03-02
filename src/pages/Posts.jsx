@@ -15,7 +15,6 @@ import Box from "@mui/material/Box";
 import Joi from "joi";
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
-import * as authService from "../services/auth";
 import { ReactComponent as RaindropIcon } from "../components/Raindrop.svg";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import "./Posts.css";

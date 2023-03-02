@@ -102,7 +102,7 @@ const LatestCard = ({ posts, isLoading }) => {
           </div>
         ) : (
           <Grid item xs={12} display="flex" justifyContent="center">
-            <div class="loader"></div>
+            <div className="loader"></div>
           </Grid>
         )}{" "}
       </Card>

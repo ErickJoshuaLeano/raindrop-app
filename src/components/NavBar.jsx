@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import React from "react";
 import * as authService from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import { Fade, Grid, useTheme, Dialog } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import PublicRoundedIcon from "@mui/icons-material/PublicRounded";

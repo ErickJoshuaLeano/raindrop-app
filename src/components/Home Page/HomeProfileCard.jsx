@@ -104,7 +104,7 @@ const HomeProfileCard = ({
   if (isLoading) {
     return (
       <Card>
-        <span class="loader"></span>
+        <span className="loader"></span>
       </Card>
     );
   }
@@ -249,6 +249,7 @@ const HomeProfileCard = ({
             <MenuList xs={12}>
               <MenuItem
                 xs={12}
+                onClick={() => navigate("/home")}
                 sx={{
                   fontFamily: "Raleway, Arial, Helvetica, sans-serif",
                   fontWeight: "700",
